@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="@dimen/margin_16_dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="Bệnh nhân (20)" />
+
+    <EditText
+        android:id="@+id/edt_search_patient"
+        style="@style/roboto_regular_16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+android:layout_marginTop="@dimen/margin_10_dp"
+        android:background="@drawable/bg_search"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="@dimen/margin_10_dp"
+        android:hint="Tìm kiếm bệnh nhân"
+        android:padding="@dimen/margin_15_dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_medical_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="30"
+        tools:listitem="@layout/item_patient" />
+</LinearLayout>

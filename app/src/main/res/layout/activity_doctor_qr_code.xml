@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="@color/black">
+
+
+<!--    <me.dm7.barcodescanner.zxing.ZXingScannerView-->
+<!--        android:id="@+id/scannerView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        app:borderColor="#FFF"-->
+<!--        app:borderLength="@dimen/margin_70_dp"-->
+<!--        app:borderWidth="4dp"-->
+<!--        app:laserEnabled="false"-->
+<!--        app:maskColor="@android:color/transparent"-->
+<!--        app:roundedCorner="false"-->
+<!--        app:squaredFinder="true"/>-->
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:background="@color/black"/>
+
+    <ImageView
+        android:id="@+id/btn_close"
+        app:tint="@color/white"
+        android:layout_marginStart="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_40_dp"
+        android:padding="@dimen/margin_6_dp"
+        android:layout_width="@dimen/margin_40_dp"
+        android:layout_height="@dimen/margin_40_dp"/>
+
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="83dp"
+        android:background="@color/black"/>
+
+    <TextView
+        android:layout_marginBottom="49dp"
+        android:textColor="@color/white"
+        android:text="@string/str_text_rq_guide"
+        style="@style/roboto_regular_16dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</RelativeLayout>

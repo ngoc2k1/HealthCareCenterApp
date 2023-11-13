@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="circle">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="radius_8dp">
+        <item name="cornerSize">8dp</item>
+    </style>
+
+    <style name="roboto_bold_18dp" parent="roboto_bold_16dp">
+        <item name="android:textSize">@dimen/textsize_18_sp</item>
+        <item name="android:fontWeight">700</item>
+        <item name="lineHeight">@dimen/margin_21_dp</item>
+    </style>
+
+    <style name="roboto_regular_16dp">
+        <item name="android:textSize">@dimen/textsize_16_sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontWeight">400</item>
+        <item name="android:textStyle">normal</item>
+        <item name="lineHeight">17dp</item>
+    </style>
+
+    <style name="roboto_regular_12dp" parent="roboto_regular_16dp">
+        <item name="android:textSize">@dimen/textsize_12_sp</item>
+        <item name="lineHeight">15dp</item>
+    </style>
+
+    <style name="roboto_bold_16dp" parent="roboto_regular_16dp">
+        <item name="android:fontWeight">600</item>
+        <item name="android:textStyle">bold</item>
+        <item name="lineHeight">18dp</item>
+    </style>
+
+    <style name="roboto_bold_10dp" parent="roboto_bold_16dp">
+        <item name="android:textSize">@dimen/textsize_10_sp</item>
+        <item name="lineHeight">@dimen/margin_10_dp</item>
+    </style>
+
+    <style name="roboto_bold_14dp" parent="roboto_bold_16dp">
+        <item name="android:textSize">@dimen/textsize_14_sp</item>
+    </style>
+
+    <style name="roboto_bold_24dp" parent="roboto_bold_18dp">
+        <item name="android:textSize">@dimen/textsize_24_sp</item>
+    </style>
+</resources>

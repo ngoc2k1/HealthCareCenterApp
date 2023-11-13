@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="@string/str_notification" />
+
+    <TextView
+        android:id="@+id/tv_none_notification"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_50_dp"
+        android:gravity="center"
+        android:text="@string/str_none_notification"
+        android:textColor="@color/grey" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_notification"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margin_10_dp"
+        android:paddingBottom="@dimen/margin_80_dp"
+        android:visibility="gone"
+        tools:listitem="@layout/item_notification" />
+</LinearLayout>

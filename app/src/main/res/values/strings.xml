@@ -1,0 +1,211 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="str_title_profile_medical">Hồ sơ bệnh án</string>
+    <string name="str_all"><u>Tất cả</u></string>
+    <string name="tab_profile_doctor">Thông báo</string>
+    <string name="confirm_password_change_password">Đổi mật khẩu</string>
+    <string name="str_forgot_and_change_password">Quên mật khẩu?</string>
+
+    <string name="str_edit_profile">Chỉnh sửa hồ sơ</string>
+    <string name="str_login_fingerprint">Đăng nhập với vân tay</string>
+    <string name="str_account_vietnamese">Tiếng Việt (VN)</string>
+    <string name="str_support_setting">Hỗ trợ</string>
+    <string name="str_language_setting">Ngôn ngữ</string>
+    <string name="str_questions_setting">Các câu hỏi thường gặp</string>
+    <string name="str_logout">Đăng xuất</string>
+
+
+    <string name="account_header_title">Tài khoản</string>
+    <string name="account_option_account_setting">Thiết lập tài khoản</string>
+    <string name="account_update_info_success">Cập nhật thành công</string>
+    <string name="account_option_activity_history">Lịch sử hoạt động</string>
+    <string name="account_option_application_setting">Thiết lập ứng dụng</string>
+    <string name="account_user_info">Thông tin cá nhân</string>
+    <string name="account_edit">Chỉnh sửa</string>
+    <string name="str_forgot_and_change_password_title">Quên mật khẩu</string>
+    <string name="str_update">Cập nhật</string>
+    <string name="account_logout">ĐĂNG XUẤT</string>
+    <string name="account_validate_name">Vui lòng nhập họ và tên!</string>
+    <string name="account_validate_name_lenght">Vui lòng nhập họ tên tối đa 255 ký tự!</string>
+    <string name="account_validate_dob">Vui lòng nhập ngày sinh!</string>
+    <string name="account_validate_phone">Vui lòng nhập số điện thoại!</string>
+    <string name="account_validate_phone_format">Vui lòng nhập đúng định dạng số điện thoại!</string>
+    <string name="account_validate_gender">Vui lòng chọn giới tính!</string>
+    <string name="account_validate_address">Vui lòng nhập địa chỉ thường trú!</string>
+
+    <string name="str_user_zalo">Đăng nhập với zalo</string>
+    <string name="str_user_facebook">Đăng nhập với Facebook</string>
+    <string name="str_user_google">Đăng nhập với Google</string>
+    <!--    home doctor-->
+    <string name="str_newest" translatable="false">Mới nhất</string>
+    <string name="str_hello_user" translatable="false">Xin chào,</string>
+    <string name="str_qr_doctor" translatable="false">Quét mã QR</string>
+    <string name="str_capture" translatable="false">Chụp</string>
+    <string name="home_doctor_hello">Xin chào,</string>
+    <string name="list_patient">Danh sách bệnh nhân</string>
+    <string name="home_doctor_work_schedule">Lịch làm việc</string>
+    <string name="home_doctor_format">Dr. {0}</string>
+    <string name="home_doctor_format_experts">Chức vụ: {0}</string>
+    <string name="home_doctor_scan_qr_code">Mã QR không hợp lệ!</string>
+
+    <string name="str_medical_records">Hồ sơ\nbệnh án</string>
+    <string name="str_test_update">Cập nhật\nxét nghiệm</string>
+    <string name="str_handbook">Cẩm nang sức khỏe</string>
+    <string name="str_specialist_home">Khám\nChuyên khoa</string>
+    <string name="str_medical_equipment_home">Tư vấn\nTrực tuyến</string>
+    <string name="str_genera_home">Khám\nTổng quát</string>
+    <string name="str_test_home">Xét nghiệm</string>
+    <string name="str_cancer_home">Tầm soát\nUng thư</string>
+    <string name="str_at_home">Chăm sóc\nY tế tại nhà</string>
+    <!--Make an appointment-->
+    <string name="make_an_appointment_header_title">Đặt lịch khám</string>
+
+    <!--    update test result-->
+    <string name="update_test_result_file">Tệp tin</string>
+    <string name="file_not_recognized">tập tin không được công nhận</string>
+    <string name="choose_one_activity_to_open">Chọn một ứng dụng để mở</string>
+    <string name="no_suitable_application">Không có ứng dụng để mở file</string>
+    <string name="str_info_medical">Thông tin khám</string>
+    <string name="str_make_appointment">Hẹn lịch tái khám</string>
+    <string name="str_info_strong">Thông tin sức khỏe</string>
+    <string name="str_please_wait">Vui lòng chờ quá trình tải lên hoàn tất !</string>
+    <string name="update_file_success">Cập nhật lịch sử khám bệnh thành công!</string>
+    <string name="reschedule_medical_success">Hẹn lịch tái khám thành công!</string>
+    <string name="str_update_file_success">Cập nhật thành công!</string>
+    <string name="str_confirm_success">Xác nhận đã khám thành công!</string>
+    <string name="str_create_success">Tạo thành công !</string>
+    <string name="str_create_medical_history_success">Tạo lịch sử khám bệnh thành công!</string>
+    <string name="str_new_notification_status">Mới</string>
+    <string name="str_make_appointment_user">Lịch tái khám</string>
+    <string name="hair_space">&#x200A;</string>
+    <!--    notification -->
+    <string name="str_notification">Thông báo</string>
+    <string name="str_none_notification">Bạn chưa có thông báo nào</string>
+    <string name="str_price" translatable="false">Giá khám:</string>
+    <string name="str_create_medical" translatable="false">Đặt lịch ngay</string>
+
+    <!--Register-->
+    <string name="register_header_title_new">Đăng ký tài khoản</string>
+    <string name="register_username_hint">Tên</string>
+    <string name="authen_username_hint">Số điện thoại</string>
+    <string name="register_password_hint"><![CDATA[Mật khẩu<br/><font color=\'#DC2220\'><i>(ít nhất 6 ký tự cả chữ hoa,chữ thường và số)</i></font>]]></string>
+    <string name="old_password_hint"><![CDATA[Mật khẩu cũ<br/><font color=\'#DC2220\'><i>(ít nhất 6 ký tự cả chữ hoa,chữ thường và số)</i></font>]]></string>
+    <string name="new_password_hint"><![CDATA[Mật khẩu mới<br/><font color=\'#DC2220\'><i>(ít nhất 6 ký tự cả chữ hoa,chữ thường và số)</i></font>]]></string>
+    <string name="register_confirm_password_hint">Nhập lại mật khẩu</string>
+    <string name="register_birthday_hint">Ngày sinh</string>
+    <string name="register_address_hint_new">Địa chỉ cụ thể</string>
+    <string name="btn_register_title">Đăng ký</string>
+    <string name="register_validate_enter_name">Vui lòng nhập họ và tên!</string>
+    <string name="register_validate_enter_province">Vui lòng chọn Tỉnh/Thành phố!</string>
+    <string name="register_validate_enter_district">Vui lòng chọn Quận/Huyện!</string>
+    <string name="register_validate_enter_user_name">Vui lòng nhập Email hoặc số điện thoại!</string>
+    <string name="register_validate_too_long_name"> Vui lòng nhập họ và tên lớn nhất 255 kí tự!</string>
+    <string name="register_validate_user_name_max_length">Vui lòng nhập Email hoặc Số điện thoại lớn nhất 100 kí tự!</string>
+    <string name="register_validate_user_name_not_phone_or_email">Tài khoản phải là số điện thoại hoặc email</string>
+    <string name="register_validate_user_name_not_email">Vui lòng nhập đúng định dạng email!</string>
+    <string name="register_validate_user_name_not_phone">Vui lòng nhập đúng định dạng số điện thoại!</string>
+    <string name="register_validate_enter_password">Vui lòng nhập mật khẩu!</string>
+    <string name="register_validate_wrong_format_password">Mật khẩu phải bao gồm cả chữ vào số</string>
+    <string name="register_validate_too_short_password">Vui lòng nhập mật khẩu ít nhất 6 kí tự!</string>
+    <string name="register_validate_enter_confirm_password">Vui lòng nhập lại mật khẩu!</string>
+    <string name="register_validate_too_long_password">Vui lòng nhập mật khẩu lớn nhất 50 kí tự!</string>
+    <string name="register_validate_confirm_password_not_match">Vui lòng nhập lại mật khẩu khớp với mật khẩu!</string>
+    <string name="register_validate_enter_birthday">Vui lòng nhập ngày sinh</string>
+    <string name="register_validate_enter_gender">Vui lòng chọn giới tính!</string>
+    <string name="register_validate_enter_address">Vui lòng nhập địa chỉ</string>
+    <string name="register_validate_enter_birth_day">Vui lòng nhập ngày sinh!</string>
+    <string name="str_more">Khác</string>
+    <string name="str_accept">Đồng ý</string>
+    <string name="str_update_success">Cập nhật thành công</string>
+    <string name="str_update_error">Cập nhật thất bại</string>
+    <string name="str_updating">Đang tải ...</string>
+    <string name="str_male">Nam</string>
+    <string name="str_female">Nữ</string>
+    <!--Login-->
+    <string name="login_hint_username"><u>ID</u></string>
+    <string name="login_tv_register_title"><u>Đăng ký tài khoản</u></string>
+    <string name="register_account_success"><u>Đăng ký hội viên thành công!</u></string>
+    <string name="btn_login_title">Đăng nhập</string>
+    <string name="login_username_hint">Tên đăng nhập</string>
+    <string name="login_password_hint">Mật khẩu</string>
+    <string name="login_password_note">(Ít nhất 6 ký tự cả chữ hoa, chữ thường và số)</string>
+    <string name="facebook_img_url">https://graph.facebook.com/{0}/picture?type=large</string>
+    <string name="login_validate_user_name">Vui lòng nhập Email hoặc số điện thoại!</string>
+    <string name="login_validate_password">Vui lòng nhập mật khẩu!</string>
+    <string name="login_successful">Đăng nhập thành công!</string>
+    <string name="login_failed">Đăng nhập thất bại!</string>
+    <string name="str_choose_login">Hoặc đăng nhập qua</string>
+    <string name="login_validate_token">Không thể lấy token thiết bị, vui lòng kiểm tra mạng và thử lại</string>
+    <!--create resume-->
+    <string name="create_medical_identity_card">Vui lòng nhập đúng định dạng CCCD/CMND!</string>
+    <string name="create_medical_health_insurance">Vui lòng nhập đúng định dạng Mã số thẻ bảo hiểm Y tế!</string>
+    <string name="create_resume_describe_self_length_150">Vui lòng nhập mô tả bản thân lớn nhất 150 kí tự!</string>
+    <string name="create_resume_describe_self_input">Vui lòng nhập mô tả bản thân!</string>
+    <string name="create_resume_name">Họ và tên <font color="#A04FE9">*</font></string>
+    <string name="create_resume_phone">Số điện thoại <font color="#A04FE9">*</font></string>
+    <string name="create_resume_birthday">Ngày sinh <font color="#A04FE9">*</font></string>
+    <string name="create_resume_gender">Giới tính <font color="#A04FE9">*</font></string>
+    <string name="create_update_resume_user_body_index">Chỉ số cơ thể</string>
+    <string name="create_update_resume_email">Địa chỉ email</string>
+    <string name="create_update_resume_identity_card">CCCD/CMND</string>
+    <string name="create_update_resume_insurance_code">Mã số thẻ bảo hiểm Y tế</string>
+    <string name="create_update_resume_title_province">Tỉnh/Thành phố</string>
+    <string name="create_update_resume_district">Quận/Huyện</string>
+    <string name="create_update_resume_address">Địa chỉ</string>
+    <string name="create_update_resume_describe_self">Mô tả bản thân</string>
+    <string name="create_resume_hint_input_phone">Nhập số điện thoại</string>
+    <string name="create_resume_hint_input_birthday">Chọn ngày sinh</string>
+    <string name="create_resume_hint_input_province">Chọn Tỉnh/Thành phố</string>
+    <string name="create_resume_hint_input_district">Chọn Quận/Huyện</string>
+    <string name="create_resume_you_not_select_province">Bạn chưa chọn Tỉnh/Thành phố</string>
+    <string name="create_resume_you_not_select_district">Vui lòng chọn Quận/Huyện!</string>
+    <string name="create_resume_you_not_select_province_and_district">Vui lòng chọn Tỉnh/Thành phố và Quận/Huyện!</string>
+    <string name="create_resume_hint_input_describe_self">Nhập mô tả ngắn về bản thân</string>
+    <string name="create_resume_btn_completed">Hoàn tất</string>
+    <string name="create_resume_title">Tạo Hồ Sơ</string>
+    <string name="create_update_resume_title">Chỉnh sửa tài khoản</string>
+    <string name="create_update_profile_title">Chỉnh sửa hồ sơ</string>
+    <string name="create_resume_avatar">Ảnh\nđại diện</string>
+    <string name="create_resume_update_user_info">Cập nhật thông tin cá nhân</string>
+    <string name="create_resume_name_null">Vui lòng nhập họ và tên!</string>
+    <string name="create_resume_prefecture_null">Vui lòng chon Tỉnh/Thành phố!</string>
+    <string name="create_resume_district_null">Vui lòng chon Quận/Huyện!</string>
+    <string name="create_resume_name_length_255">Vui lòng nhập họ tên lớn nhất 255 kí tự!</string>
+    <string name="create_resume_address_length_255">Vui lòng nhập địa chỉ lớn nhất 255 kí tự!</string>
+    <string name="create_resume_gender_null">Vui lòng chọn giới tính!</string>
+    <string name="create_resume_birth_null">Vui lòng nhập ngày sinh!</string>
+    <string name="create_resume_address_null"> Vui lòng nhập địa chỉ thường trú!</string>
+    <string name="create_resume_diagnostic">Chẩn đoán</string>
+    <string name="create_resume_change">Thay ảnh</string>
+    <string name="create_resume_select_blood_group">Nhóm máu</string>
+    <string name="create_resume_edt_length_255">Vui lòng nhập chẩn đoán lớn nhất 255 kí tự!</string>
+    <string name="format_month_date_picker">Tháng</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_book_schedule">Đặt lịch khám</string>
+    <string name="str_profile_patient">Hồ sơ bệnh án</string>
+    <string name="str_text_rq_guide" translatable="false">Vui lòng đưa mã QR vào giữa khung trắng</string>
+
+    <string name="str_medical_history">Lịch sử khám bệnh</string>
+
+    <!--Information appointment schedule-->
+    <string name="text_confirm_medical" translatable="false">Xác nhận đã khám</string>
+    <string name="text_view_kqkb" translatable="false">Xem KQKB</string>
+    <string name="text_view_result" translatable="false">Xem kết quả khám bệnh</string>
+    <string name="text_update_result" translatable="false">Cập nhật kết quả khám bệnh</string>
+    <string name="text_patient_username" translatable="false">Họ và tên</string>
+    <string name="text_doctor_username" translatable="false">Bác sĩ</string>
+    <string name="text_doctor_specialization" translatable="false">Chuyên khoa</string>
+    <string name="text_birthday" translatable="false">Ngày sinh</string>
+    <string name="text_phone" translatable="false">Số điện thoại</string>
+    <string name="text_date_medical" translatable="false">Ngày khám</string>
+    <string name="text_time_medical" translatable="false">Giờ khám</string>
+    <string name="text_time_interval_medical" translatable="false">Thời gian dự kiến
+    </string>
+    <string name="text_note" translatable="false">Ghi chú</string>
+    <string name="detail_patient_title" translatable="false">Bệnh nhân chi tiết</string>
+    <string name="text_state_health" translatable="false">Tình trạng sức khỏe</string>
+    <string name="text_edit" translatable="false"><u>Sửa</u></string>
+
+
+</resources>

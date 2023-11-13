@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="Thông tin lịch khám" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/cl_bottom"
+        android:layout_below="@id/header">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed">
+
+                <LinearLayout
+                    android:id="@+id/ll_information_patient"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cv_avatar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="9dp"
+                        app:cardElevation="0dp">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/imv_avatar"
+                            android:layout_width="54dp"
+                            android:layout_height="54dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_default_avatar_home" />
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_medical_user_name"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="2"
+                        android:text="Le Bao Long"
+                        android:textSize="@dimen/margin_18_dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_medical_user_age"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_3_dp"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:maxLines="1"
+                        android:paddingBottom="@dimen/margin_4_dp"
+                        android:text="Nu, 35"
+                        android:textColor="@color/grey" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/img_quick_response"
+                    android:layout_width="72dp"
+                    android:layout_height="72dp"
+                    android:layout_marginTop="@dimen/margin_9_dp"
+                    android:src="@drawable/ic_quick_response"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll_information_patient" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_information_doctor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_24_dp"
+                    android:background="@drawable/bg_information_doctor_schedule_new"
+                    app:layout_constraintTop_toBottomOf="@id/img_quick_response">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/cl_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.imageview.ShapeableImageView
+                            android:id="@+id/img_avatar_doctor_schedule_new"
+                            android:layout_width="78dp"
+                            android:layout_height="78dp"
+                            android:layout_marginStart="@dimen/margin_15_dp"
+                            android:layout_marginTop="@dimen/margin_12_dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/img_default_avatar_home"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:shapeAppearanceOverlay="@style/radius_8dp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_name_doctor_schedule_new"
+                            style="@style/roboto_bold_18dp"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_13_dp"
+                            android:layout_marginEnd="@dimen/margin_15_dp"
+                            android:ellipsize="end"
+                            android:maxLines="2"
+                            android:text="ThS, BS.Le Anh Tuantest"
+                            app:layout_constraintBottom_toBottomOf="@id/img_avatar_doctor_schedule_new"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_avatar_doctor_schedule_new"
+                            app:layout_constraintTop_toTopOf="@id/img_avatar_doctor_schedule_new" />
+
+                        <View
+                            android:id="@+id/line_split"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginStart="@dimen/margin_13_dp"
+                            android:layout_marginTop="@dimen/margin_8_dp"
+                            android:layout_marginEnd="@dimen/margin_15_dp"
+                            android:background="@drawable/line_history_patient"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/img_avatar_doctor_schedule_new"
+                            app:layout_constraintTop_toBottomOf="@id/tv_name_doctor_schedule_new" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/img_hepatitis_infection"
+                        android:layout_width="@dimen/margin_24_dp"
+                        android:layout_height="@dimen/margin_24_dp"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:layout_marginTop="@dimen/margin_8_dp"
+                        android:layout_marginBottom="@dimen/margin_12_dp"
+                        android:padding="@dimen/margin_5_dp"
+                        android:src="@drawable/ic_hepatitis_transmission_black"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/cl_top" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_hepatitis_infection"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_15_dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:text="Truyền nhiễm - Viêm gan"
+                        app:layout_constraintBottom_toBottomOf="@id/img_hepatitis_infection"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/img_hepatitis_infection"
+                        app:layout_constraintTop_toTopOf="@id/img_hepatitis_infection" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_state"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_32_dp"
+                    android:background="@drawable/bg_item_book_detail"
+                    app:layout_constraintTop_toBottomOf="@id/cl_information_doctor">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_state_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="Trạng thái"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_state" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_state"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_15_dp"
+                        android:layout_marginVertical="@dimen/margin_16_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:text="Chưa khám"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_state_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_doctor_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_12_dp"
+                    android:background="@drawable/bg_item_book_detail"
+                    app:layout_constraintTop_toBottomOf="@id/cl_state">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_position_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="@string/text_doctor_specialization"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_position" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_position"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_15_dp"
+                        android:layout_marginTop="@dimen/margin_20_dp"
+                        android:layout_marginBottom="@dimen/margin_16_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="2"
+                        android:text="Truyền nhiễm - Viêm gan"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_position_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_patient_schedule_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_12_dp"
+                    android:background="@drawable/bg_item_book_detail"
+                    app:layout_constraintTop_toBottomOf="@id/cl_doctor_detail">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_patient_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:layout_marginTop="@dimen/margin_12_dp"
+                        android:text="@string/text_patient_username"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_name_patient_schedule_new"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_12_dp"
+                        android:layout_marginEnd="@dimen/margin_15_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="2"
+                        android:text="Nguyễn Phạm Anh Quốc"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_phone_patient"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_birthday_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="@string/text_birthday"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_birthday" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_birthday"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_13_dp"
+                        android:layout_marginEnd="@dimen/margin_15_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:text="27/04/1999"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_phone_patient"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name_patient_schedule_new" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_phone_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="@string/text_phone"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_phone_patient" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_phone_patient"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_15_dp"
+                        android:layout_marginTop="@dimen/margin_17_dp"
+                        android:layout_marginBottom="@dimen/margin_12_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:text="0974703331"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_phone_title"
+                        app:layout_constraintTop_toBottomOf="@id/tv_birthday" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_time_and_date_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_12_dp"
+                    android:background="@drawable/bg_item_book_detail"
+                    app:layout_constraintTop_toBottomOf="@id/cl_patient_schedule_new">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_date_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="@string/text_date_medical"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_calendar" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_calendar"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_15_dp"
+                        android:layout_marginTop="@dimen/margin_10_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:text="T6, 10/03/2023"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_date_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_time_appointment_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="@string/text_time_medical"
+                        android:textColor="@color/grey"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_time" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_time"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_20_dp"
+                        android:layout_marginEnd="@dimen/margin_15_dp"
+                        android:layout_marginBottom="@dimen/margin_16_dp"
+                        android:ellipsize="end"
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:text="9:00 AM"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="@id/tv_calendar"
+                        app:layout_constraintTop_toBottomOf="@id/tv_calendar" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_address_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_12_dp"
+                    android:background="@drawable/bg_item_book_detail"
+                    app:layout_constraintTop_toBottomOf="@id/cl_time_and_date_detail">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_address_appointment_title"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_15_dp"
+                        android:text="Địa chỉ khám"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/tv_medical_user_address" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_medical_user_address"
+                        style="@style/roboto_bold_14dp"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/margin_15_dp"
+                        android:layout_marginVertical="@dimen/margin_16_dp"
+                        android:gravity="end"
+                        android:text="242 Nguyen Chi Thanh, P.3, Q.10, Tp.HCM"
+                        android:textSize="@dimen/margin_16_dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/tv_address_appointment_title"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <LinearLayout
+                    android:id="@+id/cl_health"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_16_dp"
+                    android:layout_marginTop="@dimen/margin_32_dp"
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/cl_address_detail">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_state_health_title"
+                        style="@style/roboto_bold_18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_state_health" />
+
+                    <TextView
+                        android:id="@+id/tv_state_health"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_10_dp"
+                        android:background="@drawable/bg_state_health"
+                        android:paddingHorizontal="@dimen/margin_15_dp"
+                        android:paddingVertical="@dimen/margin_16_dp"
+                        android:text="242 Nguyen Chi Thanh, P.3, Q.10, Tp.HCM  fsafsafafafafafafasfas fsafasfafafasfsafsafsfafasafsafasfafafsafaffsafsaafsfafafafsafsafsafafsafafsaf" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginHorizontal="@dimen/margin_13_dp"
+        android:layout_marginTop="@dimen/margin_16_dp"
+        android:layout_marginBottom="@dimen/margin_25_dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/cl_option"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_result_medical"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_border_home"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/text_view_kqkb"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_confirm"
+                style="@style/roboto_bold_16dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_16_dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_border_home"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/text_confirm_medical"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/cl_option_schedule_new"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_16_dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_border_home"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:gravity="center"
+                android:stateListAnimator="@null"
+                android:text="@string/text_confirm_medical"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

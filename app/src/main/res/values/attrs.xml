@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="AccountOptionView">
+        <attr name="option_title" format="string" />
+        <attr name="option_icon" format="integer" />
+        <attr name="option_is_switch" format="boolean" />
+        <attr name="option_is_language" format="boolean" />
+        <attr name="option_is_change_account" format="boolean" />
+    </declare-styleable>
+</resources>

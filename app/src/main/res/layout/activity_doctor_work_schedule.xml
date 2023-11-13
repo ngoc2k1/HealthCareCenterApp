@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="Lịch khám"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_input_date"
+        style="@style/roboto_bold_24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_marginHorizontal="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_18_dp"
+        android:gravity="center_vertical"
+        android:text="Thứ 6, 15/06/2022"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_input_date"
+        android:layout_width="@dimen/margin_32_dp"
+        android:layout_height="@dimen/margin_32_dp"
+        android:src="@drawable/ic_down_to_open_calendar"
+        app:layout_constraintBottom_toBottomOf="@id/tv_input_date"
+        app:layout_constraintStart_toEndOf="@id/tv_input_date"
+        app:layout_constraintTop_toTopOf="@id/tv_input_date" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_none_schedule"
+        style="@style/roboto_bold_14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="Không có lịch làm việc"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/margin_18_dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/tv_input_date" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcv_work_schedule"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_6_dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_input_date"
+        tools:listitem="@layout/item_work_schedule_doctor" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
