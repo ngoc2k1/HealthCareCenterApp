@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.model.PatientModel
+import com.example.myapplication.model.patient.PatientModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ItemWorkScheduleDoctorBinding
 import java.util.*
@@ -38,17 +38,17 @@ class ScheduleDoctorItemAdapter(
     override fun onBindViewHolder(holder: PatientVH, position: Int) {
         val schedule = scheduleList[position]
         holder.binding.apply {
-            tvTime.text = schedule.videoTitle
-            tvStatus.text = schedule.videoTitle
-            tvUserName.text = schedule.videoTitle
-            tvSpecialty.text = schedule.videoTitle
-            tvAgeGender.text = schedule.videoTitle
-            Glide.with(context).load(schedule.videoImage).centerCrop()
-                .placeholder(R.drawable.img_default_avatar_home)
-                .into(holder.binding.imvAvatarWorkSchedule)
-            Glide.with(context).load(schedule.videoImage).centerCrop()
-                .placeholder(R.drawable.img_default_avatar_home)
-                .into(holder.binding.imvHepatitisTransmission)
+            tvTime.text = schedule.id.toString()
+            tvStatus.text = schedule.id.toString()
+            tvUserName.text = schedule.id.toString()
+            tvSpecialty.text = schedule.id.toString()
+            tvAgeGender.text = schedule.id.toString()
+//            Glide.with(context).load(schedule.videoImage).centerCrop()
+//                .placeholder(R.drawable.img_default_avatar_home)
+//                .into(holder.binding.imvAvatarWorkSchedule)
+//            Glide.with(context).load(schedule.videoImage).centerCrop()
+//                .placeholder(R.drawable.img_default_avatar_home)
+//                .into(holder.binding.imvHepatitisTransmission)
             root.setOnClickListener {
                 onClickListener?.onItemClick(schedule)
             }

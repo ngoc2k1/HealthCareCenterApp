@@ -56,35 +56,60 @@
                     android:layout_height="0.8dp"
                     android:layout_marginTop="@dimen/margin_9_dp"
                     android:background="@color/grey"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_name_doctor"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/tv_name_doctor" />
+                    app:layout_constraintStart_toStartOf="@id/tv_name_doctor"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name_doctor" />
+
 
                 <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ln_specialty"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_15_dp"
+                    android:layout_marginStart="@dimen/margin_13_dp"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:layout_marginEnd="@dimen/margin_5_dp"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/view_line"
+                    app:layout_constraintStart_toEndOf="@id/imv_avt"
                     app:layout_constraintTop_toBottomOf="@id/view_line">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/margin_13_dp"
-                        android:layout_height="@dimen/margin_13_dp"
-                        android:layout_marginTop="@dimen/margin_5_dp"
-                        android:src="@drawable/ic_location_home" />
+                        android:id="@+id/iv_specialty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_hepatitis_transmission_black" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_address"
+                        android:id="@+id/tv_specialty"
                         style="@style/roboto_regular_16dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/margin_9_dp"
-                        tools:text="Số 9, ngõ A, huyện B, tỉnh C" />
-
+                        tools:text="Truyền nhiễm" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/margin_13_dp"
+                    android:layout_height="@dimen/margin_13_dp"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:src="@drawable/ic_location_home" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_address"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_9_dp"
+                    tools:text="Số 9, ngõ A, huyện B, tỉnh C" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"

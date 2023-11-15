@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@color/grey_light"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/margin_16_dp">
 
     <TextView
         android:id="@+id/header"
         style="@style/roboto_bold_18dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_20_dp"
         android:gravity="center"
         android:text="Hồ sơ bệnh án" />
@@ -39,7 +42,6 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/purple"
-            app:layout_constraintBottom_toBottomOf="@id/img_avatar"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/img_avatar"
             app:layout_constraintTop_toTopOf="@id/img_avatar"
@@ -56,53 +58,62 @@
             app:layout_constraintTop_toBottomOf="@id/tv_name"
             tools:text="Nữ, 35" />
 
-        <LinearLayout
-            android:id="@+id/ln_information_user"
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_16_dp"
             android:layout_marginTop="@dimen/margin_10_dp"
-            android:orientation="horizontal"
+            app:cardCornerRadius="@dimen/margin_12_dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_avatar">
 
-            <TextView
-                android:id="@+id/tv_weight"
+            <LinearLayout
+                android:id="@+id/ln_information_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_account_setting"
-                android:drawablePadding="@dimen/margin_3_dp"
-                tools:text="50 kg" />
+                android:layout_margin="@dimen/margin_10_dp"
+                android:orientation="horizontal">
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/margin_10_dp"
-                android:background="@color/black" />
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_weight_black"
+                    android:drawablePadding="@dimen/margin_3_dp"
+                    tools:text="50 kg" />
 
-            <TextView
-                android:id="@+id/tv_height"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_account_setting"
-                android:drawablePadding="@dimen/margin_3_dp"
-                tools:text="156 cm" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/margin_10_dp"
+                    android:background="@color/black" />
 
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:layout_marginHorizontal="@dimen/margin_10_dp"
-                android:background="@color/black" />
+                <TextView
+                    android:id="@+id/tv_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_height_black"
+                    android:drawablePadding="@dimen/margin_3_dp"
+                    tools:text="156 cm" />
 
-            <TextView
-                android:id="@+id/tv_blood"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawableStart="@drawable/ic_account_setting"
-                android:drawablePadding="@dimen/margin_3_dp"
-                tools:text="A" />
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/margin_10_dp"
+                    android:background="@color/black" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_blood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_blood_black"
+                    android:drawablePadding="@dimen/margin_3_dp"
+                    tools:text="A" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -128,5 +139,5 @@
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="30"
-        tools:listitem="@layout/item_book_schedule" />
+        tools:listitem="@layout/item_medical_history" />
 </LinearLayout>

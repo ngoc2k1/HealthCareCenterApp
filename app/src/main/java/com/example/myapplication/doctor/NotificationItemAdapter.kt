@@ -36,10 +36,10 @@ class NotificationItemAdapter(
     override fun onBindViewHolder(holder: NotificationVH, position: Int) {
         val patient = notificationList[position]
         holder.binding.apply {
-            tvContent.text = patient.videoTitle
-            tvDaytime.text = patient.videoTitle
-            tvState.text = patient.videoTitle
-            tvTitle.text = patient.videoTitle
+            tvContent.text = patient.content
+            tvDaytime.text = patient.content
+            tvState.text = patient.content
+            tvTitle.text = patient.content
         }
     }
 

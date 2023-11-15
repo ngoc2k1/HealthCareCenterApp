@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.WindowManager
-import com.example.myapplication.model.PatientModel
+import com.example.myapplication.model.patient.PatientModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDoctorListPatientBinding
 import java.util.Timer

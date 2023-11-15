@@ -21,7 +21,7 @@ class ScheduleDoctorActivity : AppCompatActivity() {
             this.resources.getColor(R.color.background_main)
 
         binding.apply {
-//            rcvWorkSchedule
+//            rcvWorkSchedule  -> fragment book schedule detail
 //            ivInputDate.setOnClickListener{
 //            }
 //            tvInputDate.text=

@@ -206,6 +206,7 @@
     <string name="detail_patient_title" translatable="false">Bệnh nhân chi tiết</string>
     <string name="text_state_health" translatable="false">Tình trạng sức khỏe</string>
     <string name="text_edit" translatable="false"><u>Sửa</u></string>
+    <string name="str_ddmmyyyy">dd/MM/yyyy</string>
 
 
 </resources>

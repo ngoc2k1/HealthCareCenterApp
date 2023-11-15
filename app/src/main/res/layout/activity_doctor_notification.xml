@@ -25,6 +25,12 @@
         android:text="@string/str_none_notification"
         android:textColor="@color/grey" />
 
+    <ImageView
+        android:layout_width="300dp"
+        android:id="@+id/qr"
+        android:layout_height="300dp"
+        android:src="@drawable/img_default_avatar_home" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_notification"
         android:layout_width="match_parent"

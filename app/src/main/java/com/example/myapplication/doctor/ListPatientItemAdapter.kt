@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.myapplication.model.PatientModel
+import com.example.myapplication.model.patient.PatientModel
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ItemPatientBinding
 import java.util.*
@@ -38,8 +38,8 @@ class ListPatientItemAdapter(
     override fun onBindViewHolder(holder: PatientVH, position: Int) {
         val patient = dataVideoList[position]
         holder.binding.apply {
-            tvName.text = patient.videoTitle
-            tvSexAge.text = patient.videoTitle + ", " + patient.videoTitle
+            tvName.text = patient.id.toString()
+            tvSexAge.text = patient.id.toString() + ", " + patient.id.toString()
 //        val millisecondsTodayDate = Date().time
 //        val millisecondsPeriod = millisecondsTodayDate - video.publishTime
 //        holder.binding.tvTime.text = convertMillisecondsToDate(millisecondsPeriod)
@@ -48,7 +48,7 @@ class ListPatientItemAdapter(
 //            .placeholder(R.drawable.background)
 //            .into(holder.binding.ivItemvideoChannelavatar);
 
-            Glide.with(context).load(patient.videoImage).centerCrop()
+            Glide.with(context).load(patient.id.toString()).centerCrop()
                 .placeholder(R.drawable.img_default_avatar_home)
                 .into(holder.binding.imvAvatar)
 
