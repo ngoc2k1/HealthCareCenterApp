@@ -41,11 +41,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        finish()
-    }
-
     override fun onResume() {
         super.onResume()
         binding.viewContain.apply {

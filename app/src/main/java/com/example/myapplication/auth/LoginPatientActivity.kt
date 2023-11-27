@@ -113,12 +113,6 @@ class LoginPatientActivity : AppCompatActivity() {
             } else btnLogin.setBackgroundResource(R.drawable.bg_border_button_authen)
         }
     }
-
-    override fun onStop() {
-        super.onStop()
-        finish()
-    }
-
     override fun onResume() {
         super.onResume()
         binding.viewContain.apply {

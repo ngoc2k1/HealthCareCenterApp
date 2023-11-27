@@ -55,6 +55,6 @@ class NetworkInterceptor(var mContext: Context) : Interceptor {
 
 class NoConnectivityException : IOException() {
     override val message: String?
-        get() = "Không có kết nối mạng"
+        get() = "No internet"
 }
 

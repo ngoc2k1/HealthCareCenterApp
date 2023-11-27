@@ -15,4 +15,12 @@ data class DoctorLoginResponse(
         @SerializedName("token")
         val token: String
     )
+    data class Specialty(
+        @SerializedName("id")
+        val id: Int,
+        @SerializedName("image")
+        val image: String,
+        @SerializedName("name")
+        val name: String
+    )
 }

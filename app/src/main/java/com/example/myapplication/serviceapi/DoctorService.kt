@@ -1,6 +1,7 @@
 package com.example.myapplication.serviceapi
 
 import com.example.myapplication.model.NotificationModel
+import com.example.myapplication.model.doctor.DoctorAccountResponse
 import com.example.myapplication.model.doctor.DoctorLoginRequest
 import com.example.myapplication.model.doctor.DoctorLoginResponse
 import com.example.myapplication.model.doctor.DoctorModel
@@ -10,16 +11,16 @@ import com.example.myapplication.model.patient.PatientModel
 import retrofit2.http.*
 
 interface DoctorService {
-//    @Path("id") id: Int,
-//    @Query("msisdn") msisdn: String,
-//    @Query("timestamp") timestamp: String,
 //    @Query("security") security: String,
 //    @Header("Accept-language") acceptLanguage: String,
-//    @Header("mocha-api") mochaApi: String
     @GET("doctor")
-    suspend fun getDoctor(): DoctorModel
+    suspend fun getDoctor(): DoctorAccountResponse
+
     @POST("doctor/login")
-    suspend fun loginDoctor(@Body doctorLoginRequest: DoctorLoginRequest): DoctorLoginResponse
+    suspend fun loginDoctor(
+        @Body doctorLoginRequest: DoctorLoginRequest
+    ): DoctorLoginResponse
+
     @PUT("doctor/update/{id}")
     suspend fun updateDoctor(@Path("id") id: Int, @Body doctorModel: DoctorModel): Boolean
 

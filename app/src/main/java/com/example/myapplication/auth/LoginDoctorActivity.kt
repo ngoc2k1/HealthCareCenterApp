@@ -9,15 +9,20 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginDoctorBinding
+import com.example.myapplication.doctor.AccountDoctorActivity
 import com.example.myapplication.doctor.HomeDoctorActivity
+import com.example.myapplication.doctor.NotificationDoctorActivity
 import com.example.myapplication.model.doctor.DoctorLoginRequest
+import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
+import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -27,15 +32,11 @@ class LoginDoctorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginDoctorBinding
     var context: Context? = null
 
-    override fun onStop() {
-        super.onStop()
-//        finish()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginDoctorBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        var apiClient = ApiClient(this@LoginDoctorActivity)
 
         context = this
 
@@ -45,26 +46,38 @@ class LoginDoctorActivity : AppCompatActivity() {
             this@LoginDoctorActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
+
         binding.apply {
             loginTvForgetPassword.setOnClickListener {
                 val forgotPwDialog = ForgotPwDialog()
                 forgotPwDialog.show(supportFragmentManager, "dialog")//supportFM : activity
             }
             btnLogin.setOnClickListener {
-//                GlobalScope.launch(Dispatchers.IO) {
-//                    val doctor = ApiClient.doctorService.loginDoctor(
-//                        DoctorLoginRequest(
-//                            "12345",
-//                            "ttpyen@mailinator.com"
-//                        )
-//                    )
-//                    withContext(Dispatchers.Main) {
-//                        btnLogin.text = doctor.msg
-//                    }
-//                }
-//                startActivity(Intent(this@LoginDoctorActivity, HomeDoctorActivity::class.java))
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val doctor = apiClient.doctorService.loginDoctor(
+                        DoctorLoginRequest(
+                            "ttpyen@mailinator.com", "12345"
+                        )
+                    )
+                    if (doctor.code == 200) {
+                        withContext(Dispatchers.Main) {
+                            toast(
+                                Hawk.get<String>(HawkKey.ACCESS_TOKEN_DOCTOR)
+                            )
+                        }
+                        startActivity(
+                            Intent(
+                                this@LoginDoctorActivity,
+                                AccountDoctorActivity::class.java
+                            )
+                        )
+                    } else if (doctor.code in 400..499) {
+                        withContext(Dispatchers.Main) {
+                            btnLogin.text = doctor.data.token
+                        }
+                    }
+                }
             }
-
 
             loginEdtUsername.addTextChangedListener(object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
