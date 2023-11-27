@@ -16,7 +16,7 @@
         android:id="@+id/view_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_bottom_sheet_home" />
+        android:background="@drawable/bg_border_bottomsheet" />
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -81,57 +81,69 @@
             android:layout_marginTop="6dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="Ngọc"
+            tools:text="Ngọc"
             android:textColor="@color/black" />
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/ln_information"
-        android:layout_width="match_parent"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_information"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="33dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_marginHorizontal="@dimen/margin_16_dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/grey_light"
+        app:cardCornerRadius="@dimen/margin_20_dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/rl_info">
 
-        <TextView
-            android:id="@+id/tv_weight"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:id="@+id/ln_information"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_account_setting"
-            android:drawablePadding="@dimen/margin_3_dp"
-            tools:text="50 kg" />
+            android:layout_margin="@dimen/margin_15_dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/margin_10_dp"
-            android:background="@color/black" />
+            <TextView
+                android:id="@+id/tv_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_weight_black"
+                android:drawablePadding="@dimen/margin_3_dp"
+                tools:text="50 kg" />
 
-        <TextView
-            android:id="@+id/tv_height"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_account_setting"
-            android:drawablePadding="@dimen/margin_3_dp"
-            tools:text="156 cm" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/margin_10_dp"
+                android:background="@color/black" />
 
-        <View
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/margin_10_dp"
-            android:background="@color/black" />
+            <TextView
+                android:id="@+id/tv_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_height_black"
+                android:drawablePadding="@dimen/margin_3_dp"
+                tools:text="156 cm" />
 
-        <TextView
-            android:id="@+id/tv_blood"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_account_setting"
-            android:drawablePadding="@dimen/margin_3_dp"
-            tools:text="A" />
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/margin_10_dp"
+                android:background="@color/black" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/tv_blood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_blood_black"
+                android:drawablePadding="@dimen/margin_3_dp"
+                tools:text="A" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_button"
@@ -141,7 +153,7 @@
         android:layout_marginTop="23dp"
         android:elevation="2dp"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/ln_information">
+        app:layout_constraintTop_toBottomOf="@id/cv_information">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
@@ -165,12 +177,12 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/margin_70_dp"
                     android:layout_height="@dimen/margin_70_dp"
-                    android:layout_marginVertical="@dimen/margin_5_dp"
-                    android:src="@drawable/ic_microskop" />
+                    android:padding="@dimen/margin_10_dp"
+                    android:src="@drawable/book" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_test_update"
-                    style="@style/roboto_bold_18dp"
+                    style="@style/roboto_bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -207,12 +219,12 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/margin_70_dp"
                     android:layout_height="@dimen/margin_70_dp"
-                    android:layout_marginVertical="@dimen/margin_5_dp"
-                    android:src="@drawable/ic_data_medis" />
+                    android:padding="@dimen/margin_10_dp"
+                    android:src="@drawable/profile" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_medical_records"
-                    style="@style/roboto_bold_18dp"
+                    style="@style/roboto_bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -222,15 +234,5 @@
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.cardview.widget.CardView>
     </androidx.appcompat.widget.LinearLayoutCompat>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nsv_container"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="120dp"
-        android:elevation="1dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></androidx.core.widget.NestedScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

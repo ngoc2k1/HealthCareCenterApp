@@ -5,11 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/margin_12_dp"
-    android:background="@drawable/bg_item_selected"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="@dimen/margin_12_dp"
-    app:cardElevation="@dimen/margin_4_dp">
+    app:cardCornerRadius="@dimen/margin_12_dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -22,7 +20,6 @@
             android:layout_marginVertical="@dimen/margin_12_dp"
             android:layout_marginStart="@dimen/margin_12_dp"
             app:cardCornerRadius="9dp"
-            app:cardElevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

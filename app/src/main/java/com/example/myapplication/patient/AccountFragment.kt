@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentAccountBinding
+import com.example.myapplication.utils.getCurrentHour
 
 class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null
@@ -16,5 +18,20 @@ class AccountFragment : Fragment() {
     ): View? {
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.viewContain.apply {
+            if (getCurrentHour() in 6..18) {
+                setBackgroundResource(R.drawable.background_app_sun)
+            } else {
+                setBackgroundResource(R.drawable.background_app)
+            }
+        }
     }
 }

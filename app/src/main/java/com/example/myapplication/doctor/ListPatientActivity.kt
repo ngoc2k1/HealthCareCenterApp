@@ -1,9 +1,11 @@
 package com.example.myapplication.doctor
 
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.WindowManager
 import com.example.myapplication.model.patient.PatientModel
 import com.example.myapplication.R
@@ -20,10 +22,12 @@ class ListPatientActivity : AppCompatActivity() {
         binding = ActivityDoctorListPatientBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val window = this.window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = this.resources.getColor(R.color.background_main)
+        window.apply {
+            decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            this@ListPatientActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            statusBarColor = Color.TRANSPARENT
+        }
 
         //set du lieu rv
         patientItemAdapter = ListPatientItemAdapter(this)

@@ -2,11 +2,14 @@ package com.example.myapplication.doctor
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.view.WindowManager
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDoctorHomeBinding
+import com.example.myapplication.utils.getCurrentHour
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -14,6 +17,16 @@ import com.journeyapps.barcodescanner.ScanOptions
 class HomeDoctorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDoctorHomeBinding
     var context: Context? = null
+    override fun onResume() {
+        super.onResume()
+        binding.viewContain.apply {
+            if (getCurrentHour() in 6..18) {
+                setBackgroundResource(R.drawable.background_app_sun)
+            } else {
+                setBackgroundResource(R.drawable.background_app)
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,10 +35,12 @@ class HomeDoctorActivity : AppCompatActivity() {
 
         context = this
 
-        val window = this.window
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.statusBarColor = this.resources.getColor(R.color.background_main)
+        window.apply {
+            decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            this@HomeDoctorActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+            statusBarColor = Color.TRANSPARENT
+        }
 
         with(binding) {
 //            tvName.text

@@ -1,10 +1,10 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Health Care Center</string>
     <string name="str_title_profile_medical">Hồ sơ bệnh án</string>
     <string name="str_all"><u>Tất cả</u></string>
     <string name="tab_profile_doctor">Thông báo</string>
-    <string name="confirm_password_change_password">Đổi mật khẩu</string>
-    <string name="str_forgot_and_change_password">Quên mật khẩu?</string>
+    <string name="str_forgot_password">Quên mật khẩu?</string>
+    <string name="str_login">Bạn đã có tài khoản?</string>
 
     <string name="str_edit_profile">Chỉnh sửa hồ sơ</string>
     <string name="str_login_fingerprint">Đăng nhập với vân tay</string>
@@ -87,7 +87,9 @@
     <!--Register-->
     <string name="register_header_title_new">Đăng ký tài khoản</string>
     <string name="register_username_hint">Tên</string>
-    <string name="authen_username_hint">Số điện thoại</string>
+    <string name="authen_username_hint">Số điện thoại/Email</string>
+    <string name="authen_phone_hint">Số điện thoại</string>
+    <string name="authen_email_hint">Email</string>
     <string name="register_password_hint"><![CDATA[Mật khẩu<br/><font color=\'#DC2220\'><i>(ít nhất 6 ký tự cả chữ hoa,chữ thường và số)</i></font>]]></string>
     <string name="old_password_hint"><![CDATA[Mật khẩu cũ<br/><font color=\'#DC2220\'><i>(ít nhất 6 ký tự cả chữ hoa,chữ thường và số)</i></font>]]></string>
     <string name="new_password_hint"><![CDATA[Mật khẩu mới<br/><font color=\'#DC2220\'><i>(ít nhất 6 ký tự cả chữ hoa,chữ thường và số)</i></font>]]></string>
@@ -100,11 +102,11 @@
     <string name="register_validate_enter_district">Vui lòng chọn Quận/Huyện!</string>
     <string name="register_validate_enter_user_name">Vui lòng nhập Email hoặc số điện thoại!</string>
     <string name="register_validate_too_long_name"> Vui lòng nhập họ và tên lớn nhất 255 kí tự!</string>
-    <string name="register_validate_user_name_max_length">Vui lòng nhập Email hoặc Số điện thoại lớn nhất 100 kí tự!</string>
-    <string name="register_validate_user_name_not_phone_or_email">Tài khoản phải là số điện thoại hoặc email</string>
+    <string name="register_validate_user_name">Vui lòng nhập số điện thoại</string>
+    <string name="register_validate_user_name_not_phone_or_email">Tài khoản phải là số điện thoại</string>
     <string name="register_validate_user_name_not_email">Vui lòng nhập đúng định dạng email!</string>
     <string name="register_validate_user_name_not_phone">Vui lòng nhập đúng định dạng số điện thoại!</string>
-    <string name="register_validate_enter_password">Vui lòng nhập mật khẩu!</string>
+    <string name="register_validate_enter_password">Vui lòng nhập mật khẩu</string>
     <string name="register_validate_wrong_format_password">Mật khẩu phải bao gồm cả chữ vào số</string>
     <string name="register_validate_too_short_password">Vui lòng nhập mật khẩu ít nhất 6 kí tự!</string>
     <string name="register_validate_enter_confirm_password">Vui lòng nhập lại mật khẩu!</string>
@@ -126,6 +128,8 @@
     <string name="login_tv_register_title"><u>Đăng ký tài khoản</u></string>
     <string name="register_account_success"><u>Đăng ký hội viên thành công!</u></string>
     <string name="btn_login_title">Đăng nhập</string>
+    <string name="btn_login_title_doctor">Đăng nhập là bác sĩ</string>
+    <string name="btn_login_title_patient">Đăng nhập là bệnh nhân</string>
     <string name="login_username_hint">Tên đăng nhập</string>
     <string name="login_password_hint">Mật khẩu</string>
     <string name="login_password_note">(Ít nhất 6 ký tự cả chữ hoa, chữ thường và số)</string>
@@ -187,7 +191,8 @@
     <string name="str_text_rq_guide" translatable="false">Vui lòng đưa mã QR vào giữa khung trắng</string>
 
     <string name="str_medical_history">Lịch sử khám bệnh</string>
-
+    <string name="str_medical_history_detail">Xem LSKB</string>
+    <string name="str_medical_history_cancel">Hủy lịch</string>
     <!--Information appointment schedule-->
     <string name="text_confirm_medical" translatable="false">Xác nhận đã khám</string>
     <string name="text_view_kqkb" translatable="false">Xem KQKB</string>
@@ -207,6 +212,22 @@
     <string name="text_state_health" translatable="false">Tình trạng sức khỏe</string>
     <string name="text_edit" translatable="false"><u>Sửa</u></string>
     <string name="str_ddmmyyyy">dd/MM/yyyy</string>
+    <string name="str_no_work_schedule">Không có lịch làm việc</string>
+    <string name="str_schedule">Lịch khám</string>
+    <string name="st_fullname">Họ và tên</string>
 
+    <string name="confirm_old_password_title_change">Mật khẩu hiện tại<font color='#FFF50505'> *</font></string>
+    <string name="confirm_new_password_title_change">Mật khẩu mới<font color='#FFF50505'> *</font></string>
+    <string name="confirm_password_re_password_title_change">Nhập lại mật khẩu mới<font color='#FFF50505'> *</font></string>
+    <string name="confirm_password_change_password">Đổi mật khẩu</string>
+
+    <string name="confirm_old_password_title_forgot">Email khi đăng kí tài khoản<font color='#FFF50505'> *</font></string>
+    <string name="confirm_password_forgot_active_otp">OTP nhận được<font color='#FFF50505'> *</font></string>
+    <string name="confirm_password_forgot_active_title">Cập nhật mật khẩu</string>
+    <string name="confirm_password_forgot_password">Quên mật khẩu</string>
+    <string name="confirm_password_note">Lưu ý:\nMật khẩu không được trùng với mật khẩu cũ</string>
+    <string name="str_ok">OK</string>
+    <string name="str_huy">Hủy</string>
+    <string name="str_name_app">HEALTH CARE CENTER</string>
 
 </resources>

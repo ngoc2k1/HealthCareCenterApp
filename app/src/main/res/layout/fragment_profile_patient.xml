@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/header"
-        style="@style/roboto_bold_18dp"
+        style="@style/roboto_bold_24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -21,7 +21,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10_dp">
+        android:layout_marginTop="@dimen/margin_20_dp">
 
         <ImageView
             android:id="@+id/img_avatar"
@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_name"
-            style="@style/roboto_bold_24dp"
+            style="@style/roboto_bold_18dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16_dp"
@@ -49,7 +49,7 @@
 
         <TextView
             android:id="@+id/tv_gender_age"
-            style="@style/roboto_regular_16dp"
+            style="@style/roboto_regular_12dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_16_dp"
-            android:layout_marginTop="@dimen/margin_10_dp"
+            android:layout_marginTop="@dimen/margin_5_dp"
             app:cardCornerRadius="@dimen/margin_12_dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +71,7 @@
             <LinearLayout
                 android:id="@+id/ln_information_user"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_10_dp"
                 android:orientation="horizontal">
 
@@ -128,6 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:paddingBottom="@dimen/margin_5_dp"
         android:text="Tạo mới"
         android:textColor="@color/blue" />
 

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_16_dp"
+        android:layout_marginTop="@dimen/margin_6_dp"
+        android:layout_marginBottom="@dimen/margin_6_dp"
+        app:cardCornerRadius="@dimen/margin_12_dp"
+        app:cardElevation="@dimen/margin_5_dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="11dp"
+            android:paddingVertical="@dimen/margin_12_dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_status"
+                    style="@style/roboto_bold_14dp"
+                    android:layout_width="68dp"
+                    android:layout_height="18dp"
+                    android:background="@drawable/bg_item_work_state_cancelled"
+                    android:gravity="center"
+                    android:text="Đã hủy"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/margin_12_dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imv_avt"
+                    android:layout_width="@dimen/width_78.5dp"
+                    android:layout_height="@dimen/width_78.5dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/doctor"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_status"
+                    app:shapeAppearanceOverlay="@style/radius_8dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_name_doctor"
+                    style="@style/roboto_bold_18dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13_dp"
+                    android:layout_marginEnd="@dimen/margin_5_dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_avt"
+                    app:layout_constraintTop_toBottomOf="@id/tv_status"
+                    tools:text="Vu Manh Ha" />
+
+
+                <View
+                    android:id="@+id/view_line"
+                    android:layout_width="0dp"
+                    android:layout_height="0.8dp"
+                    android:layout_marginTop="@dimen/margin_9_dp"
+                    android:background="@color/grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_name_doctor"
+                    app:layout_constraintTop_toBottomOf="@id/tv_name_doctor" />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ln_specialty"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_13_dp"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:layout_marginEnd="@dimen/margin_5_dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imv_avt"
+                    app:layout_constraintTop_toBottomOf="@id/view_line">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_specialty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_hepatitis_transmission_black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_specialty"
+                        style="@style/roboto_regular_16dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_9_dp"
+                        tools:text="Truyền nhiễm" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/margin_13_dp"
+                    android:layout_height="@dimen/margin_13_dp"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:src="@drawable/ic_location_home" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_address"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_9_dp"
+                    tools:text="Số 9, ngõ A, huyện B, tỉnh C" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_8_dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_cancel"
+                    style="@style/roboto_bold_14dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_30_dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border_home"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="@dimen/margin_15_dp"
+                    android:paddingVertical="@dimen/margin_7_dp"
+                    android:text="@string/str_medical_history_cancel"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_go_medical_history"
+                    style="@style/roboto_bold_14dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border_home"
+                    android:gravity="center_horizontal"
+                    android:paddingHorizontal="@dimen/margin_15_dp"
+                    android:paddingVertical="@dimen/margin_7_dp"
+                    android:text="@string/str_medical_history_detail"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.cardview.widget.CardView>
+</androidx.appcompat.widget.LinearLayoutCompat>

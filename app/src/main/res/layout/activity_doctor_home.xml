@@ -2,9 +2,10 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_contain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/img_bg_login">
+    android:background="@drawable/background_app_sun">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,7 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_46_dp"
-            android:src="@drawable/ic_notification"
+            android:padding="@dimen/margin_10_dp"
+            android:src="@drawable/ic_notification_setting"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,6 +26,7 @@
             android:id="@+id/iv_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="@dimen/margin_10_dp"
             android:src="@drawable/ic_account_setting"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/iv_notification" />
@@ -42,7 +45,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_23_dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_favourite_setting"
+                android:src="@drawable/img_default_avatar_home"
                 app:shapeAppearance="@style/circle" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -78,9 +81,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_28_dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_bottom_sheet_home"
+            android:background="@drawable/bg_border_form"
             android:orientation="vertical"
-            android:paddingBottom="83dp"
+            android:paddingVertical="@dimen/margin_10_dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ll_top">
 
@@ -88,7 +91,6 @@
                 android:id="@+id/rl_list_patient"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_13_dp"
                 android:foreground="?attr/selectableItemBackgroundBorderless">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -169,7 +171,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20_dp"
-                android:layout_marginBottom="@dimen/margin_13_dp"
                 android:foreground="?attr/selectableItemBackgroundBorderless">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -204,9 +205,6 @@
 
                 </androidx.cardview.widget.CardView>
             </RelativeLayout>
-
         </LinearLayout>
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.core.widget.NestedScrollView>

@@ -19,7 +19,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_time"
-        style="@style/roboto_bold_16dp"
+        style="@style/roboto_regular_16dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|start"
@@ -33,14 +33,17 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_status"
-        style="@style/roboto_bold_14dp"
-        android:layout_width="68dp"
-        android:layout_height="18dp"
+        style="@style/roboto_regular_12dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_1_dp"
         android:layout_marginEnd="@dimen/margin_24_dp"
         android:background="@drawable/bg_item_work_state_cancelled"
         android:gravity="center"
+        android:paddingHorizontal="@dimen/margin_10_dp"
+        android:paddingVertical="@dimen/margin_2_dp"
         android:text="Đã hủy"
+        android:textColor="@color/white"
         android:textSize="@dimen/margin_12_dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -51,7 +54,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin_12_dp"
         android:background="@drawable/bg_item_work_schedule"
-        app:layout_constraintTop_toBottomOf="@id/tv_time">
+        app:layout_constraintTop_toBottomOf="@id/tv_status">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cl_item"
