@@ -35,12 +35,13 @@ class AccountDoctorActivity : AppCompatActivity() {
             statusBarColor = Color.TRANSPARENT
         }
         var apiClient = ApiClient(this@AccountDoctorActivity)
-//        lifecycleScope.launch() {
-//            val doctor = apiClient.doctorService.getDoctor()
-//            if (doctor.code == 200) {
-//            } else if (doctor.code in 400..499) {
-//            }
-//        }
+        lifecycleScope.launch() {
+            val doctor = apiClient.doctorService.getDoctor()
+            if (doctor.code == 200) {
+//                binding.tvName.text = doctor.data.
+            } else if (doctor.code in 400..499) {
+            }
+        }
     }
 
     override fun onResume() {

@@ -5,6 +5,7 @@ import com.example.myapplication.model.doctor.DoctorAccountResponse
 import com.example.myapplication.model.doctor.DoctorLoginRequest
 import com.example.myapplication.model.doctor.DoctorLoginResponse
 import com.example.myapplication.model.doctor.DoctorModel
+import com.example.myapplication.model.doctor.DoctorSpecialtyResponse
 import com.example.myapplication.model.patient.BookSchedule
 import com.example.myapplication.model.patient.PatientLoginRequest
 import com.example.myapplication.model.patient.PatientModel
@@ -13,6 +14,7 @@ import retrofit2.http.*
 interface DoctorService {
 //    @Query("security") security: String,
 //    @Header("Accept-language") acceptLanguage: String,
+//    @Header("Authorization: eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiRE9DVE9SIiwic3ViIjoiMiIsImlhdCI6MTcwMTE4NzE5NiwiZXhwIjoxNzAxNTQ3MTk2fQ.TyXbRB1C7qZqtUsgUwihsjTlr_L2wTzcydi88wdPPpqp9G925JdDyBV_YV3fy6MFxpIjLrHWXdIKgmpIOqixxw")
     @GET("doctor")
     suspend fun getDoctor(): DoctorAccountResponse
 

@@ -56,7 +56,7 @@ class LoginDoctorActivity : AppCompatActivity() {
                 lifecycleScope.launch(Dispatchers.IO) {
                     val doctor = apiClient.doctorService.loginDoctor(
                         DoctorLoginRequest(
-                            "ttpyen@mailinator.com", "12345"
+                            "email_2@gmail.com", "12345"
                         )
                     )
                     if (doctor.code == 200) {
