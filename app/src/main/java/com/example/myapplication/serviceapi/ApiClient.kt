@@ -15,11 +15,16 @@ class ApiClient(context: Context) {
     private val BASE_URL = "http://192.168.0.103:8080/api/v1/"
 
     val okHttpClientDoctor = OkHttpClient.Builder()
-        .addInterceptor(NetworkInterceptor(context))
+//        .addInterceptor(NetworkInterceptor(context))
         .addInterceptor(createHttpLoggingInterceptor()) // Log lỗi ra logcat: header lỗi, connect thành công
         .addInterceptor(DoctorHeaderAuthorizationInterceptor)
         .build()
 
+    //    val request = Request.Builder()
+//        .header("Authorization", "Client-ID $IMGUR_CLIENT_ID")
+//        .url("https://api.imgur.com/3/image")
+//        .post(requestBody)
+//        .build()
     val retrofitDoctor = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .baseUrl(BASE_URL)

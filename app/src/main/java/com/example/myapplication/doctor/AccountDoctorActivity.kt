@@ -35,10 +35,13 @@ class AccountDoctorActivity : AppCompatActivity() {
             statusBarColor = Color.TRANSPARENT
         }
         var apiClient = ApiClient(this@AccountDoctorActivity)
+        toast(
+            Hawk.get<String>(HawkKey.ACCESS_TOKEN_DOCTOR)
+        )
         lifecycleScope.launch() {
             val doctor = apiClient.doctorService.getDoctor()
             if (doctor.code == 200) {
-//                binding.tvName.text = doctor.data.
+                binding.tvName.text = doctor.data.birthday
             } else if (doctor.code in 400..499) {
             }
         }

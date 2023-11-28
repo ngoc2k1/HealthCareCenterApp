@@ -60,11 +60,7 @@ class LoginDoctorActivity : AppCompatActivity() {
                         )
                     )
                     if (doctor.code == 200) {
-                        withContext(Dispatchers.Main) {
-                            toast(
-                                Hawk.get<String>(HawkKey.ACCESS_TOKEN_DOCTOR)
-                            )
-                        }
+                        Hawk.put(HawkKey.ACCESS_TOKEN_DOCTOR, doctor.data.token)
                         startActivity(
                             Intent(
                                 this@LoginDoctorActivity,
