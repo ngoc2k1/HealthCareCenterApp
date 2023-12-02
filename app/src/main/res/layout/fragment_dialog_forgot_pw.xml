@@ -1,73 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:padding="@dimen/margin_16_dp">
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/roboto_bold_24dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_10_dp"
-        android:gravity="center_horizontal"
-        android:text="@string/confirm_password_forgot_password"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_phone"
-        style="@style/roboto_bold_14dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20_dp"
-        android:gravity="center_horizontal"
-        android:text="@string/confirm_old_password_title_forgot"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        <TextView
+            android:id="@+id/title"
+            style="@style/roboto_bold_24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center_horizontal"
+            android:text="@string/confirm_password_forgot_password"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_forgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="title,button_cancel,tv_email, edt_email, button_ok"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group_active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="title_active,button_cancel_active,tv_otp, tv_pw, button_ok_active,edt_pw,edt_otp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_email"
+            style="@style/roboto_bold_14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:gravity="center_horizontal"
+            android:text="@string/confirm_old_password_title_forgot"
+            app:layout_constraintTop_toBottomOf="@id/title" />
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/edt_phone"
-        style="@style/roboto_regular_16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:gravity="center_horizontal"
-        android:inputType="number"
-        android:lines="1"
-        app:layout_constraintTop_toBottomOf="@id/tv_phone"
-        tools:layout_editor_absoluteX="16dp" />
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_email"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:text="ngoc2012001@gmail.com"
+            app:layout_constraintTop_toBottomOf="@id/tv_email"
+            tools:layout_editor_absoluteX="16dp" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_ok"
-        style="@style/roboto_regular_16dp"
-        android:layout_width="@dimen/width_78.5dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_15_dp"
-        android:background="@drawable/bg_border_home"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/margin_15_dp"
-        android:paddingVertical="@dimen/margin_7_dp"
-        android:text="@string/str_ok"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/edt_phone"
-        app:layout_constraintTop_toBottomOf="@id/edt_phone" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_ok"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="@dimen/width_78.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15_dp"
+            android:background="@drawable/bg_border_home"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_15_dp"
+            android:paddingVertical="@dimen/margin_20_dp"
+            android:text="@string/str_ok"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/edt_email"
+            app:layout_constraintTop_toBottomOf="@id/edt_email" />
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/button_cancel"
-        style="@style/roboto_regular_16dp"
-        android:layout_width="@dimen/width_78.5dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_15_dp"
-        android:background="@drawable/bg_border_home"
-        android:gravity="center"
-        android:paddingHorizontal="@dimen/margin_15_dp"
-        android:paddingVertical="@dimen/margin_7_dp"
-        android:text="@string/str_huy"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="@id/edt_phone"
-        app:layout_constraintTop_toBottomOf="@id/edt_phone" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_cancel"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="@dimen/width_78.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15_dp"
+            android:background="@drawable/bg_border_home"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_15_dp"
+            android:paddingVertical="@dimen/margin_20_dp"
+            android:text="@string/str_huy"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/edt_email"
+            app:layout_constraintTop_toBottomOf="@id/edt_email" />
+
+        <TextView
+            android:id="@+id/title_active"
+            style="@style/roboto_bold_24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10_dp"
+            android:gravity="center_horizontal"
+            android:text="@string/confirm_password_forgot_active_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_otp"
+            style="@style/roboto_bold_14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:gravity="center_horizontal"
+            android:text="@string/confirm_password_forgot_active_otp"
+            app:layout_constraintTop_toBottomOf="@id/title_active" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_otp"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:inputType="number"
+            android:lines="1"
+            app:layout_constraintTop_toBottomOf="@id/tv_otp"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/tv_pw"
+            style="@style/roboto_bold_14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20_dp"
+            android:gravity="center_horizontal"
+            android:text="@string/confirm_new_password_title_change"
+            app:layout_constraintTop_toBottomOf="@id/edt_otp" />
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edt_pw"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
+            android:inputType="textPassword"
+            android:lines="1"
+            app:layout_constraintTop_toBottomOf="@id/tv_pw"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_ok_active"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="@dimen/width_78.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15_dp"
+            android:background="@drawable/bg_border_home"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_15_dp"
+            android:paddingVertical="@dimen/margin_20_dp"
+            android:text="@string/str_ok"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/edt_pw"
+            app:layout_constraintTop_toBottomOf="@id/edt_pw" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_cancel_active"
+            style="@style/roboto_regular_16dp"
+            android:layout_width="@dimen/width_78.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15_dp"
+            android:background="@drawable/bg_border_home"
+            android:gravity="center"
+            android:paddingHorizontal="@dimen/margin_15_dp"
+            android:paddingVertical="@dimen/margin_20_dp"
+            android:text="@string/str_huy"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toStartOf="@id/edt_pw"
+            app:layout_constraintTop_toBottomOf="@id/edt_pw" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
 

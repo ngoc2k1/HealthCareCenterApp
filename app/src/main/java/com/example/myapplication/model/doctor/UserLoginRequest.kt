@@ -3,7 +3,7 @@ package com.example.myapplication.model.doctor
 
 import com.google.gson.annotations.SerializedName
 
-data class DoctorLoginRequest(
+data class UserLoginRequest(
     @SerializedName("phoneOrEmail")
     val phoneOrEmail: String,
     @SerializedName("password")

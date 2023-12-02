@@ -38,7 +38,8 @@
     <string name="str_user_google">Đăng nhập với Google</string>
     <!--    home doctor-->
     <string name="str_newest" translatable="false">Mới nhất</string>
-    <string name="str_hello_user" translatable="false">Xin chào,</string>
+    <string name="str_hello_user" translatable="false">Xin chào buổi sáng</string>
+    <string name="str_hello_user_evening" translatable="false">Xin chào buổi tối</string>
     <string name="str_qr_doctor" translatable="false">Quét mã QR</string>
     <string name="str_capture" translatable="false">Chụp</string>
     <string name="home_doctor_hello">Xin chào,</string>
@@ -140,6 +141,9 @@
     <string name="login_failed">Đăng nhập thất bại!</string>
     <string name="str_choose_login">Hoặc đăng nhập qua</string>
     <string name="login_validate_token">Không thể lấy token thiết bị, vui lòng kiểm tra mạng và thử lại</string>
+    <string name="str_error_change_pw" translatable="false">Vui lòng nhập đầy đủ vào ô trống</string>
+    <string name="str_error_change_pw_cf" translatable="false">Vui lòng nhập mật khẩu mới trùng nhau</string>
+
     <!--create resume-->
     <string name="create_medical_identity_card">Vui lòng nhập đúng định dạng CCCD/CMND!</string>
     <string name="create_medical_health_insurance">Vui lòng nhập đúng định dạng Mã số thẻ bảo hiểm Y tế!</string>
@@ -212,7 +216,8 @@
     <string name="text_state_health" translatable="false">Tình trạng sức khỏe</string>
     <string name="text_edit" translatable="false"><u>Sửa</u></string>
     <string name="str_ddmmyyyy">dd/MM/yyyy</string>
-    <string name="str_no_work_schedule">Không có lịch làm việc</string>
+    <string name="str_no_work_schedule">Không có lịch khám bệnh nhân</string>
+    <string name="str_no_patient">Không có bệnh nhân</string>
     <string name="str_schedule">Lịch khám</string>
     <string name="st_fullname">Họ và tên</string>
 
@@ -225,9 +230,14 @@
     <string name="confirm_password_forgot_active_otp">OTP nhận được<font color='#FFF50505'> *</font></string>
     <string name="confirm_password_forgot_active_title">Cập nhật mật khẩu</string>
     <string name="confirm_password_forgot_password">Quên mật khẩu</string>
-    <string name="confirm_password_note">Lưu ý:\nMật khẩu không được trùng với mật khẩu cũ</string>
+    <string name="confirm_password_note">Lưu ý:\nMật khẩu mới không được giống mật khẩu hiện tại</string>
+    <string name="confirm_password_note_compare">Mật khẩu mới không được giống mật khẩu hiện tại</string>
     <string name="str_ok">OK</string>
+    <string name="str_chuakham">Chưa khám</string>
+    <string name="str_dakham">Đã khám</string>
+    <string name="str_dahuy">Đã hủy</string>
     <string name="str_huy">Hủy</string>
     <string name="str_name_app">HEALTH CARE CENTER</string>
+    <string name="str_search_patient">Tìm kiếm bệnh nhân</string>
 
 </resources>

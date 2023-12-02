@@ -1,6 +1,7 @@
 package com.example.myapplication.model.doctor
 
 
+import com.example.myapplication.model.Specialty
 import com.google.gson.annotations.SerializedName
 
 data class DoctorAccountResponse(
@@ -36,13 +37,5 @@ data class DoctorAccountResponse(
         val phone: String,
         @SerializedName("specialty")
         val specialty: Specialty
-    )
-    data class Specialty(
-        @SerializedName("id")
-        val id: Int,
-        @SerializedName("image")
-        val image: String,
-        @SerializedName("name")
-        val name: String
     )
 }

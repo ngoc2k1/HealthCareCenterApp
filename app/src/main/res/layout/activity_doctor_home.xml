@@ -16,7 +16,8 @@
             android:id="@+id/iv_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_46_dp"
+            android:layout_marginTop="@dimen/margin_60_dp"
+            android:background="@drawable/bg_border_circle"
             android:padding="@dimen/margin_10_dp"
             android:src="@drawable/ic_notification_setting"
             app:layout_constraintEnd_toEndOf="parent"
@@ -26,6 +27,7 @@
             android:id="@+id/iv_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@drawable/bg_border_circle"
             android:padding="@dimen/margin_10_dp"
             android:src="@drawable/ic_account_setting"
             app:layout_constraintStart_toStartOf="parent"
@@ -57,8 +59,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="@dimen/margin_13_dp"
                 android:maxLines="1"
-                android:text="@string/str_hello_user"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                tools:text="@string/str_hello_user" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name"
@@ -159,7 +161,7 @@
                         android:background="@drawable/bg_button_home"
                         android:gravity="center_vertical"
                         android:paddingStart="112dp"
-                        android:text="@string/home_doctor_work_schedule"
+                        android:text="@string/str_schedule"
                         android:textColor="@color/white"
                         tools:ignore="RtlSymmetry" />
 

@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/grey_light"
-    android:paddingHorizontal="@dimen/margin_16_dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/margin_16_dp">
 
     <TextView
         android:id="@+id/header"
         style="@style/roboto_bold_24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20_dp"
+        android:layout_marginTop="@dimen/margin_40_dp"
         android:gravity="center"
         tools:text="Bệnh nhân (20)" />
 
@@ -26,7 +26,7 @@
         android:background="@drawable/bg_search"
         android:drawableStart="@drawable/ic_search"
         android:drawablePadding="@dimen/margin_10_dp"
-        tools:hint="Tìm kiếm bệnh nhân"
+        android:hint="@string/str_search_patient"
         android:padding="@dimen/margin_15_dp" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -34,9 +34,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
-        android:layout_marginTop="@dimen/margin_10_dp"
+        android:layout_marginTop="@dimen/margin_20_dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="30"
         tools:listitem="@layout/item_patient" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_none"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="@string/str_no_patient"
+        android:textColor="@color/grey"
+        android:visibility="gone"/>
 </LinearLayout>

@@ -5,9 +5,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#A4A4A4</color>
     <color name="grey_light">#56F1EDED</color>
+    <color name="green">#3A883D</color>
     <color name="yellow">#EFDA21</color>
     <color name="purple">#A04FE9</color>
     <color name="color_home">#002458</color>
+    <color name="red">#DF3528</color>
 
 
 </resources>

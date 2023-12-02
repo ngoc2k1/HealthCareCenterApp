@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/view_contain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_app_sun"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:fillViewport="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_15_dp"
+                android:layout_marginTop="@dimen/width_135dp"
+                android:layout_marginBottom="@dimen/margin_60_dp"
+                android:background="@drawable/bg_border_form"
+                android:orientation="vertical"
+                android:paddingVertical="@dimen/margin_26_dp"
+                android:paddingStart="@dimen/margin_22_dp"
+                android:paddingEnd="@dimen/margin_21_dp">
+
+                <EditText
+                    android:id="@+id/input_phone_register"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_call"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/authen_phone_hint"
+                    android:inputType="number"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/input_email_register"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_email"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/authen_email_hint"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/input_password_register"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_40_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_password_setting"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/login_password_hint"
+                    android:inputType="textPassword"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/input_confirm_password_register"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_40_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_password_setting"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/register_confirm_password_hint"
+                    android:inputType="textPassword"
+                    android:padding="10dp" />
+
+                <EditText
+                    android:id="@+id/input_full_name"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_40_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_account_setting"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/st_fullname"
+                    android:padding="10dp" />
+
+                <TextView
+                    android:id="@+id/tv_birthday"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_40_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/all_buttoncalendar"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/register_birthday_hint"
+                    android:padding="10dp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_gen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="19dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rb_male"
+                        android:layout_width="@dimen/margin_30_dp"
+                        android:layout_height="@dimen/margin_30_dp"
+                        android:padding="@dimen/margin_5_dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_3_dp"
+                        android:text="@string/str_male"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/rb_female"
+                        android:layout_width="@dimen/margin_30_dp"
+                        android:layout_height="@dimen/margin_30_dp"
+                        android:layout_marginStart="@dimen/margin_30_dp"
+                        android:padding="@dimen/margin_5_dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_3_dp"
+                        android:text="@string/str_female"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        android:id="@+id/rb_other"
+                        android:layout_width="@dimen/margin_30_dp"
+                        android:layout_height="@dimen/margin_30_dp"
+                        android:layout_marginStart="@dimen/margin_30_dp"
+                        android:padding="@dimen/margin_5_dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_3_dp"
+                        android:text="@string/str_more"
+                        android:textColor="@color/white" />
+
+                </RadioGroup>
+
+                <EditText
+                    android:id="@+id/edt_address"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_40_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_home"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:hint="@string/register_address_hint_new"
+                    android:maxLength="255"
+                    android:padding="10dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_register"
+                    style="@style/roboto_bold_18dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_40_dp"
+                    android:layout_marginTop="@dimen/margin_32_dp"
+                    android:background="@drawable/bg_border_button_authen"
+                    android:gravity="center"
+                    android:text="@string/btn_register_title"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_login"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="5dp"
+                    android:text="@string/str_login"
+                    android:textColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>

@@ -43,7 +43,9 @@
     <style name="roboto_bold_14dp" parent="roboto_bold_16dp">
         <item name="android:textSize">@dimen/textsize_14_sp</item>
     </style>
-
+    <style name="roboto_regular_14dp" parent="roboto_regular_16dp">
+        <item name="android:textSize">@dimen/textsize_14_sp</item>
+    </style>
     <style name="roboto_bold_24dp" parent="roboto_bold_18dp">
         <item name="android:textSize">@dimen/textsize_24_sp</item>
     </style>

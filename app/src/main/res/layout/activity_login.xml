@@ -36,6 +36,7 @@
                 android:drawablePadding="@dimen/margin_10_dp"
                 android:hint="@string/authen_username_hint"
                 android:padding="@dimen/margin_10_dp"
+                android:text="myle@gmail.com"
                 app:layout_constraintTop_toBottomOf="@+id/logo_app" />
 
             <com.google.android.material.textfield.TextInputEditText
@@ -50,6 +51,7 @@
                 android:hint="@string/login_password_hint"
                 android:inputType="textPassword"
                 android:padding="@dimen/margin_10_dp"
+                android:text="12345"
                 app:layout_constraintEnd_toEndOf="@+id/login_edt_username"
                 app:layout_constraintStart_toStartOf="@+id/login_edt_username"
                 app:layout_constraintTop_toBottomOf="@+id/login_edt_username" />

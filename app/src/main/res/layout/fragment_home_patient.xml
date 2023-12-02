@@ -1,37 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/view_contain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_app_sun"
-    android:fillViewport="true">
+    android:background="@drawable/background_app_sun">
 
-    <RelativeLayout
-        android:id="@+id/ll_logo"
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="@dimen/width_115dp"
+        android:layout_height="@dimen/width_115dp"
+        android:layout_marginTop="@dimen/margin_30_dp"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        style="@style/roboto_bold_18dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/str_name_app"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/logo"
+        app:layout_constraintTop_toTopOf="@id/logo" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/margin_28_dp"
+        android:background="@drawable/bg_border_form"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logo">
 
         <ImageView
-            android:id="@+id/logo"
-            android:layout_width="@dimen/width_115dp"
-            android:layout_height="@dimen/width_115dp"
-            android:src="@drawable/logo" />
+            android:id="@+id/img_avatar"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="@dimen/margin_16_dp"
+            android:layout_marginTop="44dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_default_avatar_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            style="@style/roboto_bold_18dp"
+        <RelativeLayout
+            android:id="@+id/rl_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="13dp"
+            android:layout_marginEnd="@dimen/margin_17_dp"
+            app:layout_constraintBottom_toBottomOf="@id/img_avatar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/img_avatar"
+            app:layout_constraintTop_toTopOf="@id/img_avatar">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_greeting"
+                style="@style/roboto_bold_14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/margin_30_dp"
+                android:text="@string/str_hello_user"
+                android:textColor="@color/grey" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_full_name"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_greeting"
+                android:layout_marginTop="6dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/black"
+                tools:text="Ngọc" />
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@id/logo"
-            android:layout_alignBottom="@id/logo"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="@dimen/margin_20_dp"
-            android:layout_toEndOf="@id/logo"
-            android:gravity="center"
-            android:text="@string/str_name_app"
-            android:textColor="@color/white" />
-    </RelativeLayout>
+            android:layout_marginHorizontal="@dimen/margin_16_dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/grey_light"
+            app:cardCornerRadius="@dimen/margin_20_dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rl_info">
 
-    <include
-        android:id="@+id/bottom"
-        layout="@layout/bottom_sheet_home" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+            <LinearLayout
+                android:id="@+id/ln_information"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_15_dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_weight_black"
+                    android:drawablePadding="@dimen/margin_3_dp"
+                    tools:text="50 kg" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/margin_10_dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_height"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_height_black"
+                    android:drawablePadding="@dimen/margin_3_dp"
+                    tools:text="156 cm" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/margin_10_dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/tv_blood"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_blood_black"
+                    android:drawablePadding="@dimen/margin_3_dp"
+                    tools:text="A" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_14_dp"
+            android:layout_marginTop="23dp"
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/cv_information">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_2_dp"
+                android:layout_marginTop="@dimen/margin_2_dp"
+                android:layout_marginBottom="@dimen/margin_6_dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/margin_6_dp"
+                app:cardCornerRadius="@dimen/margin_14_dp"
+                app:cardElevation="@dimen/margin_6_dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_test_update"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/margin_70_dp"
+                        android:layout_height="@dimen/margin_70_dp"
+                        android:padding="@dimen/margin_10_dp"
+                        android:src="@drawable/book" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_book_schedule"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/make_an_appointment_header_title"
+                        android:textColor="@color/white" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/view_line_button"
+                android:layout_width="@dimen/margin_5_dp"
+                android:layout_height="match_parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_2_dp"
+                android:layout_marginTop="@dimen/margin_2_dp"
+                android:layout_marginBottom="@dimen/margin_6_dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/margin_6_dp"
+                app:cardCornerRadius="@dimen/margin_14_dp"
+                app:cardElevation="@dimen/margin_6_dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/margin_70_dp"
+                        android:layout_height="@dimen/margin_70_dp"
+                        android:padding="@dimen/margin_10_dp"
+                        android:src="@drawable/profile" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_medical_records"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/str_medical_records"
+                        android:textColor="@color/white" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

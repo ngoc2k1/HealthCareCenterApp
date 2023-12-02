@@ -1,26 +1,25 @@
 package com.example.myapplication.doctor
 
-import android.content.Context
-import android.content.DialogInterface
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
-import com.example.myapplication.R
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.databinding.ActivityDoctorNotificationBinding
-import com.google.zxing.BarcodeFormat
-import com.google.zxing.MultiFormatWriter
-import com.google.zxing.WriterException
-import com.journeyapps.barcodescanner.BarcodeEncoder
-import com.journeyapps.barcodescanner.ScanContract
-import com.journeyapps.barcodescanner.ScanIntentResult
-import com.journeyapps.barcodescanner.ScanOptions
+import com.example.myapplication.model.DoctorNotificationResponse
+import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.gone
+import com.example.myapplication.utils.toast
+import com.example.myapplication.utils.visible
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class NotificationDoctorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDoctorNotificationBinding
-    private lateinit var notificationItemAdapter: NotificationItemAdapter
+    private var mListNotification: List<DoctorNotificationResponse.Data> = emptyList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDoctorNotificationBinding.inflate(layoutInflater)
@@ -32,26 +31,30 @@ class NotificationDoctorActivity : AppCompatActivity() {
             this@NotificationDoctorActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
-        notificationItemAdapter = NotificationItemAdapter(this)
+        val apiClient = ApiClient(this@NotificationDoctorActivity)
 
-        binding.tvNoneNotification.setOnClickListener {
-            generateQR()
+        binding.apply {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val notificationResponse = apiClient.doctorService.getNotification()
+                if (notificationResponse.code == 200) {
+                    withContext(Dispatchers.Main)
+                    {
+                        mListNotification = notificationResponse.data
+                        toast(mListNotification.size.toString())
+                        if (mListNotification.isEmpty()) {
+                            tvNoneNotification.visible()
+                            rvNotification.gone()
+                        } else {
+                            tvNoneNotification.gone()
+                            rvNotification.visible()
+                            val notificationItemAdapter = DoctorListNotificationItemmAdapter()
+//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                            rvNotification.adapter = notificationItemAdapter
+                            notificationItemAdapter.submitList(mListNotification)
+                        }
+                    }
+                }
+            }
         }
     }
-
-    private fun generateQR() {
-        val text = "NGUYEN NGOC UYEN"
-        val write = MultiFormatWriter()
-        try {
-            val matrix = write.encode(text, BarcodeFormat.QR_CODE, 400, 400)
-            val encoder = BarcodeEncoder()
-            val bitmap = encoder.createBitmap(matrix)
-//            binding.qr.setImageBitmap(bitmap)
-
-        } catch (e: WriterException) {
-            e.printStackTrace()
-        }
-    }
-
-
 }

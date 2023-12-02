@@ -10,23 +10,16 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewModelScope
-import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginDoctorBinding
-import com.example.myapplication.doctor.AccountDoctorActivity
 import com.example.myapplication.doctor.HomeDoctorActivity
-import com.example.myapplication.doctor.NotificationDoctorActivity
-import com.example.myapplication.model.doctor.DoctorLoginRequest
+import com.example.myapplication.model.doctor.UserLoginRequest
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.getCurrentHour
-import com.example.myapplication.utils.toast
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class LoginDoctorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginDoctorBinding
@@ -36,7 +29,7 @@ class LoginDoctorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginDoctorBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        var apiClient = ApiClient(this@LoginDoctorActivity)
+        val apiClient = ApiClient(this@LoginDoctorActivity)
 
         context = this
 
@@ -49,28 +42,26 @@ class LoginDoctorActivity : AppCompatActivity() {
 
         binding.apply {
             loginTvForgetPassword.setOnClickListener {
-                val forgotPwDialog = ForgotPwDialog()
+                val forgotPwDialog = ForgotPasswordDialog()
+                forgotPwDialog.mContext = this@LoginDoctorActivity
+                forgotPwDialog.isCancelable = false
                 forgotPwDialog.show(supportFragmentManager, "dialog")//supportFM : activity
             }
             btnLogin.setOnClickListener {
+                val username = loginEdtUsername.text.toString()
+                val password = loginEdtPassword.text.toString()
                 lifecycleScope.launch(Dispatchers.IO) {
                     val doctor = apiClient.doctorService.loginDoctor(
-                        DoctorLoginRequest(
-                            "email_2@gmail.com", "12345"
-                        )
+                        UserLoginRequest(username, password)
                     )
                     if (doctor.code == 200) {
                         Hawk.put(HawkKey.ACCESS_TOKEN_DOCTOR, doctor.data.token)
                         startActivity(
                             Intent(
                                 this@LoginDoctorActivity,
-                                AccountDoctorActivity::class.java
+                                HomeDoctorActivity::class.java
                             )
                         )
-                    } else if (doctor.code in 400..499) {
-                        withContext(Dispatchers.Main) {
-                            btnLogin.text = doctor.data.token
-                        }
                     }
                 }
             }

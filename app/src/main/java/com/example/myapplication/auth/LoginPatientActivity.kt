@@ -9,10 +9,17 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginBinding
+import com.example.myapplication.model.doctor.UserLoginRequest
+import com.example.myapplication.prefs.HawkKey
+import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.getCurrentHour
+import com.orhanobut.hawk.Hawk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginPatientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -22,23 +29,35 @@ class LoginPatientActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        context = this
-
         window.apply {
             decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             this@LoginPatientActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
+
+        context = this
+        val apiClient = ApiClient(this@LoginPatientActivity)
+
         binding.apply {
             loginTvForgetPassword.setOnClickListener {
-                val forgotPwDialog = ForgotPwDialog()
+                val forgotPwDialog = ForgotPasswordDialog()
+                forgotPwDialog.isCancelable = false
+//                forgotPwDialog.mContext = this@LoginPatientActivity
                 forgotPwDialog.show(supportFragmentManager, "dialog")//supportFM : activity
             }
             btnLogin.setOnClickListener {
-                //call api
-                startActivity(Intent(this@LoginPatientActivity, MainActivity::class.java))
+                val username = loginEdtUsername.text.toString()
+                val password = loginEdtPassword.text.toString()
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val patient = apiClient.patientService.loginPatient(
+                        UserLoginRequest(username, password)
+                    )
+                    if (patient.code == 200) {
+                        Hawk.put(HawkKey.ACCESS_TOKEN_PATIENT, patient.data.token)
+                        startActivity(Intent(this@LoginPatientActivity, MainActivity::class.java))
+                    }
+                }
             }
 
             loginTvRegister.setOnClickListener {
@@ -113,6 +132,7 @@ class LoginPatientActivity : AppCompatActivity() {
             } else btnLogin.setBackgroundResource(R.drawable.bg_border_button_authen)
         }
     }
+
     override fun onResume() {
         super.onResume()
         binding.viewContain.apply {

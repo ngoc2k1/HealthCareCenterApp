@@ -1,12 +1,13 @@
-package com.example.myapplication.model.patient
+package com.example.myapplication.model
+
 
 import com.google.gson.annotations.SerializedName
 
 data class Specialty(
     @SerializedName("id")
     val id: Int,
-    @SerializedName("name")
-    val name: String,
     @SerializedName("image")
-    val image: String
+    val image: String,
+    @SerializedName("name")
+    val name: String
 )

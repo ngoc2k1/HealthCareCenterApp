@@ -32,18 +32,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10_dp"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@id/iv_current_pw"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_current_pw" />
-
-    <ImageView
-        android:id="@+id/iv_current_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_15_dp"
-        android:paddingStart="0dp"
-        android:src="@drawable/ic_eye_hide"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_current_pw" />
 
     <TextView
@@ -54,16 +44,6 @@
         android:text="@string/confirm_new_password_title_change"
         app:layout_constraintTop_toBottomOf="@id/edt_current_pw" />
 
-    <ImageView
-        android:id="@+id/iv_newpw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_15_dp"
-        android:paddingStart="0dp"
-        android:src="@drawable/ic_eye_hide"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_newpw" />
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edt_new_pw"
         style="@style/roboto_regular_16dp"
@@ -71,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10_dp"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@id/iv_newpw"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_newpw" />
 
@@ -83,16 +63,6 @@
         android:text="@string/confirm_password_re_password_title_change"
         app:layout_constraintTop_toBottomOf="@id/edt_new_pw" />
 
-    <ImageView
-        android:id="@+id/iv_cf_pw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/margin_15_dp"
-        android:paddingStart="0dp"
-        android:src="@drawable/ic_eye_hide"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_cf_newpw" />
-
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/edt_cf_pw"
         style="@style/roboto_regular_16dp"
@@ -100,7 +70,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_10_dp"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@id/iv_cf_pw"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_cf_newpw" />
 
@@ -123,11 +93,11 @@
         android:layout_marginTop="@dimen/margin_15_dp"
         android:background="@drawable/bg_border_home"
         android:gravity="center"
-        android:paddingHorizontal="@dimen/margin_15_dp"
-        android:paddingVertical="@dimen/margin_7_dp"
+        android:paddingHorizontal="@dimen/margin_20_dp"
+        android:paddingVertical="@dimen/margin_15_dp"
         android:text="@string/str_ok"
         android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@id/edt_cf_pw"
+        app:layout_constraintEnd_toEndOf="@id/tv_note"
         app:layout_constraintTop_toBottomOf="@id/tv_note" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -138,8 +108,8 @@
         android:layout_marginTop="@dimen/margin_15_dp"
         android:background="@drawable/bg_border_home"
         android:gravity="center"
-        android:paddingHorizontal="@dimen/margin_15_dp"
-        android:paddingVertical="@dimen/margin_7_dp"
+        android:paddingHorizontal="@dimen/margin_20_dp"
+        android:paddingVertical="@dimen/margin_15_dp"
         android:text="@string/str_huy"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@id/edt_cf_pw"

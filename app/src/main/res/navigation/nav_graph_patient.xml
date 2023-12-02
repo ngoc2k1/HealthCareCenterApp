@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_patien">
+    android:id="@+id/nav_graph_patien"
+    app:startDestination="@id/accountFragment">
 
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.myapplication.patient.AccountFragment"
+        android:label="AccountFragment" />
+    <fragment
+        android:id="@+id/homePatientFragment"
+        android:name="com.example.myapplication.patient.HomePatientFragment"
+        android:label="HomePatientFragment" >
+        <action
+            android:id="@+id/action_homePatientFragment_to_scheduleFragment"
+            app:destination="@id/scheduleFragment" />
+        <action
+            android:id="@+id/action_homePatientFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.example.myapplication.patient.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/scheduleFragment"
+        android:name="com.example.myapplication.patient.ScheduleFragment"
+        android:label="ScheduleFragment" />
 </navigation>
