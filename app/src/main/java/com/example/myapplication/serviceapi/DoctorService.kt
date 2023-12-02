@@ -3,6 +3,7 @@ package com.example.myapplication.serviceapi
 import com.example.myapplication.model.ChangePwRequest
 import com.example.myapplication.model.ChangePwResponse
 import com.example.myapplication.model.DoctorNotificationResponse
+import com.example.myapplication.model.DoctorProfileRequest
 import com.example.myapplication.model.PatientListResponse
 import com.example.myapplication.model.ResetPwActiveRequest
 import com.example.myapplication.model.ResetPwRequest
@@ -15,6 +16,8 @@ import retrofit2.http.*
 interface DoctorService {
     @GET("doctor")
     suspend fun getDoctor(): DoctorAccountResponse
+    @PUT("doctor/update")
+    suspend fun updateDoctor(@Body doctorProfileRequest: DoctorProfileRequest): ChangePwResponse
 
     @POST("doctor/login")
     suspend fun loginDoctor(

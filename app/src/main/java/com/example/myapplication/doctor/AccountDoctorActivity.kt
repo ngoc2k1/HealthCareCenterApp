@@ -45,12 +45,12 @@ class AccountDoctorActivity : AppCompatActivity() {
             }
             optionChangePassword.setOnClickListener {
                 val changePwDialog = ChangePwDialog()
-                changePwDialog.isCancelable=false
+                changePwDialog.isCancelable = false
                 changePwDialog.mContext = this@AccountDoctorActivity
                 changePwDialog.show(supportFragmentManager, "dialog")//supportFM : activity
             }
-            optionChangeAccount.setOnClickListener {
-
+            optionEditProfile.setOnClickListener {
+                startActivity(Intent(this@AccountDoctorActivity, ProfileDoctorActivity::class.java))
             }
             optionChangeAccount.setOnClickListener {
                 Hawk.put(HawkKey.ACCESS_TOKEN_DOCTOR, "")

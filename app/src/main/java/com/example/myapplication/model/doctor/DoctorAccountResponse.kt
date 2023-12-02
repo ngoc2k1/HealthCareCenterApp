@@ -26,11 +26,11 @@ data class DoctorAccountResponse(
         @SerializedName("gender")
         val gender: String,
         @SerializedName("healthInsurance")
-        val healthInsurance: Any,
+        val healthInsurance: String,
         @SerializedName("id")
         val id: Int,
         @SerializedName("identityCard")
-        val identityCard: Any,
+        val identityCard: String,
         @SerializedName("name")
         val name: String,
         @SerializedName("phone")

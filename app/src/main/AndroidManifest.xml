@@ -66,6 +66,9 @@
         <activity
             android:name=".auth.LoginDoctorActivity"
             android:exported="false" />
+        <activity
+            android:name=".doctor.ProfileDoctorActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

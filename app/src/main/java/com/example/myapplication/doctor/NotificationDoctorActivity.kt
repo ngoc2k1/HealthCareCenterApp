@@ -10,7 +10,6 @@ import com.example.myapplication.databinding.ActivityDoctorNotificationBinding
 import com.example.myapplication.model.DoctorNotificationResponse
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.gone
-import com.example.myapplication.utils.toast
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -40,7 +39,6 @@ class NotificationDoctorActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main)
                     {
                         mListNotification = notificationResponse.data
-                        toast(mListNotification.size.toString())
                         if (mListNotification.isEmpty()) {
                             tvNoneNotification.visible()
                             rvNotification.gone()

@@ -169,6 +169,7 @@
                     android:drawablePadding="@dimen/margin_10_dp"
                     android:hint="@string/register_address_hint_new"
                     android:maxLength="255"
+                    android:maxLines="3"
                     android:padding="10dp" />
 
                 <androidx.appcompat.widget.AppCompatButton

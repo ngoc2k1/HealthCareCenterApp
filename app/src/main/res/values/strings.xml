@@ -11,6 +11,7 @@
     <string name="str_account_vietnamese">Tiếng Việt (VN)</string>
     <string name="str_support_setting">Hỗ trợ</string>
     <string name="str_language_setting">Ngôn ngữ</string>
+    <string name="str_save_profile">Xác nhận</string>
     <string name="str_questions_setting">Các câu hỏi thường gặp</string>
     <string name="str_logout">Đăng xuất</string>
 
@@ -53,6 +54,7 @@
     <string name="str_test_update">Cập nhật\nxét nghiệm</string>
     <string name="str_handbook">Cẩm nang sức khỏe</string>
     <string name="str_specialist_home">Khám\nChuyên khoa</string>
+    <string name="str_specialist">Chuyên khoa</string>
     <string name="str_medical_equipment_home">Tư vấn\nTrực tuyến</string>
     <string name="str_genera_home">Khám\nTổng quát</string>
     <string name="str_test_home">Xét nghiệm</string>
@@ -97,10 +99,12 @@
     <string name="register_confirm_password_hint">Nhập lại mật khẩu</string>
     <string name="register_birthday_hint">Ngày sinh</string>
     <string name="register_address_hint_new">Địa chỉ cụ thể</string>
+    <string name="register_address_test">Địa chỉ khám bệnh</string>
+    <string name="str_identityCard">Căn cước công dân</string>
+    <string name="str_healthInsurance">Mã bảo hiểm y tế</string>
     <string name="btn_register_title">Đăng ký</string>
+    <string name="str_profile">Sửa thông tin cá nhân</string>
     <string name="register_validate_enter_name">Vui lòng nhập họ và tên!</string>
-    <string name="register_validate_enter_province">Vui lòng chọn Tỉnh/Thành phố!</string>
-    <string name="register_validate_enter_district">Vui lòng chọn Quận/Huyện!</string>
     <string name="register_validate_enter_user_name">Vui lòng nhập Email hoặc số điện thoại!</string>
     <string name="register_validate_too_long_name"> Vui lòng nhập họ và tên lớn nhất 255 kí tự!</string>
     <string name="register_validate_user_name">Vui lòng nhập số điện thoại</string>
@@ -239,5 +243,6 @@
     <string name="str_huy">Hủy</string>
     <string name="str_name_app">HEALTH CARE CENTER</string>
     <string name="str_search_patient">Tìm kiếm bệnh nhân</string>
+    <string name="str_note_profile">Thông tin này không được sửa</string>
 
 </resources>

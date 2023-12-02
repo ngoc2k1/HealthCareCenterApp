@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/view_contain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,196 +8,230 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:fillViewport="true">
 
-        <androidx.core.widget.NestedScrollView
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="false"
-            android:fillViewport="true">
+            android:layout_marginHorizontal="@dimen/margin_15_dp"
+            android:layout_marginTop="@dimen/radius_20_dp"
+            android:layout_marginBottom="@dimen/margin_60_dp"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/margin_26_dp"
+            android:paddingStart="@dimen/margin_22_dp"
+            android:paddingEnd="@dimen/margin_21_dp">
 
-            <androidx.appcompat.widget.LinearLayoutCompat
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/img_edit"-->
+            <!--                    android:layout_width="wrap_content"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:layout_gravity="right"-->
+            <!--                    android:padding="@dimen/margin_10_dp"-->
+            <!--                    android:scaleType="centerCrop"-->
+            <!--                    android:src="@drawable/ic_edit" />-->
+
+            <ImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/margin_80_dp"
+                android:layout_height="@dimen/margin_80_dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_default_avatar_home" />
+
+            <EditText
+                android:id="@+id/input_phone"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_call"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/authen_phone_hint"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_phone_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_note_profile"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/input_email"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/authen_email_hint"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_email_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_note_profile"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/input_full_name"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_account_setting"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/st_fullname"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_birthday"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/all_buttoncalendar"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/register_birthday_hint"
+                android:padding="10dp" />
+
+            <RadioGroup
+                android:id="@+id/rg_gen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/margin_15_dp"
-                android:layout_marginTop="@dimen/width_135dp"
-                android:layout_marginBottom="@dimen/margin_60_dp"
-                android:background="@drawable/bg_border_form"
-                android:orientation="vertical"
-                android:paddingVertical="@dimen/margin_26_dp"
-                android:paddingStart="@dimen/margin_22_dp"
-                android:paddingEnd="@dimen/margin_21_dp">
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/input_phone_register"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/ic_call"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/authen_phone_hint"
-                    android:inputType="number"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/input_email_register"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/ic_email"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/authen_email_hint"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/input_password_register"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/ic_password_setting"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/login_password_hint"
-                    android:inputType="textPassword"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/input_confirm_password_register"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/ic_password_setting"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/register_confirm_password_hint"
-                    android:inputType="textPassword"
-                    android:padding="10dp" />
-
-                <EditText
-                    android:id="@+id/input_full_name"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/ic_account_setting"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/st_fullname"
-                    android:padding="10dp" />
-
-                <TextView
-                    android:id="@+id/tv_birthday"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/all_buttoncalendar"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/register_birthday_hint"
-                    android:padding="10dp" />
-
-                <RadioGroup
-                    android:id="@+id/rg_gen"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="19dp"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/rb_male"
-                        android:layout_width="@dimen/margin_30_dp"
-                        android:layout_height="@dimen/margin_30_dp"
-                        android:padding="@dimen/margin_5_dp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/roboto_bold_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_3_dp"
-                        android:text="@string/str_male"
-                        android:textColor="@color/white" />
-
-                    <RadioButton
-                        android:id="@+id/rb_female"
-                        android:layout_width="@dimen/margin_30_dp"
-                        android:layout_height="@dimen/margin_30_dp"
-                        android:layout_marginStart="@dimen/margin_30_dp"
-                        android:padding="@dimen/margin_5_dp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/roboto_bold_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_3_dp"
-                        android:text="@string/str_female"
-                        android:textColor="@color/white" />
-
-                    <RadioButton
-                        android:id="@+id/rb_other"
-                        android:layout_width="@dimen/margin_30_dp"
-                        android:layout_height="@dimen/margin_30_dp"
-                        android:layout_marginStart="@dimen/margin_30_dp"
-                        android:padding="@dimen/margin_5_dp" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        style="@style/roboto_bold_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_3_dp"
-                        android:text="@string/str_more"
-                        android:textColor="@color/white" />
-
-                </RadioGroup>
-
-                <EditText
-                    android:id="@+id/edt_address"
-                    style="@style/roboto_regular_16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginTop="@dimen/margin_20_dp"
-                    android:background="@drawable/bg_border_input_authen"
-                    android:drawableStart="@drawable/ic_home"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:hint="@string/register_address_hint_new"
-                    android:maxLength="255"
-                    android:padding="10dp" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btn_register"
-                    style="@style/roboto_bold_18dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginTop="@dimen/margin_32_dp"
-                    android:background="@drawable/bg_border_button_authen"
-                    android:gravity="center"
-                    android:text="@string/btn_register_title"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white" />
+                <RadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="@dimen/margin_30_dp"
+                    android:layout_height="@dimen/margin_30_dp"
+                    android:enabled="false"
+                    android:padding="@dimen/margin_5_dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tv_login"
-                    style="@style/roboto_regular_16dp"
+                    style="@style/roboto_bold_16dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="5dp"
-                    android:text="@string/str_login"
+                    android:layout_marginStart="@dimen/margin_3_dp"
+                    android:text="@string/str_male"
                     android:textColor="@color/white" />
 
-            </androidx.appcompat.widget.LinearLayoutCompat>
-        </androidx.core.widget.NestedScrollView>
+                <RadioButton
+                    android:id="@+id/rb_female"
+                    android:layout_width="@dimen/margin_30_dp"
+                    android:layout_height="@dimen/margin_30_dp"
+                    android:layout_marginStart="@dimen/margin_30_dp"
+                    android:enabled="false"
+                    android:padding="@dimen/margin_5_dp" />
 
-    </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/roboto_bold_16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_3_dp"
+                    android:text="@string/str_female"
+                    android:textColor="@color/white" />
 
-</RelativeLayout>
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edt_address"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_home"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/register_address_test"
+                android:maxLength="255"
+                android:padding="10dp"
+                android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+
+            <EditText
+                android:id="@+id/edt_identityCard"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_identity"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/str_identityCard"
+                android:maxLength="255"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/edt_healthInsurance"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_healthinsurance"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/str_healthInsurance"
+                android:maxLength="255"
+                android:padding="10dp" />
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/edt_specialty"-->
+            <!--                style="@style/roboto_regular_16dp"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="@dimen/margin_40_dp"-->
+            <!--                android:layout_marginTop="@dimen/margin_20_dp"-->
+            <!--                android:background="@drawable/bg_border_input_authen"-->
+            <!--                android:drawableStart="@drawable/ic_hepatitis_transmission_black"-->
+            <!--                android:drawablePadding="@dimen/margin_10_dp"-->
+            <!--                android:enabled="false"-->
+            <!--                android:hint="@string/str_specialist"-->
+            <!--                android:maxLength="255"-->
+            <!--                android:padding="10dp" />-->
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_32_dp"
+                android:background="@drawable/bg_border_button_authen_clicked"
+                android:gravity="center"
+                android:text="@string/str_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_32_dp"
+                android:background="@drawable/bg_border_button_authen_clicked"
+                android:gravity="center"
+                android:text="@string/str_save_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+
