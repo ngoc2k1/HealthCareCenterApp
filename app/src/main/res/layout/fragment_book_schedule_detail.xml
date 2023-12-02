@@ -2,17 +2,17 @@
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_contain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey_light"
-    android:orientation="vertical">
+    android:background="@color/grey_light">
 
     <TextView
         android:id="@+id/header"
         style="@style/roboto_bold_24dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_20_dp"
+        android:layout_marginTop="@dimen/margin_40_dp"
         android:gravity="center"
         android:text="Thông tin lịch khám" />
 
@@ -53,7 +53,7 @@
                         app:cardElevation="0dp">
 
                         <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/imv_avatar"
+                            android:id="@+id/iv_avatar_patient"
                             android:layout_width="54dp"
                             android:layout_height="54dp"
                             android:scaleType="centerCrop"
@@ -61,7 +61,7 @@
                     </androidx.cardview.widget.CardView>
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_medical_user_name"
+                        android:id="@+id/tv_name_patient"
                         style="@style/roboto_bold_16dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
                         android:textSize="@dimen/margin_18_dp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_medical_user_age"
+                        android:id="@+id/tv_gender_age_patient"
                         style="@style/roboto_regular_16dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -83,11 +83,10 @@
                         android:paddingBottom="@dimen/margin_4_dp"
                         android:text="Nu, 35"
                         android:textColor="@color/grey" />
-
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/img_quick_response"
+                    android:id="@+id/iv_qr"
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_marginTop="@dimen/margin_9_dp"
@@ -103,7 +102,8 @@
                     android:layout_marginHorizontal="@dimen/margin_16_dp"
                     android:layout_marginTop="@dimen/margin_24_dp"
                     android:background="@drawable/bg_information_doctor_schedule_new"
-                    app:layout_constraintTop_toBottomOf="@id/img_quick_response">
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/iv_qr">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cl_top"
@@ -181,7 +181,6 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_state"
                     android:layout_width="match_parent"
@@ -192,7 +191,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cl_information_doctor">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_state_title"
+                        android:id="@+id/tv_status_title"
                         style="@style/roboto_regular_16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -200,10 +199,10 @@
                         android:text="Trạng thái"
                         android:textColor="@color/grey"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tv_state" />
+                        app:layout_constraintTop_toTopOf="@id/tv_status" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_state"
+                        android:id="@+id/tv_status"
                         style="@style/roboto_bold_16dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -215,7 +214,7 @@
                         android:text="Chưa khám"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_state_title"
+                        app:layout_constraintStart_toEndOf="@id/tv_status_title"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -230,7 +229,7 @@
                     app:layout_constraintTop_toBottomOf="@id/cl_state">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_position_title"
+                        android:id="@+id/tv_specialty"
                         style="@style/roboto_regular_16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -256,107 +255,78 @@
                         android:textSize="@dimen/margin_16_dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_position_title"
+                        app:layout_constraintStart_toEndOf="@id/tv_specialty"
                         app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cl_patient_schedule_new"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16_dp"
-                    android:layout_marginTop="@dimen/margin_12_dp"
-                    android:background="@drawable/bg_item_book_detail"
-                    app:layout_constraintTop_toBottomOf="@id/cl_doctor_detail">
+                <!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+                <!--                    android:id="@+id/cl_patient_schedule_new"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginHorizontal="@dimen/margin_16_dp"-->
+                <!--                    android:layout_marginTop="@dimen/margin_12_dp"-->
+                <!--                    android:background="@drawable/bg_item_book_detail"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/cl_doctor_detail">-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_patient_title"
-                        style="@style/roboto_regular_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_15_dp"
-                        android:layout_marginTop="@dimen/margin_12_dp"
-                        android:text="@string/text_patient_username"
-                        android:textColor="@color/grey"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <!--                    <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                        android:id="@+id/tv_name_patient_title"-->
+                <!--                        style="@style/roboto_regular_16dp"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="@dimen/margin_15_dp"-->
+                <!--                        android:layout_marginTop="@dimen/margin_12_dp"-->
+                <!--                        android:text="@string/text_patient_username"-->
+                <!--                        android:textColor="@color/grey"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_name_patient_schedule_new"
-                        style="@style/roboto_bold_14dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_12_dp"
-                        android:layout_marginEnd="@dimen/margin_15_dp"
-                        android:ellipsize="end"
-                        android:gravity="end"
-                        android:maxLines="2"
-                        android:text="Nguyễn Phạm Anh Quốc"
-                        android:textSize="@dimen/margin_16_dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/tv_phone_patient"
-                        app:layout_constraintTop_toTopOf="parent" />
+                <!--                    <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                        android:id="@+id/tv_name_patient_schedule_new"-->
+                <!--                        style="@style/roboto_bold_14dp"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginTop="@dimen/margin_12_dp"-->
+                <!--                        android:layout_marginEnd="@dimen/margin_15_dp"-->
+                <!--                        android:ellipsize="end"-->
+                <!--                        android:gravity="end"-->
+                <!--                        android:maxLines="2"-->
+                <!--                        android:text="Nguyễn Phạm Anh Quốc"-->
+                <!--                        android:textSize="@dimen/margin_16_dp"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toStartOf="@id/tv_phone_patient"-->
+                <!--                        app:layout_constraintTop_toTopOf="parent" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_birthday_title"
-                        style="@style/roboto_regular_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_15_dp"
-                        android:text="@string/text_birthday"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/margin_16_dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tv_birthday" />
+                <!--                    <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                        android:id="@+id/tv_phone_title"-->
+                <!--                        style="@style/roboto_regular_16dp"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="@dimen/margin_15_dp"-->
+                <!--                        android:text="@string/text_phone"-->
+                <!--                        android:textColor="@color/grey"-->
+                <!--                        android:textSize="@dimen/margin_16_dp"-->
+                <!--                        app:layout_constraintStart_toStartOf="parent"-->
+                <!--                        app:layout_constraintTop_toTopOf="@id/tv_phone_patient" />-->
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_birthday"
-                        style="@style/roboto_bold_14dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_13_dp"
-                        android:layout_marginEnd="@dimen/margin_15_dp"
-                        android:ellipsize="end"
-                        android:gravity="end"
-                        android:maxLines="1"
-                        android:text="27/04/1999"
-                        android:textSize="@dimen/margin_16_dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/tv_phone_patient"
-                        app:layout_constraintTop_toBottomOf="@id/tv_name_patient_schedule_new" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_phone_title"
-                        style="@style/roboto_regular_16dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_15_dp"
-                        android:text="@string/text_phone"
-                        android:textColor="@color/grey"
-                        android:textSize="@dimen/margin_16_dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tv_phone_patient" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_phone_patient"
-                        style="@style/roboto_bold_14dp"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="@dimen/margin_15_dp"
-                        android:layout_marginTop="@dimen/margin_17_dp"
-                        android:layout_marginBottom="@dimen/margin_12_dp"
-                        android:ellipsize="end"
-                        android:gravity="end"
-                        android:maxLines="1"
-                        android:text="0974703331"
-                        android:textSize="@dimen/margin_16_dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/tv_phone_title"
-                        app:layout_constraintTop_toBottomOf="@id/tv_birthday" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                <!--                    <androidx.appcompat.widget.AppCompatTextView-->
+                <!--                        android:id="@+id/tv_phone_patient"-->
+                <!--                        style="@style/roboto_bold_14dp"-->
+                <!--                        android:layout_width="0dp"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginHorizontal="@dimen/margin_15_dp"-->
+                <!--                        android:layout_marginTop="@dimen/margin_17_dp"-->
+                <!--                        android:layout_marginBottom="@dimen/margin_12_dp"-->
+                <!--                        android:ellipsize="end"-->
+                <!--                        android:gravity="end"-->
+                <!--                        android:maxLines="1"-->
+                <!--                        android:text="0974703331"-->
+                <!--                        android:textSize="@dimen/margin_16_dp"-->
+                <!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                        app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                        app:layout_constraintStart_toEndOf="@id/tv_phone_title"-->
+                <!--                        app:layout_constraintTop_toBottomOf="@id/tv_name_patient_title" />-->
+                <!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cl_time_and_date_detail"
@@ -365,7 +335,7 @@
                     android:layout_marginHorizontal="@dimen/margin_16_dp"
                     android:layout_marginTop="@dimen/margin_12_dp"
                     android:background="@drawable/bg_item_book_detail"
-                    app:layout_constraintTop_toBottomOf="@id/cl_patient_schedule_new">
+                    app:layout_constraintTop_toBottomOf="@id/cl_doctor_detail">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_date_title"
@@ -376,10 +346,10 @@
                         android:text="@string/text_date_medical"
                         android:textColor="@color/grey"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tv_calendar" />
+                        app:layout_constraintTop_toTopOf="@id/tv_dateTest" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_calendar"
+                        android:id="@+id/tv_dateTest"
                         style="@style/roboto_bold_16dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -394,7 +364,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_time_appointment_title"
+                        android:id="@+id/tv_time_title"
                         style="@style/roboto_regular_16dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -402,10 +372,10 @@
                         android:text="@string/text_time_medical"
                         android:textColor="@color/grey"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tv_time" />
+                        app:layout_constraintTop_toTopOf="@id/tv_timeTest" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_time"
+                        android:id="@+id/tv_timeTest"
                         style="@style/roboto_bold_16dp"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -418,8 +388,8 @@
                         android:text="08:00 - 09:00"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="@id/tv_calendar"
-                        app:layout_constraintTop_toBottomOf="@id/tv_calendar" />
+                        app:layout_constraintStart_toStartOf="@id/tv_dateTest"
+                        app:layout_constraintTop_toBottomOf="@id/tv_dateTest" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -510,14 +480,14 @@
                     app:layout_constraintTop_toBottomOf="@id/cl_price">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_state_health_title"
+                        android:id="@+id/tv_status_health_title"
                         style="@style/roboto_bold_18dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/text_state_health" />
 
                     <TextView
-                        android:id="@+id/tv_state_health"
+                        android:id="@+id/tv_status_health"
                         style="@style/roboto_regular_16dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -601,7 +571,7 @@
                 android:foreground="?attr/selectableItemBackgroundBorderless"
                 android:gravity="center"
                 android:stateListAnimator="@null"
-                android:text="@string/text_confirm_medical"
+                android:text="@string/text_view_kqkb"
                 android:textAllCaps="false"
                 android:textColor="@color/white" />
 

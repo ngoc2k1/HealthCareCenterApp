@@ -221,6 +221,7 @@
     <string name="text_edit" translatable="false"><u>Sửa</u></string>
     <string name="str_ddmmyyyy">dd/MM/yyyy</string>
     <string name="str_no_work_schedule">Không có lịch khám bệnh nhân</string>
+    <string name="str_no_medical_history">Chưa có lịch sử khám bệnh</string>
     <string name="str_no_patient">Không có bệnh nhân</string>
     <string name="str_schedule">Lịch khám</string>
     <string name="st_fullname">Họ và tên</string>
@@ -244,5 +245,7 @@
     <string name="str_name_app">HEALTH CARE CENTER</string>
     <string name="str_search_patient">Tìm kiếm bệnh nhân</string>
     <string name="str_note_profile">Thông tin này không được sửa</string>
+    <string name="str_profile_schedule">Hồ sơ bệnh án</string>
+    <string name="str_create">Tạo mới</string>
 
 </resources>

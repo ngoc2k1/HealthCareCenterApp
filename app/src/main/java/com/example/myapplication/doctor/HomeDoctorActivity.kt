@@ -66,9 +66,9 @@ class HomeDoctorActivity : AppCompatActivity() {
                 withContext(Dispatchers.Main)
                 {
                     binding.apply {
-                        Glide.with(this@HomeDoctorActivity).load(doctor.data.avatar).centerCrop()
+                        Glide.with(imgAvatar).load(doctor.data.avatar).centerCrop()
                             .placeholder(R.drawable.img_default_avatar_home)
-                            .into(binding.imgAvatar)
+                            .into(imgAvatar)
                         tvName.text = doctor.data.name
                     }
                     bundle.putString(NAME_DOCTOR, doctor.data.name)
@@ -94,7 +94,7 @@ class HomeDoctorActivity : AppCompatActivity() {
                 options.setOrientationLocked(true)
                 options.captureActivity = QRCodeDoctorActivity::class.java
                 barLauncher.launch(options)
-                generateQR()
+//                generateQR()
             }
             rlListPatient.setOnClickListener {
                 val intent = Intent(this@HomeDoctorActivity, ListPatientActivity::class.java)

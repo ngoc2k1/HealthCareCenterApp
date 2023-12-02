@@ -40,8 +40,7 @@ class RegisterActivity : AppCompatActivity() {
                 if (rgGen.checkedRadioButtonId != -1) {
                     reason = when {
                         rbFemale.isChecked -> rbFemale.text.toString()
-                        rbMale.isChecked -> rbMale.text.toString()
-                        else -> rbOther.text.toString()
+                        else -> rbMale.text.toString()
                     }
                     checkInputRegister()
                 } else btnRegister.setBackgroundResource(R.drawable.bg_border_button_authen)

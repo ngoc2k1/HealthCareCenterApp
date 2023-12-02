@@ -1,5 +1,6 @@
 package com.example.myapplication.doctor
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.databinding.ActivityDoctorListPatientBinding
 import com.example.myapplication.model.PatientProfile
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant.ID_PATIENT
 import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
@@ -106,7 +108,8 @@ class ListPatientActivity : AppCompatActivity(), OnItemmClickListener {
     }
 
     override fun getDetailPatient(id: Int) {
-//        val intent = Intent(this@ListPatientActivity, ScheduleDoctorActivity::class.java)
-//        startActivity(intent)
+        val intent = Intent(this@ListPatientActivity, MedicalHistoryPatientActivity::class.java)
+        intent.putExtra(ID_PATIENT, id)
+        startActivity(intent)
     }
 }

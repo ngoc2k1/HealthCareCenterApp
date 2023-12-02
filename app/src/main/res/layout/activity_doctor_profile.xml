@@ -153,7 +153,7 @@
                 android:id="@+id/edt_address"
                 style="@style/roboto_regular_16dp"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/margin_40_dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_20_dp"
                 android:background="@drawable/bg_border_input_authen"
                 android:drawableStart="@drawable/ic_home"
@@ -161,8 +161,9 @@
                 android:enabled="false"
                 android:hint="@string/register_address_test"
                 android:maxLength="255"
+                android:maxLines="3"
                 android:padding="10dp"
-                android:text="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" />
+                android:text="aaaaaaaaaaaaaaaaaaa" />
 
             <EditText
                 android:id="@+id/edt_identityCard"

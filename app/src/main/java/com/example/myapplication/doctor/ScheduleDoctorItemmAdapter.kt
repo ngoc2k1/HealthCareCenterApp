@@ -54,7 +54,7 @@ class ScheduleDoctorItemmAdapter(
                     .placeholder(R.drawable.img_default_avatar_home)
                     .into(imvAvatarWorkSchedule)
                 root.setOnClickListener {
-//                    listener.getDetailPatient(schedule.id)
+                    listener.getDetailSchedule(schedule.id)
                 }
             }
 

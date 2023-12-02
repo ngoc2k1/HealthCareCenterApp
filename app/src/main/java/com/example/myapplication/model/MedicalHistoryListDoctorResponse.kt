@@ -23,13 +23,13 @@ data class MedicalHistoryListDoctorResponse(
         @SerializedName("id")
         val id: Int,
         @SerializedName("judgmentNote")
-        val judgmentNote: Any,
+        val judgmentNote: String? = "",
         @SerializedName("prescription")
-        val prescription: Any,
+        val prescription: String? = "",
         @SerializedName("retestDate")
-        val retestDate: Any,
+        val retestDate: String? = "",
         @SerializedName("testResult")
-        val testResult: Any
+        val testResult: String? = ""
     ) {
         data class BookScheduleX(
             @SerializedName("dateTest")

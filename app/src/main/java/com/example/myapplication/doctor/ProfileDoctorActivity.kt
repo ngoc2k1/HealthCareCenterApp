@@ -63,7 +63,7 @@ class ProfileDoctorActivity : AppCompatActivity() {
                     }
                 }
             }
-            tvBirthday.setOnClickListener{
+            tvBirthday.setOnClickListener {
                 openCalendarDialog(tvBirthday)
             }
             btnEdit.setOnClickListener {
@@ -118,11 +118,15 @@ class ProfileDoctorActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        binding.viewContain.apply {
+        binding.apply {
             if (getCurrentHour() in 6..18) {
-                setBackgroundResource(R.drawable.background_app_sun)
+                viewContain.setBackgroundResource(R.drawable.background_app_sun)
+                tvEmailNote.setTextColor(resources.getColor(R.color.black))
+                tvPhoneNote.setTextColor(resources.getColor(R.color.black))
             } else {
-                setBackgroundResource(R.drawable.background_app)
+                viewContain.setBackgroundResource(R.drawable.background_app)
+                tvEmailNote.setTextColor(resources.getColor(R.color.grey))
+                tvPhoneNote.setTextColor(resources.getColor(R.color.grey))
             }
         }
     }

@@ -1,16 +1,17 @@
 package com.example.myapplication.doctor
 
+import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
-import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDoctorWorkScheduleBinding
-import com.example.myapplication.model.PatientProfile
 import com.example.myapplication.model.WorkScheduleResponse
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant.AVT_DOCTOR
+import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
 import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
@@ -45,10 +46,9 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
                     } else {
                         tvNoneSchedule.gone()
                         rcvWorkSchedule.visible()
-
-                        withContext(Dispatchers.Main)
-                        {
-                            val scheduleItemAdapter = ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
+                        withContext(Dispatchers.Main) {
+                            val scheduleItemAdapter =
+                                ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
 //        binding.pbMainLoadingvideo.visibility = View.VISIBLE
                             binding.rcvWorkSchedule.adapter = scheduleItemAdapter
 
@@ -61,6 +61,8 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun getDetailSchedule(id: Int) {
-//            rcvWorkSchedule  -> fragment book schedule detail
+        val intent = Intent(this@ScheduleDoctorActivity, DetailScheduleActivity::class.java)
+        intent.putExtra(ID_BOOKSCHEDULE, id)
+        startActivity(intent)
     }
 }

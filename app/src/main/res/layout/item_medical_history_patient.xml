@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_2_dp"
+    android:layout_marginBottom="@dimen/margin_10_dp"
+    android:background="@color/white"
+    android:clickable="true"
+    android:elevation="@dimen/margin_8_dp"
+    android:focusable="true"
+    app:cardCornerRadius="@dimen/margin_15_dp"
+    app:cardElevation="@dimen/margin_8_dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ln_ext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imv_judgement"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_6_dp"
+                android:src="@drawable/ic_judgement_purple" />
+
+            <ImageView
+                android:id="@+id/imv_test_result"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_6_dp"
+                android:src="@drawable/ic_test_result_purple" />
+
+
+            <ImageView
+                android:id="@+id/imv_prescription"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginTop="@dimen/margin_16_dp"
+                android:layout_marginEnd="@dimen/margin_15_dp"
+                android:src="@drawable/ic_prescription_purple" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <TextView
+            android:id="@+id/tv_time"
+            style="@style/roboto_bold_14dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_5_dp"
+            android:layout_marginStart="@dimen/margin_15_dp"
+            android:layout_marginTop="@dimen/margin_16_dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="T6, 10/03/2023"
+            app:layout_constraintEnd_toStartOf="@id/ln_ext"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="T6, 10/03/2023" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cv_avatar"
+            android:layout_width="@dimen/width_78.5dp"
+            android:layout_height="@dimen/width_78.5dp"
+            android:layout_marginStart="@dimen/margin_15_dp"
+            android:layout_marginTop="@dimen/margin_5_dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_time"
+            app:shapeAppearanceOverlay="@style/radius_8dp"
+            app:strokeWidth="1dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_default_avatar_home"
+                app:shapeAppearanceOverlay="@style/radius_8dp" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_name_doctor"
+            style="@style/roboto_bold_18dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_13_dp"
+            android:layout_marginEnd="@dimen/margin_5_dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cv_avatar"
+            app:layout_constraintTop_toTopOf="@id/cv_avatar"
+            tools:text="Vu Manh Ha" />
+
+        <View
+            android:id="@+id/view_line"
+            android:layout_width="0dp"
+            android:layout_height="0.8dp"
+            android:layout_marginTop="@dimen/margin_9_dp"
+            android:background="@color/grey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_name_doctor"
+            app:layout_constraintTop_toBottomOf="@id/tv_name_doctor" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ln_specialty"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_13_dp"
+            android:layout_marginTop="@dimen/margin_5_dp"
+            android:layout_marginEnd="@dimen/margin_5_dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cv_avatar"
+            app:layout_constraintTop_toBottomOf="@id/view_line">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_specialty"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_hepatitis_transmission_black" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_specialty"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_9_dp"
+                tools:text="Truyền nhiễm" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ln_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8_dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/cv_avatar"
+            app:layout_constraintTop_toBottomOf="@id/cv_avatar">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_address"
+                android:layout_width="@dimen/margin_13_dp"
+                android:layout_height="@dimen/margin_13_dp"
+                android:layout_marginTop="@dimen/margin_5_dp"
+                android:src="@drawable/ic_location_home" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_address"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_9_dp"
+                android:layout_marginBottom="@dimen/margin_16_dp"
+                tools:text="Số 9, ngõ A, huyện B, tỉnh C" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

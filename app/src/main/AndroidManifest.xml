@@ -69,6 +69,12 @@
         <activity
             android:name=".doctor.ProfileDoctorActivity"
             android:exported="false" />
+        <activity
+            android:name=".doctor.DetailScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".doctor.MedicalHistoryPatientActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

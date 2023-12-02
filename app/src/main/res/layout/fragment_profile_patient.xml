@@ -14,9 +14,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/margin_20_dp"
+        android:layout_marginTop="@dimen/margin_40_dp"
         android:gravity="center"
-        android:text="Hồ sơ bệnh án" />
+        android:text="@string/str_profile_schedule" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -124,12 +124,14 @@
         android:text="@string/str_medical_history" />
 
     <TextView
+        android:id="@+id/tv_add"
         style="@style/roboto_regular_16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:paddingBottom="@dimen/margin_5_dp"
-        android:text="Tạo mới"
+        android:visibility="gone"
+        android:text="@string/str_create"
         android:textColor="@color/blue" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -141,4 +143,17 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="30"
         tools:listitem="@layout/item_medical_history" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_none"
+        style="@style/roboto_bold_14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="@string/str_no_medical_history"
+        android:textColor="@color/grey"
+        android:visibility="gone"
+        app:layout_constraintTop_toBottomOf="@+id/header" />
 </LinearLayout>

@@ -1,9 +1,11 @@
 package com.example.myapplication.serviceapi
 
+import com.example.myapplication.model.BookScheduleDetailResponse
 import com.example.myapplication.model.ChangePwRequest
 import com.example.myapplication.model.ChangePwResponse
 import com.example.myapplication.model.DoctorNotificationResponse
 import com.example.myapplication.model.DoctorProfileRequest
+import com.example.myapplication.model.MedicalHistoryListDoctorResponse
 import com.example.myapplication.model.PatientListResponse
 import com.example.myapplication.model.ResetPwActiveRequest
 import com.example.myapplication.model.ResetPwRequest
@@ -16,13 +18,12 @@ import retrofit2.http.*
 interface DoctorService {
     @GET("doctor")
     suspend fun getDoctor(): DoctorAccountResponse
+
     @PUT("doctor/update")
     suspend fun updateDoctor(@Body doctorProfileRequest: DoctorProfileRequest): ChangePwResponse
 
     @POST("doctor/login")
-    suspend fun loginDoctor(
-        @Body doctorLoginRequest: UserLoginRequest
-    ): UserLoginResponse
+    suspend fun loginDoctor(@Body doctorLoginRequest: UserLoginRequest): UserLoginResponse//
 
 //    @PUT("doctor/update/{id}")
 //    suspend fun updateDoctor(@Path("id") id: Int, @Body doctorModel: DoctorModel): Boolean
@@ -34,7 +35,7 @@ interface DoctorService {
     suspend fun getListPatient(@Query("name") name: String): PatientListResponse//
 
     @PUT("book-schedule/confirm/{id}")
-    suspend fun confirmPatientTested(@Path("id") id: Int): Boolean
+    suspend fun confirmPatientTested(@Path("id") id: Int): ChangePwResponse//
 
     @GET("list-book-schedule-by-doctor?page=1")
     suspend fun getListBookScheduleByDoctor(): WorkScheduleResponse//
@@ -50,4 +51,10 @@ interface DoctorService {
 
     @POST("doctor/reset-password")
     suspend fun sendEmail(@Body reqPwActiveRequest: ResetPwActiveRequest): ChangePwResponse//
+
+    @GET("book-schedule/detail/{id}")
+    suspend fun getDetailBookSchedule(@Path("id") id: Int): BookScheduleDetailResponse//
+
+    @GET("list-medical-history-by-doctor/{id}?page=1")
+    suspend fun getListMedicalHistoryByDoctor(@Path("id") id: Int): MedicalHistoryListDoctorResponse//
 }
