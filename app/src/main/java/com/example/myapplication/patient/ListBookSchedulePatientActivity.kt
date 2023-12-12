@@ -47,9 +47,12 @@ class ListBookSchedulePatientActivity : AppCompatActivity(), OnDetailSchedule {
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val medicalHistoryResponse =
-                    apiClient.patientService.getListBookScheduleByPatient(1)
+                    apiClient.patientService.getListBookScheduleByPatient()
                 withContext(Dispatchers.Main) {
-                    if (medicalHistoryResponse.isSuccessful()) {
+                    if (medicalHistoryResponse.isLoading()) pbLoading.visible()
+                    else if (medicalHistoryResponse.isSuccessful()) {
+                        pbLoading.gone()
+                        rvMedicalHistory.visible()
                         medicalHistoryResponse.data?.data?.let {
                             it.apply {
                                 mBookSchedule = it

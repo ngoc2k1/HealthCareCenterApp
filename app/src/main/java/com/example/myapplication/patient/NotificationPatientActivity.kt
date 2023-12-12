@@ -7,6 +7,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityDoctorNotificationBinding
 import com.example.myapplication.databinding.FragmentNotificationBinding
 import com.example.myapplication.doctor.DoctorListNotificationItemmAdapter
@@ -24,7 +26,9 @@ import kotlinx.coroutines.withContext
 class NotificationPatientActivity : AppCompatActivity() {
     private lateinit var binding: FragmentNotificationBinding
     private var mListNotification: List<PatientNotificationResponse.Data> = emptyList()
-
+    private var currentPage = 1
+    private lateinit var listLayoutMgr: LinearLayoutManager
+    private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentNotificationBinding.inflate(layoutInflater)
@@ -38,7 +42,8 @@ class NotificationPatientActivity : AppCompatActivity() {
         }
         val apiClient = ApiClient(this@NotificationPatientActivity)
         val notificationItemAdapter = PatientListNotificationItemmAdapter()
-
+        listLayoutMgr =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val notificationResponse = apiClient.patientService.getNotification(1)
@@ -53,7 +58,7 @@ class NotificationPatientActivity : AppCompatActivity() {
                                 } else {
                                     tvNoneNotification.gone()
                                     rvNotification.visible()
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                                    rvNotification.layoutManager = listLayoutMgr
                                     rvNotification.adapter = notificationItemAdapter
                                     notificationItemAdapter.submitList(mListNotification)
                                 }
@@ -64,6 +69,31 @@ class NotificationPatientActivity : AppCompatActivity() {
                     }
                 }
             }
+            rvNotification.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (listLayoutMgr.findLastVisibleItemPosition() == mListNotification.size - 1 && mAllowToLoadMore) {
+                        mAllowToLoadMore = false
+                        currentPage += 1
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val notificationResponse = apiClient.patientService.getNotification(currentPage)
+
+                            withContext(Dispatchers.Main) {
+                                if (notificationResponse.isSuccessful()) {
+                                    notificationResponse.data?.data?.let {
+                                        mListNotification = mListNotification + it
+                                        notificationItemAdapter.submitList(mListNotification)
+                                        mAllowToLoadMore = true
+                                    }
+                                } else {
+                                    mAllowToLoadMore = false
+                                    toast(notificationResponse.error?.error?.msg.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
     }
 }

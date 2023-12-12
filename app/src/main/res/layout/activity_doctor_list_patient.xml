@@ -29,6 +29,14 @@
         android:hint="@string/str_search_patient"
         android:padding="@dimen/margin_15_dp" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:visibility="gone" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_medical_history"
         android:layout_width="match_parent"
@@ -39,6 +47,7 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="30"
         tools:listitem="@layout/item_patient" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_none"
         style="@style/roboto_bold_18dp"
@@ -49,5 +58,6 @@
         android:gravity="center"
         android:text="@string/str_no_patient"
         android:textColor="@color/grey"
-        android:visibility="gone"/>
+        android:visibility="gone" />
+
 </LinearLayout>

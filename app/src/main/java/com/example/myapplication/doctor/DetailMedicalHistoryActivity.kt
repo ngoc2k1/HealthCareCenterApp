@@ -74,7 +74,6 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                             } else {
                                 toast(updateMedicalHistory.error?.error?.msg.toString())
                             }
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
                         }
                     }
                     tvSave.gone()

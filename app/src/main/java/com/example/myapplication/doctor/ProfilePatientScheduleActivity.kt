@@ -8,6 +8,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentProfilePatientBinding
@@ -30,7 +32,9 @@ class ProfilePatientScheduleActivity : AppCompatActivity(), OnMedicalHistoryClic
     private lateinit var binding: FragmentProfilePatientBinding
     var context: Context? = null
     private var mMedicalHistory: List<MedicalHistoryListDoctorResponse.Data> = emptyList()
-
+    private var currentPage = 1
+    private lateinit var listLayoutMgr: LinearLayoutManager
+    private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentProfilePatientBinding.inflate(layoutInflater)
@@ -44,6 +48,11 @@ class ProfilePatientScheduleActivity : AppCompatActivity(), OnMedicalHistoryClic
 
         val apiClient = ApiClient(this@ProfilePatientScheduleActivity)
         val idPatient = intent.getIntExtra(ID_PATIENT, 0)
+        listLayoutMgr =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        val medicalHistoryItemAdapter =
+            MedicalHistoryListPatientItemmAdapter(this@ProfilePatientScheduleActivity)
+
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val medicalHistoryResponse =
@@ -52,15 +61,13 @@ class ProfilePatientScheduleActivity : AppCompatActivity(), OnMedicalHistoryClic
                     if (medicalHistoryResponse.isSuccessful()) {
                         medicalHistoryResponse.data?.data?.let {
                             mMedicalHistory = it
-                            if (mMedicalHistory.isNullOrEmpty()) {
+                            if (mMedicalHistory.isEmpty()) {
                                 tvNone.visible()
                                 rvMedicalHistory.gone()
                             } else {
                                 tvNone.gone()
                                 rvMedicalHistory.visible()
-                                val medicalHistoryItemAdapter =
-                                    MedicalHistoryListPatientItemmAdapter(this@ProfilePatientScheduleActivity)
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                                rvMedicalHistory.layoutManager = listLayoutMgr
                                 rvMedicalHistory.adapter = medicalHistoryItemAdapter
                                 medicalHistoryItemAdapter.submitList(mMedicalHistory)
                             }
@@ -70,6 +77,32 @@ class ProfilePatientScheduleActivity : AppCompatActivity(), OnMedicalHistoryClic
                     }
                 }
             }
+            rvMedicalHistory.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (listLayoutMgr.findLastVisibleItemPosition() == mMedicalHistory.size - 1 && mAllowToLoadMore) {
+                        mAllowToLoadMore = false
+                        currentPage += 1
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val medicalHistoryResponse =
+                                apiClient.doctorService.getListMedicalHistoryByDoctor(idPatient,currentPage)
+                            withContext(Dispatchers.Main) {
+                                if (medicalHistoryResponse.isSuccessful()) {
+                                    medicalHistoryResponse.data?.data?.let {
+                                        mMedicalHistory = mMedicalHistory + it
+                                        medicalHistoryItemAdapter.submitList(mMedicalHistory)
+                                        mAllowToLoadMore = true
+                                    }
+                                } else {
+                                    mAllowToLoadMore = false
+                                    toast(medicalHistoryResponse.error?.error?.msg.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+
             lifecycleScope.launch(Dispatchers.IO) {
                 val patient =
                     apiClient.doctorService.getPatientByDoctor(idPatient)

@@ -10,12 +10,16 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.BookScheduleCreateBinding
 import com.example.myapplication.model.BookCreatedRequest
 import com.example.myapplication.model.TimeByDoctorResponse
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.ID_DOCTOR
+import com.example.myapplication.utils.GENDER
+import com.example.myapplication.utils.convertGender
 import com.example.myapplication.utils.toast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,6 +32,8 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
     private var mTime: List<TimeByDoctorResponse.Data> = emptyList()
     var mDateClicked = ""
     var mdoctorWorkScheduleId = 0
+    var informationQR = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = BookScheduleCreateBinding.inflate(layoutInflater)
@@ -44,6 +50,22 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
 
 
         binding.apply {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val patient = apiClient.patientService.getPatient()
+                withContext(Dispatchers.Main) {
+                    if (patient.isSuccessful()) {
+                        patient.data?.data?.let {
+                            it.apply {
+                                informationQR =
+                                    "Tên người đặt lịch: $name | ${convertGender(gender)}\n"
+                            }
+                        }
+                    } else {
+                        toast(patient.error?.error?.msg.toString())
+                    }
+                }
+            }
+
             lifecycleScope.launch(Dispatchers.IO) {
                 val listDate = apiClient.patientService.getDateByDoctor(idDoctor)
                 withContext(Dispatchers.Main) {
@@ -114,37 +136,39 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
 //                                }
 //                            }
                         }
-                    }
-                    else {
+                    } else {
                         toast(listDate.error?.error?.msg.toString())
                     }
                 }
-                tvSave.setOnClickListener {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val response = apiClient.patientService.createBookSchedule(
-                            BookCreatedRequest(
-                                mdoctorWorkScheduleId,
-                                edtNamePatientTest.text.toString(),
-                                "",
-                                edtStatus.text.toString()
-                            )
+            }
+            tvSave.setOnClickListener {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val namePatientTest = edtNamePatientTest.text.toString()
+                    val statusHeath = edtStatus.text.toString()
+                    val response = apiClient.patientService.createBookSchedule(
+                        BookCreatedRequest(
+                            mdoctorWorkScheduleId,
+                            namePatientTest,
+                            informationQR + "Tên người khám: $namePatientTest\nTình trạng sức khỏe: $statusHeath",
+                            statusHeath
                         )
-                        withContext(Dispatchers.Main) {
-                            if (response.isSuccessful()) {
-                                toast(response.data?.msg.toString())
-                                startActivity(
-                                    Intent(
-                                        this@BookScheduleCreatePatientActivity,
-                                        ListBookSchedulePatientActivity::class.java
-                                    )
+                    )
+                    withContext(Dispatchers.Main) {
+                        if (response.isSuccessful()) {
+                            toast(response.data?.msg.toString())
+                            startActivity(
+                                Intent(
+                                    this@BookScheduleCreatePatientActivity,
+                                    ListBookSchedulePatientActivity::class.java
                                 )
-                            } else {
-                                toast(response.error?.error?.msg.toString())
-                            }
+                            )
+                        } else {
+                            toast(response.error?.error?.msg.toString())
                         }
                     }
                 }
             }
+
         }
     }
 

@@ -17,6 +17,13 @@
         android:gravity="center"
         android:text="Lịch khám" />
 
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/margin_20_dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_medical_history"
         android:layout_width="match_parent"
@@ -24,9 +31,11 @@
         android:layout_gravity="center_vertical"
         android:layout_marginTop="@dimen/margin_20_dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="30"
         tools:listitem="@layout/item_work_schedule_doctor" />
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_none"
         style="@style/roboto_bold_18dp"
@@ -37,5 +46,5 @@
         android:gravity="center"
         android:text="@string/str_no_patient"
         android:textColor="@color/grey"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>

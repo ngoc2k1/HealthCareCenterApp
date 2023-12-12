@@ -64,9 +64,6 @@ interface DoctorService {
         @Body medicalHistoryUpdateRequest: MedicalHistoryUpdateRequest
     ): Resource<ChangePwResponse>
 
-    @GET("medical-history/detail/{id}")
-    suspend fun getDetailMedicalHistory(@Path("id") id: Int): Resource<MedicalHistoryDetailResponse>
-
     @GET("patient/{id}")
     suspend fun getPatientByDoctor(@Path("id") id: Int): Resource<PatientAccountResponse>
 }

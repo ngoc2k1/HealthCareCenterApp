@@ -8,6 +8,8 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentProfilePatientBinding
@@ -30,7 +32,9 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
     private lateinit var binding: FragmentProfilePatientBinding
     var context: Context? = null
     private var mMedicalHistory: List<MedicalHistoryListPatientResponse.Data> = emptyList()
-
+    private var currentPage = 1
+    private lateinit var listLayoutMgr: LinearLayoutManager
+    private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentProfilePatientBinding.inflate(layoutInflater)
@@ -44,6 +48,10 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
         }
         val bundle: Bundle? = intent.extras
         val apiClient = ApiClient(this@ProfilePatientScheduleByPatientActivity)
+        val medicalHistoryItemAdapter =
+            ProfilePatienScheduleItemFullAdapter(this@ProfilePatientScheduleByPatientActivity)
+        listLayoutMgr =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val medicalHistoryResponse =
@@ -58,9 +66,7 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
                             } else {
                                 tvNone.gone()
                                 rvMedicalHistory.visible()
-                                val medicalHistoryItemAdapter =
-                                    ProfilePatienScheduleItemFullAdapter(this@ProfilePatientScheduleByPatientActivity)
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                                rvMedicalHistory.layoutManager = listLayoutMgr
                                 rvMedicalHistory.adapter = medicalHistoryItemAdapter
                                 medicalHistoryItemAdapter.submitList(mMedicalHistory)
                             }
@@ -70,6 +76,33 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
                     }
                 }
             }
+            rvMedicalHistory.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (listLayoutMgr.findLastVisibleItemPosition() == mMedicalHistory.size - 1 && mAllowToLoadMore) {
+                        mAllowToLoadMore = false
+                        currentPage += 1
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val medicalHistoryResponse =
+                                apiClient.patientService.getListMedicalHistoryByPatient(currentPage)
+
+                            withContext(Dispatchers.Main) {
+                                if (medicalHistoryResponse.isSuccessful()) {
+                                    medicalHistoryResponse.data?.data?.let {
+                                        mMedicalHistory = mMedicalHistory + it
+                                        medicalHistoryItemAdapter.submitList(mMedicalHistory)
+                                        mAllowToLoadMore = true
+                                    }
+                                } else {
+                                    mAllowToLoadMore = false
+                                    toast(medicalHistoryResponse.error?.error?.msg.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+
             if (bundle != null) {
                 val avatar = bundle.getString(Constant.AVT_PATIENT)
                 Glide.with(imgAvatar).load(avatar)

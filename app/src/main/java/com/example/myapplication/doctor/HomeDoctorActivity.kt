@@ -100,7 +100,7 @@ class HomeDoctorActivity : AppCompatActivity() {
                     options.setOrientationLocked(true)
                     options.captureActivity = QRCodeDoctorActivity::class.java
                     barLauncher.launch(options)
-//                generateQR()
+//                    generateQR()
                 }
                 rlListPatient.setOnClickListener {
                     val intent = Intent(this@HomeDoctorActivity, ListPatientActivity::class.java)

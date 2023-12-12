@@ -1,5 +1,6 @@
 package com.example.myapplication.serviceapi
 
+import androidx.paging.PagingData
 import com.example.myapplication.model.BookCreatedRequest
 import com.example.myapplication.model.BookScheduleByPatientResponse
 import com.example.myapplication.model.BookScheduleDetailResponse
@@ -59,10 +60,10 @@ interface PatientService {
     suspend fun cancelBookSchedule(@Path("id") id: Int): Resource<ChangePwResponse>
 
     @PUT("book-schedule/update/{id}")
-    suspend fun updateBookSchedule(@Path("id") id: Int): Resource<ChangePwResponse>
+    suspend fun updateBookSchedule(@Path("id") id: Int): PagingData<Resource<ChangePwResponse>>
 
     @GET("list-book-schedule-by-patient")
-    suspend fun getListBookScheduleByPatient(@Query("page") page: Int): Resource<BookScheduleByPatientResponse>
+    suspend fun getListBookScheduleByPatient(): Resource<BookScheduleByPatientResponse>
 
     @PUT("patient/change-password")
     suspend fun changePassword(@Body changePwRequest: ChangePwRequest): Resource<ChangePwResponse>

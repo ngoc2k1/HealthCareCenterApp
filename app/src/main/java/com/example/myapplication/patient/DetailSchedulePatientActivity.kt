@@ -86,7 +86,7 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                         }
                         schedule.data?.data?.let {
                             it.apply {
-//                            ivQr.setImageBitmap(qrCode.generateQR())
+                            ivQr.setImageBitmap(qrCode.generateQR())
                                 when (statusBook) {
                                     STATUS_BOOK.DA_KHAM.toString() -> {
                                         tvStatus.setTextColor(resources.getColor(R.color.green))

@@ -86,7 +86,10 @@ class ListPatientActivity : AppCompatActivity(), OnItemmClickListener {
                                             apiClient.doctorService.getListPatient(s.toString())
                                         withContext(Dispatchers.Main)
                                         {
+                                            if (listPatient.isLoading()) pbLoading.visible()
+
                                             if (listPatient.isSuccessful()) {
+                                                pbLoading.gone()
                                                 listPatient.data?.data?.let {
                                                     mListPatient = it
                                                     if (mListPatient.isEmpty()) {

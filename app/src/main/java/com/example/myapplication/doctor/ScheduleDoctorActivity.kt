@@ -7,10 +7,11 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ActivityDoctorWorkScheduleBinding
 import com.example.myapplication.model.WorkScheduleResponse
 import com.example.myapplication.serviceapi.ApiClient
-import com.example.myapplication.utils.Constant.AVT_DOCTOR
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
 import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.toast
@@ -22,7 +23,9 @@ import kotlinx.coroutines.withContext
 class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityDoctorWorkScheduleBinding
     private var mListSchedule: List<WorkScheduleResponse.WorkSchedule> = emptyList()
-
+    private var currentPage = 1
+    private lateinit var listLayoutMgr: LinearLayoutManager
+    private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDoctorWorkScheduleBinding.inflate(layoutInflater)
@@ -39,11 +42,14 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
     override fun onResume() {
         super.onResume()
         val apiClient = ApiClient(this@ScheduleDoctorActivity)
+        listLayoutMgr =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+        val scheduleItemAdapter =
+            ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
 
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val listSchedule = apiClient.doctorService.getListBookScheduleByDoctor(1)
-
                 withContext(Dispatchers.Main) {
                     if (listSchedule.isSuccessful()) {
                         listSchedule.data?.data?.let {
@@ -54,11 +60,8 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
                             } else {
                                 tvNoneSchedule.gone()
                                 rcvWorkSchedule.visible()
-                                val scheduleItemAdapter =
-                                    ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
-                                binding.rcvWorkSchedule.adapter = scheduleItemAdapter
-
+                                rcvWorkSchedule.layoutManager = listLayoutMgr
+                                rcvWorkSchedule.adapter = scheduleItemAdapter
                                 scheduleItemAdapter.submitList(mListSchedule)
                             }
                         }
@@ -67,7 +70,31 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
                     }
                 }
             }
-
+            rcvWorkSchedule.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (listLayoutMgr.findLastVisibleItemPosition() == mListSchedule.size - 1 && mAllowToLoadMore) {
+                        mAllowToLoadMore = false
+                        currentPage += 1
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val listSchedule =
+                                apiClient.doctorService.getListBookScheduleByDoctor(currentPage)
+                            withContext(Dispatchers.Main) {
+                                if (listSchedule.isSuccessful()) {
+                                    listSchedule.data?.data?.let {
+                                        mListSchedule = mListSchedule + it
+                                        scheduleItemAdapter.submitList(mListSchedule)
+                                        mAllowToLoadMore = true
+                                    }
+                                } else {
+                                    mAllowToLoadMore = false
+                                    toast(listSchedule.error?.error?.msg.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            })
         }
     }
 

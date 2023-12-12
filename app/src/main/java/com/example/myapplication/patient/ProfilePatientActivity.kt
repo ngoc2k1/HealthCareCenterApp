@@ -106,7 +106,6 @@ class ProfilePatientActivity : AppCompatActivity() {
                                 Glide.with(imgAvatar).load(mavatar).centerCrop()
                                     .placeholder(R.drawable.img_default_avatar_home)
                                     .into(imgAvatar)
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
                             }
                         } else {
                             toast(patientUpdateResponse.error?.error?.msg.toString())
@@ -151,7 +150,6 @@ class ProfilePatientActivity : AppCompatActivity() {
                                     rbMale.isChecked = false
                                 }
                             }
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
                         }
                     } else {
                         toast(patient.error?.error?.msg.toString())

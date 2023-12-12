@@ -39,7 +39,7 @@
             <ListView
                 android:id="@+id/rv_date"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginTop="@dimen/margin_10_dp"
                 android:scrollbars="vertical" />
             <TextView

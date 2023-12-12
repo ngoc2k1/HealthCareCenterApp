@@ -1,34 +1,21 @@
 package com.example.myapplication.patient
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.myapplication.R
-import com.example.myapplication.auth.LoginPatientActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FragmentBookScheduleBinding
-import com.example.myapplication.doctor.ListPatientItemmAdapter
-import com.example.myapplication.doctor.ProfilePatientScheduleActivity
 import com.example.myapplication.model.DoctorBySpecialtyResponse
-import com.example.myapplication.model.PatientProfile
-import com.example.myapplication.model.Specialty
 import com.example.myapplication.model.SpecialtyData
-import com.example.myapplication.model.SpecialtyListResponse
-import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
-import com.example.myapplication.utils.getCurrentHour
-import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.toast
-import com.example.myapplication.utils.visible
-import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -37,6 +24,9 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
     private var mListSpecialtyData = ArrayList<SpecialtyData>()
     private var mListDoctor: List<DoctorBySpecialtyResponse.Data> = emptyList()
     private lateinit var specialtyAdapter: SpecialtyListItemAdapter
+    private var currentPage = 1
+    private lateinit var listLayoutMgr: LinearLayoutManager
+    private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentBookScheduleBinding.inflate(layoutInflater)
@@ -49,6 +39,8 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
         }
 
         val apiClient = ApiClient(this@BookSchedulePatientActivity)
+        listLayoutMgr =
+            LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         specialtyAdapter = SpecialtyListItemAdapter(this@BookSchedulePatientActivity)
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
@@ -63,7 +55,6 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
                                 mListSpecialtyData.add(photo)
                             }
                             rvSpecialty.adapter = specialtyAdapter
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
                             specialtyAdapter.submitList(mListSpecialtyData)
                         }
                     } else {
@@ -73,6 +64,7 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
             }
         }
         callApiGetDoctorBySpecialty(1)
+
     }
 
     override fun getSpecialty(specialty: SpecialtyData) {
@@ -103,6 +95,7 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
                         listDoctor.data?.data?.let {
                             it.apply {
                                 mListDoctor = it
+                                rvScheduleDoctor.layoutManager = listLayoutMgr
                                 rvScheduleDoctor.adapter = doctorAdapter
                                 doctorAdapter.submitList(mListDoctor)
                             }
@@ -112,6 +105,32 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
                     }
                 }
             }
+            rvScheduleDoctor.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    if (listLayoutMgr.findLastVisibleItemPosition() == mListDoctor.size - 1 && mAllowToLoadMore) {
+                        mAllowToLoadMore = false
+                        currentPage += 1
+                        lifecycleScope.launch(Dispatchers.IO) {
+                            val listDoctor =
+                                apiClient.patientService.getDoctorBySpecialty(id,currentPage)
+                            withContext(Dispatchers.Main) {
+                                if (listDoctor.isSuccessful()) {
+                                    listDoctor.data?.data?.let {
+                                        mListDoctor = mListDoctor + it
+                                        doctorAdapter.submitList(mListDoctor)
+                                        mAllowToLoadMore = true
+                                    }
+                                } else {
+                                    mAllowToLoadMore = false
+                                    toast(listDoctor.error?.error?.msg.toString())
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+
         }
     }
 
