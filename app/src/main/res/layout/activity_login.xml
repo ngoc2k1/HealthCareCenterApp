@@ -36,7 +36,7 @@
                 android:drawablePadding="@dimen/margin_10_dp"
                 android:hint="@string/authen_username_hint"
                 android:padding="@dimen/margin_10_dp"
-                android:text="myle@gmail.com"
+                android:text="dolong@mailinator.com"
                 app:layout_constraintTop_toBottomOf="@+id/logo_app" />
 
             <com.google.android.material.textfield.TextInputEditText

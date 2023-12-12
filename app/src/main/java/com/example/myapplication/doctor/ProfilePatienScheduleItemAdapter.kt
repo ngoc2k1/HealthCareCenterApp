@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.ItemMedicalHistoryBinding
 import com.example.myapplication.model.MedicalHistoryListDoctorResponse
-import com.example.myapplication.utils.gone
 
 class MedicalHistoryListPatientItemmAdapter(
     private val listener: OnMedicalHistoryClick
@@ -21,6 +20,9 @@ class MedicalHistoryListPatientItemmAdapter(
         fun bind(medicalHistory: MedicalHistoryListDoctorResponse.Data) {
             binding.apply {
 //                groupDoctor.gone()
+                root.setOnClickListener {
+                    listener.getDetailMedicalHistory(medicalHistory.id)
+                }
                 tvTime.text = medicalHistory.bookSchedule.dateTest
             }
         }

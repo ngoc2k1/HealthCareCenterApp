@@ -8,10 +8,12 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDoctorProfileBinding
 import com.example.myapplication.model.DoctorProfileRequest
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.gone
@@ -38,31 +40,6 @@ class ProfileDoctorActivity : AppCompatActivity() {
 
         val apiClient = ApiClient(this@ProfileDoctorActivity)
         binding.apply {
-            lifecycleScope.launch(Dispatchers.IO) {
-                val doctor = apiClient.doctorService.getDoctor()
-                if (doctor.code == 200) {
-                    withContext(Dispatchers.Main)
-                    {
-                        doctor.data.apply {
-                            edtAddress.setText(addressTest)
-                            edtHealthInsurance.setText(healthInsurance)
-                            edtIdentityCard.setText(identityCard)
-                            tvBirthday.text = birthday
-                            inputPhone.setText(phone)
-                            inputEmail.setText(email)
-                            inputFullName.setText(name)
-                            if (gender == GENDER.MALE.toString()) {
-                                rbMale.isChecked = true
-                                rbFemale.isChecked = false
-                            } else {
-                                rbFemale.isChecked = true
-                                rbMale.isChecked = false
-                            }
-                        }
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
-                    }
-                }
-            }
             tvBirthday.setOnClickListener {
                 openCalendarDialog(tvBirthday)
             }
@@ -93,22 +70,35 @@ class ProfileDoctorActivity : AppCompatActivity() {
                 btnEdit.visible()
                 val gender = if (rbFemale.isChecked) GENDER.FEMALE.toString()
                 else GENDER.MALE.toString()
+                val avatar = if (gender == GENDER.FEMALE.toString())
+                    Constant.AVT_FEMALE_DOCTOR
+                else Constant.AVT_MALE_DOCTOR
+                val doctorUpdate = DoctorProfileRequest(
+                    edtAddress.text.toString(),
+                    avatar,
+                    tvBirthday.text.toString(),
+                    gender,
+                    edtHealthInsurance.text.toString(),
+                    edtIdentityCard.text.toString(),
+                    inputFullName.text.toString()
+                )
                 lifecycleScope.launch(Dispatchers.IO) {
                     val doctorUpdateResponse = apiClient.doctorService.updateDoctor(
-                        DoctorProfileRequest(
-                            edtAddress.text.toString(),
-                            "",
-                            tvBirthday.text.toString(),
-                            gender,
-                            edtHealthInsurance.text.toString(),
-                            edtIdentityCard.text.toString(),
-                            inputFullName.text.toString()
-                        )
+                        doctorUpdate
                     )
-                    if (doctorUpdateResponse.code == 200) {
-                        withContext(Dispatchers.Main) {
-                            toast(doctorUpdateResponse.msg)
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                    withContext(Dispatchers.Main) {
+                        if (doctorUpdateResponse.isSuccessful()) {
+                            doctorUpdateResponse.data?.let {
+                                toast(it.msg)
+                                val mavatar =
+                                    if (gender == GENDER.FEMALE.toString()) Constant.AVT_FEMALE_DOCTOR
+                                    else Constant.AVT_MALE_DOCTOR
+                                Glide.with(imgAvatar).load(mavatar).centerCrop()
+                                    .placeholder(R.drawable.img_default_avatar_home)
+                                    .into(imgAvatar)
+                            }
+                        } else {
+                            toast(doctorUpdateResponse.error?.error?.msg.toString())
                         }
                     }
                 }
@@ -118,15 +108,43 @@ class ProfileDoctorActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        val apiClient = ApiClient(this@ProfileDoctorActivity)
         binding.apply {
-            if (getCurrentHour() in 6..18) {
-                viewContain.setBackgroundResource(R.drawable.background_app_sun)
-                tvEmailNote.setTextColor(resources.getColor(R.color.black))
-                tvPhoneNote.setTextColor(resources.getColor(R.color.black))
-            } else {
-                viewContain.setBackgroundResource(R.drawable.background_app)
-                tvEmailNote.setTextColor(resources.getColor(R.color.grey))
-                tvPhoneNote.setTextColor(resources.getColor(R.color.grey))
+            lifecycleScope.launch(Dispatchers.IO) {
+                val doctor = apiClient.doctorService.getDoctor()
+                withContext(Dispatchers.Main)
+                {
+                    if (doctor.isSuccessful()) {
+                        doctor.data?.data?.let {
+                            it.apply {
+                                edtAddress.setText(addressTest)
+                                edtHealthInsurance.setText(healthInsurance)
+                                edtIdentityCard.setText(identityCard)
+                                tvBirthday.text = birthday
+                                inputPhone.setText(phone)
+                                inputEmail.setText(email)
+                                inputFullName.setText(name)
+                                avatar = if (gender == GENDER.FEMALE.toString())
+                                    Constant.AVT_FEMALE_DOCTOR
+                                else Constant.AVT_MALE_DOCTOR
+                                Glide.with(imgAvatar).load(avatar).centerCrop()
+                                    .placeholder(R.drawable.img_default_avatar_home)
+                                    .into(imgAvatar);
+
+                                if (gender == GENDER.MALE.toString()) {
+                                    rbMale.isChecked = true
+                                    rbFemale.isChecked = false
+                                } else {
+                                    rbFemale.isChecked = true
+                                    rbMale.isChecked = false
+                                }
+                            }
+                        }
+//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                    } else {
+                        toast(doctor.error?.error?.msg.toString())
+                    }
+                }
             }
         }
     }

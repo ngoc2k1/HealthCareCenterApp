@@ -7,7 +7,7 @@
     android:layout_marginBottom="@dimen/margin_12_dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardCornerRadius="@dimen/margin_12_dp">
+    app:cardCornerRadius="@dimen/margin_15_dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

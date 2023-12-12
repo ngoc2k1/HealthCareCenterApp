@@ -17,9 +17,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-interface OnClickListenerChangePwDialog {
-    fun addKeyResult()
-}
 
 class ChangePwDialog : DialogFragment() {
     private lateinit var binding: FragmentDialogChangePwBinding
@@ -56,10 +53,16 @@ class ChangePwDialog : DialogFragment() {
                                         apiClient.doctorService.changePassword(
                                             ChangePwRequest(newPassword, currentPassword)
                                         )
-                                    if (changePwResponse.code == 200) {
-                                        withContext(Dispatchers.Main) {
-                                            mContext!!.toast(changePwResponse.msg)
+                                    withContext(Dispatchers.Main) {
+                                        if (changePwResponse.isSuccessful()) {
+                                            changePwResponse.data?.msg?.let { it1 ->
+                                                mContext!!.toast(
+                                                    it1
+                                                )
+                                            }
                                             dismiss()
+                                        } else {
+                                            toast(changePwResponse.error?.error?.msg.toString())
                                         }
                                     }
                                 }

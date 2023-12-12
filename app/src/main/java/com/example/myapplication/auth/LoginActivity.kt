@@ -6,13 +6,10 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginAuthBinding
 import com.example.myapplication.utils.getCurrentHour
-import com.example.myapplication.utils.toast
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginAuthBinding

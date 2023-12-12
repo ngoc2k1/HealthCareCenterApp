@@ -23,15 +23,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_20_dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_avatar"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/width_65dp"
+            android:layout_height="@dimen/width_65dp"
+            android:layout_centerHorizontal="true"
             android:scaleType="centerCrop"
             android:src="@drawable/img_default_avatar_home"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/circle" />
 
         <TextView
             android:id="@+id/tv_name"
@@ -63,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_16_dp"
             android:layout_marginTop="@dimen/margin_5_dp"
-            app:cardCornerRadius="@dimen/margin_12_dp"
+            app:cardCornerRadius="@dimen/margin_15_dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_avatar">
@@ -130,19 +131,21 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:paddingBottom="@dimen/margin_5_dp"
-        android:visibility="gone"
         android:text="@string/str_create"
-        android:textColor="@color/blue" />
+        android:textColor="@color/blue"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_medical_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_20_dp"
         android:orientation="vertical"
+        android:visibility="gone"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:itemCount="30"
-        tools:listitem="@layout/item_medical_history" />
+        tools:listitem="@layout/item_medical_history_patient" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_none"
@@ -154,6 +157,5 @@
         android:gravity="center"
         android:text="@string/str_no_medical_history"
         android:textColor="@color/grey"
-        android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@+id/header" />
 </LinearLayout>

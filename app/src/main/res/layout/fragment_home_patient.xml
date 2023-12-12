@@ -36,17 +36,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/logo">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_avatar"
-            android:layout_width="65dp"
-            android:layout_height="65dp"
-            android:layout_centerInParent="true"
+            android:layout_width="@dimen/margin_80_dp"
+            android:layout_height="@dimen/margin_80_dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginStart="@dimen/margin_16_dp"
             android:layout_marginTop="44dp"
             android:scaleType="centerCrop"
             android:src="@drawable/img_default_avatar_home"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/circle" />
 
         <RelativeLayout
             android:id="@+id/rl_info"
@@ -65,8 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_30_dp"
-                android:text="@string/str_hello_user"
-                android:textColor="@color/grey" />
+                android:text="@string/str_hello_user" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_full_name"
@@ -88,8 +88,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_16_dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="@color/grey_light"
-            app:cardCornerRadius="@dimen/margin_20_dp"
+            android:backgroundTint="@color/white"
+            app:cardCornerRadius="@dimen/margin_15_dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/rl_info">
@@ -104,6 +104,7 @@
 
                 <TextView
                     android:id="@+id/tv_weight"
+                    style="@style/roboto_regular_12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_weight_black"
@@ -118,6 +119,7 @@
 
                 <TextView
                     android:id="@+id/tv_height"
+                    style="@style/roboto_regular_12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_height_black"
@@ -132,6 +134,7 @@
 
                 <TextView
                     android:id="@+id/tv_blood"
+                    style="@style/roboto_regular_12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:drawableStart="@drawable/ic_blood_black"
@@ -162,6 +165,12 @@
                 app:cardCornerRadius="@dimen/margin_14_dp"
                 app:cardElevation="@dimen/margin_6_dp">
 
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="@dimen/margin_70_dp"
+                    android:layout_height="@dimen/margin_70_dp"
+                    android:padding="@dimen/margin_10_dp"
+                    android:src="@drawable/book" />
+
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ll_test_update"
                     android:layout_width="match_parent"
@@ -184,7 +193,6 @@
                         android:layout_gravity="center_vertical"
                         android:text="@string/make_an_appointment_header_title"
                         android:textColor="@color/white" />
-
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
@@ -225,6 +233,95 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="@string/str_medical_records"
+                        android:textColor="@color/white" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/ll_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_14_dp"
+            android:layout_marginTop="@dimen/margin_30_dp"
+            android:elevation="2dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/ll_button">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_2_dp"
+                android:layout_marginTop="@dimen/margin_2_dp"
+                android:layout_marginBottom="@dimen/margin_6_dp"
+                android:layout_weight="1"
+                android:elevation="@dimen/margin_6_dp"
+                app:cardCornerRadius="@dimen/margin_14_dp"
+                app:cardElevation="@dimen/margin_6_dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_noti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/margin_70_dp"
+                        android:layout_height="@dimen/margin_70_dp"
+                        android:padding="@dimen/margin_10_dp"
+                        android:src="@drawable/ic_notification_setting" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_noti"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/str_notification"
+                        android:textColor="@color/white" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:id="@+id/view_line_setting"
+                android:layout_width="@dimen/margin_5_dp"
+                android:layout_height="match_parent" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_2_dp"
+                android:layout_marginTop="@dimen/margin_2_dp"
+                android:layout_marginBottom="@dimen/margin_6_dp"
+                android:layout_weight="1"
+                app:cardCornerRadius="@dimen/margin_15_dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/ll_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_home"
+                    android:foreground="?attr/selectableItemBackgroundBorderless"
+                    android:orientation="horizontal">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/margin_70_dp"
+                        android:layout_height="@dimen/margin_70_dp"
+                        android:padding="@dimen/margin_10_dp"
+                        android:src="@drawable/ic_account_setting" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_account"
+                        style="@style/roboto_bold_16dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/account_option_account_setting"
                         android:textColor="@color/white" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>

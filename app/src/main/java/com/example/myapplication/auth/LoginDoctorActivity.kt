@@ -17,9 +17,11 @@ import com.example.myapplication.model.doctor.UserLoginRequest
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.getCurrentHour
+import com.example.myapplication.utils.toast
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class LoginDoctorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginDoctorBinding
@@ -54,14 +56,18 @@ class LoginDoctorActivity : AppCompatActivity() {
                     val doctor = apiClient.doctorService.loginDoctor(
                         UserLoginRequest(username, password)
                     )
-                    if (doctor.code == 200) {
-                        Hawk.put(HawkKey.ACCESS_TOKEN_DOCTOR, doctor.data.token)
-                        startActivity(
-                            Intent(
-                                this@LoginDoctorActivity,
-                                HomeDoctorActivity::class.java
+                    withContext(Dispatchers.Main) {
+                        if (doctor.isSuccessful()) {
+                            Hawk.put(HawkKey.ACCESS_TOKEN_DOCTOR, doctor.data?.data?.token)
+                            startActivity(
+                                Intent(
+                                    this@LoginDoctorActivity,
+                                    HomeDoctorActivity::class.java
+                                )
                             )
-                        )
+                        } else {
+                            toast(doctor.error?.error?.msg.toString())
+                        }
                     }
                 }
             }

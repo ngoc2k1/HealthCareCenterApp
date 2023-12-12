@@ -3,13 +3,13 @@ package com.example.myapplication.model
 
 import com.google.gson.annotations.SerializedName
 
-data class BookScheduleRequest(
+data class BookCreatedRequest(
     @SerializedName("doctorWorkScheduleId")
-    var doctorWorkScheduleId: Int,
+    val doctorWorkScheduleId: Int,
     @SerializedName("namePatientTest")
-    var namePatientTest: String? = " ",
+    val namePatientTest: String,
     @SerializedName("qrcode")
     val qrcode: String,
     @SerializedName("statusHealth")
-    var statusHealth: String? = " ",
+    val statusHealth: String
 )

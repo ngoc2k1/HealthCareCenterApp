@@ -9,10 +9,22 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
+import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRegisterBinding
+import com.example.myapplication.model.PatientRegisterRequest
+import com.example.myapplication.model.doctor.UserLoginRequest
+import com.example.myapplication.patient.HomePatientActivity
+import com.example.myapplication.prefs.HawkKey
+import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.openCalendarDialog
+import com.example.myapplication.utils.toast
+import com.orhanobut.hawk.Hawk
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -31,17 +43,53 @@ class RegisterActivity : AppCompatActivity() {
             this@RegisterActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
-        binding.tvLogin.setOnClickListener {
-            startActivity(Intent(this, LoginPatientActivity::class.java))
-        }
+        val apiClient = ApiClient(this@RegisterActivity)
+
         binding.apply {
-            var reason = ""
+            tvLogin.setOnClickListener {
+                startActivity(Intent(this@RegisterActivity, LoginPatientActivity::class.java))
+            }
+            btnRegister.setOnClickListener {
+                val pw = inputPasswordRegister.text.toString()
+                val confirmPW = inputConfirmPasswordRegister.text.toString()
+                //check trongfull
+                if (confirmPW != pw) {
+                    toast(getString(R.string.str_error_change_pw_cf))
+                } else {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val gender = if (rbFemale.isChecked) GENDER.FEMALE.toString()
+                        else GENDER.MALE.toString()
+                        val patientData = PatientRegisterRequest(
+                            edtAddress.text.toString(),
+                            tvBirthday.text.toString(),
+                            inputEmailRegister.text.toString(),
+                            gender,
+                            inputFullName.text.toString(),
+                            inputPasswordRegister.text.toString(),
+                            inputPhoneRegister.text.toString()
+                        )
+                        val patient = apiClient.patientService.registerPatient(
+                            patientData
+                        )
+                        edtAddress.setText(patientData.toString())
+                        withContext(Dispatchers.Main) {
+                            if (patient.isSuccessful()) {
+                                toast(patient.data?.msg.toString())
+                                startActivity(
+                                    Intent(
+                                        this@RegisterActivity,
+                                        LoginPatientActivity::class.java
+                                    )
+                                )
+                            } else {
+                                toast(patient.error?.error?.msg.toString())
+                            }
+                        }
+                    }
+                }
+            }
             rgGen.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (rgGen.checkedRadioButtonId != -1) {
-                    reason = when {
-                        rbFemale.isChecked -> rbFemale.text.toString()
-                        else -> rbMale.text.toString()
-                    }
                     checkInputRegister()
                 } else btnRegister.setBackgroundResource(R.drawable.bg_border_button_authen)
 

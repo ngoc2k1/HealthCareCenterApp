@@ -51,8 +51,8 @@ class ForgotPasswordDialog : DialogFragment() {
                         lifecycleScope.launch(Dispatchers.IO) {
                             val changePwResponse =
                                 apiClient.doctorService.sendEmail(ResetPwActiveRequest(email))
-                            if (changePwResponse.code == 200) {
-                                withContext(Dispatchers.Main) {
+                            withContext(Dispatchers.Main) {
+                                if (changePwResponse.isSuccessful()) {
                                     groupActive.visible()
                                     groupForgot.gone()
                                     buttonOkActive.setOnClickListener {
@@ -67,15 +67,19 @@ class ForgotPasswordDialog : DialogFragment() {
                                                     apiClient.doctorService.sendNewPassword(
                                                         ResetPwRequest(pw, otp)
                                                     )
-                                                if (activePasswordResponse.code == 200) {
-                                                    withContext(Dispatchers.Main) {
-                                                        mContext!!.toast(activePasswordResponse.msg)
+                                                withContext(Dispatchers.Main) {
+                                                    if (activePasswordResponse.isSuccessful()) {
+                                                        mContext!!.toast(activePasswordResponse.data?.msg.toString())
                                                         dismiss()
+                                                    } else {
+                                                        toast(activePasswordResponse.error?.error?.msg.toString())
                                                     }
                                                 }
                                             }
                                         }
                                     }
+                                } else {
+                                    toast(changePwResponse.error?.error?.msg.toString())
                                 }
                             }
                         }

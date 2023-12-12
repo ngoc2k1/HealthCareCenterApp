@@ -13,6 +13,7 @@ import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant.AVT_DOCTOR
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
 import com.example.myapplication.utils.gone
+import com.example.myapplication.utils.toast
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,30 +34,40 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
             this@ScheduleDoctorActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
         val apiClient = ApiClient(this@ScheduleDoctorActivity)
 
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
-                val listSchedule = apiClient.doctorService.getListBookScheduleByDoctor()
-                if (listSchedule.code == 200) {
-                    mListSchedule = listSchedule.data
-                    if (mListSchedule.isEmpty()) {
-                        tvNoneSchedule.visible()
-                        rcvWorkSchedule.gone()
-                    } else {
-                        tvNoneSchedule.gone()
-                        rcvWorkSchedule.visible()
-                        withContext(Dispatchers.Main) {
-                            val scheduleItemAdapter =
-                                ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
-                            binding.rcvWorkSchedule.adapter = scheduleItemAdapter
+                val listSchedule = apiClient.doctorService.getListBookScheduleByDoctor(1)
 
-                            scheduleItemAdapter.submitList(mListSchedule)
+                withContext(Dispatchers.Main) {
+                    if (listSchedule.isSuccessful()) {
+                        listSchedule.data?.data?.let {
+                            mListSchedule = it
+                            if (mListSchedule.isEmpty()) {
+                                tvNoneSchedule.visible()
+                                rcvWorkSchedule.gone()
+                            } else {
+                                tvNoneSchedule.gone()
+                                rcvWorkSchedule.visible()
+                                val scheduleItemAdapter =
+                                    ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
+//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                                binding.rcvWorkSchedule.adapter = scheduleItemAdapter
+
+                                scheduleItemAdapter.submitList(mListSchedule)
+                            }
                         }
+                    } else {
+                        toast(listSchedule.error?.error?.msg.toString())
                     }
                 }
             }
+
         }
     }
 

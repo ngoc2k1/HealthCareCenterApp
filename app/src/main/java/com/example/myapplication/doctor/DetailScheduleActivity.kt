@@ -12,12 +12,15 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentBookScheduleDetailBinding
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
+import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
+import com.example.myapplication.utils.STATUS_BOOK
 import com.example.myapplication.utils.convertGender
 import com.example.myapplication.utils.convertStatusBook
 import com.example.myapplication.utils.generateQR
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.toast
+import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -41,52 +44,93 @@ class DetailScheduleActivity : AppCompatActivity() {
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val schedule = apiClient.doctorService.getDetailBookSchedule(idBookSchedule)
-                if (schedule.code == 200) {
-                    withContext(Dispatchers.Main) {
-                        schedule.data.doctor.apply {
-                            tvAddressAppointmentTitle.text = addressTest
-                            tvSpecialty.text = specialty.name
-                        }
-                        schedule.data.patient.apply {
-                            Glide.with(ivAvatarPatient).load(avatar).centerCrop()
-                                .placeholder(R.drawable.img_default_avatar_home)
-                                .into(ivAvatarPatient)
-                            tvNamePatient.text = name
-                            tvGenderAgePatient.text = convertGender(gender) + ", " + age + " tuổi"
-                        }
-                        schedule.data.apply {
-                            ivQr.setImageBitmap(qrCode.generateQR())
-                            tvStatus.text = convertStatusBook(statusBook, tvStatus)
-                            tvTimeTest.text = timeTest
-                            tvDateTest.text = dateTest
-                            if (statusHealth == "") {
-                                tvStatusHealth.gone()
-                                tvStatusHealthTitle.gone()
-                            } else {
-                                tvStatusHealth.text = statusHealth
+                withContext(Dispatchers.Main) {
+                    if (schedule.isSuccessful()) {
+                        schedule.data?.data?.doctor?.let {
+                            it.apply {
+                                tvAddress.text = addressTest
+                                tvSpecialtyDoctor.text = specialty.name
                             }
-                            tvPrice.text = price.toString()
                         }
-//        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                        schedule.data?.data?.patient?.let {
+                            it.apply {
+                                Glide.with(imgAvatar).load(avatar).centerCrop()
+                                    .placeholder(R.drawable.img_default_avatar_home)
+                                    .into(imgAvatar)
+                                tvNamePatient.text = name
+                                tvGenderAgePatient.text =
+                                    convertGender(gender) + ", " + age + " tuổi"
+                            }
+                        }
+                        schedule.data?.data?.let {
+                            it.apply {
+                                ivQr.setImageBitmap(qrCode.generateQR())
+                                when (statusBook) {
+                                    STATUS_BOOK.DA_KHAM.toString() -> {
+                                        tvStatus.setTextColor(resources.getColor(R.color.green))
+                                        clChuaKham.gone()
+                                        clDaKham.visible()
+                                    }
+
+                                    STATUS_BOOK.DA_HUY.toString() -> {
+                                        tvStatus.setTextColor(resources.getColor(R.color.red))
+                                        clChuaKham.gone()
+                                        clDaKham.gone()
+                                    }
+
+                                    else -> {
+                                        ivQr.visible()
+                                        clChuaKham.visible()
+                                        clDaKham.gone()
+                                        tvStatus.setTextColor(resources.getColor(R.color.blue))
+                                    }
+                                }
+                                tvStatus.text = convertStatusBook(statusBook, tvStatus)
+                                tvTimeTest.text = timeTest
+                                tvDateTest.text = dateTest
+                                if (statusHealth == "") {
+                                    clHealth.gone()
+                                } else {
+                                    clHealth.visible()
+                                    tvStatusHealth.text = statusHealth
+                                }
+                                tvPrice.text = price.toString()
+                            }
+                        }
+                    } else {
+                        toast(schedule.error?.error?.msg.toString())
                     }
                 }
             }
-            btnConfirm.setOnClickListener {
+
+            btnConfirmCk.setOnClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
                     val confirmSchedule =
                         apiClient.doctorService.confirmPatientTested(idBookSchedule)
-                    if (confirmSchedule.code == 200) {
-                        withContext(Dispatchers.Main) {
-                            toast(confirmSchedule.msg)
+                    withContext(Dispatchers.Main) {
+                        if (confirmSchedule.isSuccessful()) {
+                            tvStatus.setTextColor(resources.getColor(R.color.green))
+                            tvStatus.text =
+                                convertStatusBook(STATUS_BOOK.DA_KHAM.toString(), tvStatus)
+                            clChuaKham.gone()
+                            ivQr.gone()
+                            clDaKham.visible()
+                            toast(confirmSchedule.data?.msg.toString())
+                        }
 //        binding.pbMainLoadingvideo.visibility = View.VISIBLE
+                        else {
+                            toast(confirmSchedule.error?.error?.msg.toString())
                         }
                     }
                 }
             }
-            btnEdit.setOnClickListener {
-//                val intent = Intent(this@DetailScheduleActivity, DetailScheduleActivity::class.java)
-//                intent.putExtra(ID_MEDICALHISTORY, idBookSchedule)
-//                startActivity(intent)
+
+
+            btnResultDk.setOnClickListener {
+                val intent =
+                    Intent(this@DetailScheduleActivity, DetailMedicalHistoryActivity::class.java)
+                intent.putExtra(ID_MEDICALHISTORY, idBookSchedule)
+                startActivity(intent)
             }
         }
     }

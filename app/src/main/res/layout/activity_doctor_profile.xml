@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/view_contain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_app_sun"
+    android:background="@color/grey_light"
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
@@ -33,14 +34,14 @@
             <!--                    android:padding="@dimen/margin_10_dp"-->
             <!--                    android:scaleType="centerCrop"-->
             <!--                    android:src="@drawable/ic_edit" />-->
-
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/img_avatar"
                 android:layout_width="@dimen/margin_80_dp"
                 android:layout_height="@dimen/margin_80_dp"
                 android:layout_gravity="center_horizontal"
                 android:scaleType="centerCrop"
-                android:src="@drawable/img_default_avatar_home" />
+                android:src="@drawable/img_default_avatar_home"
+                app:shapeAppearance="@style/circle" />
 
             <EditText
                 android:id="@+id/input_phone"
@@ -128,8 +129,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_3_dp"
-                    android:text="@string/str_male"
-                    android:textColor="@color/white" />
+                    android:text="@string/str_male" />
 
                 <RadioButton
                     android:id="@+id/rb_female"
@@ -144,8 +144,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_3_dp"
-                    android:text="@string/str_female"
-                    android:textColor="@color/white" />
+                    android:text="@string/str_female" />
 
             </RadioGroup>
 
@@ -161,7 +160,7 @@
                 android:enabled="false"
                 android:hint="@string/register_address_test"
                 android:maxLength="255"
-                android:maxLines="3"
+                android:maxLines="8"
                 android:padding="10dp"
                 android:text="aaaaaaaaaaaaaaaaaaa" />
 

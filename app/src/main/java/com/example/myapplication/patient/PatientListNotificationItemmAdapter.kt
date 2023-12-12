@@ -22,7 +22,7 @@ class PatientListNotificationItemmAdapter(
                     "Thời gian khám: " + notification.bookSchedule.datTest + " | " + notification.bookSchedule.timeTest
                 tvTitle.text = notification.content
                 tvPatient.text =
-                    "Thông tin: " + notification.doctor.name + " | " + notification.doctor.specialty
+                    "Thông tin bác sĩ: " + notification.doctor.name + " | " + notification.doctor.specialty.name
 //                tvState
             }
         }

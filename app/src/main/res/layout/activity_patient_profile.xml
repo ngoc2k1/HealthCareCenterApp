@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/view_contain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_light"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_15_dp"
+            android:layout_marginTop="@dimen/radius_20_dp"
+            android:layout_marginBottom="@dimen/margin_60_dp"
+            android:orientation="vertical"
+            android:paddingVertical="@dimen/margin_26_dp"
+            android:paddingStart="@dimen/margin_22_dp"
+            android:paddingEnd="@dimen/margin_21_dp">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/img_avatar"
+                android:layout_width="@dimen/margin_80_dp"
+                android:layout_height="@dimen/margin_80_dp"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="centerCrop"
+                android:src="@drawable/img_default_avatar_home"
+                app:shapeAppearance="@style/circle" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <EditText
+                    android:id="@+id/input_blood"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_blood_black"
+                    android:drawablePadding="@dimen/margin_5_dp"
+                    android:enabled="false"
+                    android:padding="10dp"
+                    android:text="A" />
+
+                <EditText
+                    android:id="@+id/input_weight"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/margin_5_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_weight_black"
+                    android:drawablePadding="@dimen/margin_5_dp"
+                    android:enabled="false"
+                    android:padding="10dp"
+                    android:text="50 kg" />
+
+                <EditText
+                    android:id="@+id/input_height"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="@dimen/margin_5_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:layout_weight="1"
+                    android:text="156 cm"
+                    android:background="@drawable/bg_border_input_authen"
+                    android:drawableStart="@drawable/ic_height_black"
+                    android:drawablePadding="@dimen/margin_5_dp"
+                    android:enabled="false"
+                    android:padding="10dp" />
+
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/input_phone"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_call"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/authen_phone_hint"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_phone_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_note_profile"
+                android:visibility="gone" />
+
+            <EditText
+                android:id="@+id/input_email"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_email"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/authen_email_hint"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_email_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_note_profile"
+                android:visibility="gone" />
+            <EditText
+                android:id="@+id/edt_address"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_home"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/register_address_test"
+                android:maxLength="255"
+                android:maxLines="8"
+                android:padding="10dp"
+                android:text="aaaaaaaaaaaaaaaaaaa" />
+            <EditText
+                android:id="@+id/input_full_name"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_account_setting"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/st_fullname"
+                android:padding="10dp" />
+
+            <TextView
+                android:id="@+id/tv_birthday"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/all_buttoncalendar"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/register_birthday_hint"
+                android:padding="10dp" />
+
+            <RadioGroup
+                android:id="@+id/rg_gen"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="19dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="@dimen/margin_30_dp"
+                    android:layout_height="@dimen/margin_30_dp"
+                    android:enabled="false"
+                    android:padding="@dimen/margin_5_dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/roboto_bold_16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_3_dp"
+                    android:text="@string/str_male" />
+
+                <RadioButton
+                    android:id="@+id/rb_female"
+                    android:layout_width="@dimen/margin_30_dp"
+                    android:layout_height="@dimen/margin_30_dp"
+                    android:layout_marginStart="@dimen/margin_30_dp"
+                    android:enabled="false"
+                    android:padding="@dimen/margin_5_dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/roboto_bold_16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_3_dp"
+                    android:text="@string/str_female" />
+
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/edt_identityCard"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_identity"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/str_identityCard"
+                android:maxLength="255"
+                android:padding="10dp" />
+
+            <EditText
+                android:id="@+id/edt_healthInsurance"
+                style="@style/roboto_regular_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_20_dp"
+                android:background="@drawable/bg_border_input_authen"
+                android:drawableStart="@drawable/ic_healthinsurance"
+                android:drawablePadding="@dimen/margin_10_dp"
+                android:enabled="false"
+                android:hint="@string/str_healthInsurance"
+                android:maxLength="255"
+                android:padding="10dp" />
+
+            <!--            <EditText-->
+            <!--                android:id="@+id/edt_specialty"-->
+            <!--                style="@style/roboto_regular_16dp"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="@dimen/margin_40_dp"-->
+            <!--                android:layout_marginTop="@dimen/margin_20_dp"-->
+            <!--                android:background="@drawable/bg_border_input_authen"-->
+            <!--                android:drawableStart="@drawable/ic_hepatitis_transmission_black"-->
+            <!--                android:drawablePadding="@dimen/margin_10_dp"-->
+            <!--                android:enabled="false"-->
+            <!--                android:hint="@string/str_specialist"-->
+            <!--                android:maxLength="255"-->
+            <!--                android:padding="10dp" />-->
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_edit"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_32_dp"
+                android:background="@drawable/bg_border_button_authen_clicked"
+                android:gravity="center"
+                android:text="@string/str_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_save"
+                style="@style/roboto_bold_18dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_40_dp"
+                android:layout_marginTop="@dimen/margin_32_dp"
+                android:background="@drawable/bg_border_button_authen_clicked"
+                android:gravity="center"
+                android:text="@string/str_save_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:visibility="gone" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
+

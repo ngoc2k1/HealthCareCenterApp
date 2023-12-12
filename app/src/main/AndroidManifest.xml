@@ -43,9 +43,6 @@
             android:name=".doctor.AccountDoctorActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".auth.ForgotPasswordDialog"
             android:exported="false" />
         <activity
@@ -73,7 +70,38 @@
             android:name=".doctor.DetailScheduleActivity"
             android:exported="false" />
         <activity
-            android:name=".doctor.MedicalHistoryPatientActivity"
+            android:name=".doctor.ProfilePatientScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".doctor.DetailMedicalHistoryActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".patient.AccountPatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.BookSchedulePatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.NotificationPatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.HomePatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.BookScheduleCreatePatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.ProfilePatientScheduleByPatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.ProfilePatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.DetailSchedulePatientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".patient.ListBookSchedulePatientActivity"
             android:exported="false" />
     </application>
 

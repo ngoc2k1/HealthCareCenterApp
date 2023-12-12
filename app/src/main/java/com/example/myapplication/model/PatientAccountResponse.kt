@@ -10,14 +10,14 @@ data class PatientAccountResponse(
     val `data`: Data,
     @SerializedName("msg")
     val msg: String
-){
+) {
     data class Data(
         @SerializedName("address")
         val address: String,
         @SerializedName("age")
         val age: Int,
         @SerializedName("avatar")
-        val avatar: String,
+        var avatar: String?="",
         @SerializedName("birthday")
         val birthday: String,
         @SerializedName("bloodGroup")
@@ -27,13 +27,13 @@ data class PatientAccountResponse(
         @SerializedName("gender")
         val gender: String,
         @SerializedName("healthInsurance")
-        val healthInsurance: Any,
+        val healthInsurance: String? = null,
         @SerializedName("height")
         val height: Int,
         @SerializedName("id")
         val id: Int,
         @SerializedName("identityCard")
-        val identityCard: Any,
+        var identityCard: String? = null,
         @SerializedName("name")
         val name: String,
         @SerializedName("phone")

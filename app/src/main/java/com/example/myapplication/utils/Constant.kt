@@ -24,12 +24,21 @@ object Constant {
     const val NAME_DOCTOR = "NAME_DOCTOR"
     const val AVT_DOCTOR = "AVT_DOCTOR"
     const val ID_BOOKSCHEDULE = "ID_BOOKSCHEDULE"
+    const val ID_DOCTOR = "ID_DOCTOR"
     const val ID_PATIENT = "ID_PATIENT"
+    const val IS_PATIENT = "IS_PATIENT"
+    const val WEIGHT = "WEIGHT"
+    const val HEIGHT = "HEIGHT"
+    const val BLOOD = "BLOOD"
+    const val AGE_PATIENT = "AGE_PATIENT"
+    const val GENDER_PATIENT = "GENDER_PATIENT"
     const val ID_MEDICALHISTORY = "ID_MEDICALHISTORY"
     const val NAME_PATIENT = "NAME_PATIENT"
     const val AVT_PATIENT = "AVT_PATIENT"
-    const val VALIDATE_TIME =
-        "(?:(?:0[1-9]|1\\d|2[0-8])/(?:0[1-9]|1[0-2])|(?:29|30)/(?:0[13-9]|1[0-2])|31/(?:0[13578]|1[02]))/[1-9]\\d{3}|29/02(?:/[1-9]\\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)"
+    const val AVT_FEMALE = "http://res.cloudinary.com/ngoc2012001/image/upload/v1701702806/healthcare/nqelyx7wuxqqiu6e6chw.png"
+    const val AVT_FEMALE_DOCTOR ="http://res.cloudinary.com/ngoc2012001/image/upload/v1701700744/healthcare/iddoqbu7q7xk8afm0ixn.jpg"
+    const val AVT_MALE_DOCTOR = "http://res.cloudinary.com/ngoc2012001/image/upload/v1701700640/healthcare/fjrhvnjw1a8lnqrsrayt.jpg"
+    const val AVT_MALE = "http://res.cloudinary.com/ngoc2012001/image/upload/v1701703077/healthcare/folbtvcfv2xky5qyxrgc.png"
 }
 
 fun Context.toast(msg: String) {
@@ -37,7 +46,6 @@ fun Context.toast(msg: String) {
 }
 
 fun Fragment.toast(msg: String) = requireActivity().toast(msg)
-
 
 fun Activity.openCalendarDialog(textView: TextView) {
     val calendar = Calendar.getInstance()

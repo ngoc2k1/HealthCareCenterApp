@@ -12,9 +12,9 @@ data class DoctorProfileRequest(
     val birthday: String,
     @SerializedName("gender")
     val gender: String,
-    @SerializedName("healthInsurance ")
+    @SerializedName("healthInsurance")
     val healthInsurance: String,
-    @SerializedName("identityCard ")
+    @SerializedName("identityCard")
     val identityCard: String,
     @SerializedName("name")
     val name: String

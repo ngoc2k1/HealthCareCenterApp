@@ -203,7 +203,6 @@
     <string name="str_medical_history_cancel">Hủy lịch</string>
     <!--Information appointment schedule-->
     <string name="text_confirm_medical" translatable="false">Xác nhận đã khám</string>
-    <string name="text_view_kqkb" translatable="false">Xem KQKB</string>
     <string name="text_view_result" translatable="false">Xem kết quả khám bệnh</string>
     <string name="text_update_result" translatable="false">Cập nhật kết quả khám bệnh</string>
     <string name="text_patient_username" translatable="false">Họ và tên</string>

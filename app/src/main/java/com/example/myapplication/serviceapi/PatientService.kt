@@ -1,60 +1,89 @@
 package com.example.myapplication.serviceapi
 
-import com.example.myapplication.model.PatientAccountResponse
+import com.example.myapplication.model.BookCreatedRequest
+import com.example.myapplication.model.BookScheduleByPatientResponse
+import com.example.myapplication.model.BookScheduleDetailResponse
+import com.example.myapplication.model.ChangePwRequest
+import com.example.myapplication.model.ChangePwResponse
+import com.example.myapplication.model.DateByDoctor
+import com.example.myapplication.model.DoctorBySpecialtyResponse
 import com.example.myapplication.model.PatientNotificationResponse
+import com.example.myapplication.model.MedicalHistoryDetailResponse
+import com.example.myapplication.model.MedicalHistoryListPatientResponse
+import com.example.myapplication.model.PatientAccountResponse
+import com.example.myapplication.model.PatientRegisterRequest
+import com.example.myapplication.model.PatientUpdateRequest
+import com.example.myapplication.model.ResetPwActiveRequest
+import com.example.myapplication.model.ResetPwRequest
+import com.example.myapplication.model.SpecialtyListResponse
+import com.example.myapplication.model.TimeByDoctorResponse
+import com.example.myapplication.model.WorkScheduleResponse
 import com.example.myapplication.model.doctor.UserLoginRequest
 import com.example.myapplication.model.doctor.UserLoginResponse
 import retrofit2.http.*
 
 interface PatientService {
     @GET("patient")
-    suspend fun getPatient(): PatientAccountResponse
+    suspend fun getPatient(): Resource<PatientAccountResponse>
+
+    @PUT("patient/update")
+    suspend fun updatePatient(@Body patientUpdateRequest: PatientUpdateRequest): Resource<ChangePwResponse>
+
+    @GET("doctor-by-specialty/{id}")
+    suspend fun getDoctorBySpecialty(
+        @Path("id") id: Int, @Query("page") page: Int
+    ): Resource<DoctorBySpecialtyResponse>
+
+    @GET("list-specialty")
+    suspend fun getListSpecialty(): Resource<SpecialtyListResponse>
+
+    @GET("time-by-doctor/{id}")
+    suspend fun getTimeByDoctor(
+        @Path("id") id: Int,
+        @Query("date") date: String
+    ): Resource<TimeByDoctorResponse>
+
+    @GET("date-by-doctor/{id}")
+    suspend fun getDateByDoctor(@Path("id") id: Int): Resource<DateByDoctor>
 
     @POST("patient/login")
-    suspend fun loginPatient(
-        @Body patientLoginRequest: UserLoginRequest
-    ): UserLoginResponse
+    suspend fun loginPatient(@Body patientLoginRequest: UserLoginRequest): Resource<UserLoginResponse>
 
-//    @PUT("patient/update/{id}")
-//    suspend fun updatePatient(@Path("id") id: Int, @Body patientModel: PatientModel): Boolean
+    @POST("patient/register")
+    suspend fun registerPatient(@Body patientRegisterRequest: PatientRegisterRequest): Resource<ChangePwResponse>
 
     @GET("patient/notification")
-    suspend fun getNotification(): PatientNotificationResponse
+    suspend fun getNotification(@Query("page") page: Int): Resource<PatientNotificationResponse>
 
-//    @GET("list-medical-history")
-//    suspend fun getListMedicalHistory(): List<MedicalHistory>
+    @PUT("book-schedule/cancel/{id}")
+    suspend fun cancelBookSchedule(@Path("id") id: Int): Resource<ChangePwResponse>
 
-//    @GET("medical-history/detail/{id}")
-//    suspend fun getMedicalHistory(@Path("id") id: Int): MedicalHistory
+    @PUT("book-schedule/update/{id}")
+    suspend fun updateBookSchedule(@Path("id") id: Int): Resource<ChangePwResponse>
 
-//    @PUT("medical-history/update/{id}")
-//    suspend fun updateMedicalHistory(
-//        @Path("id") id: Int,
-//        @Body medicalHistory: MedicalHistory
-//    ): Boolean
+    @GET("list-book-schedule-by-patient")
+    suspend fun getListBookScheduleByPatient(@Query("page") page: Int): Resource<BookScheduleByPatientResponse>
 
-//    @POST("medical-history/create")
-//    suspend fun createMedicalHistory(@Body medicalHistory: MedicalHistory): Boolean
+    @PUT("patient/change-password")
+    suspend fun changePassword(@Body changePwRequest: ChangePwRequest): Resource<ChangePwResponse>
 
-//    @GET("list-specialty")
-//    suspend fun getListSpecialty(): List<Specialty>
+    @PUT("patient/reset-password")
+    suspend fun sendNewPassword(@Body resetPwRequest: ResetPwRequest): Resource<ChangePwResponse>
 
-//    @GET("doctor-by-specialty/{id}")
-//    suspend fun getDoctorBySpecialty(@Path("id") id: Int): List<DoctorModel>
+    @POST("patient/reset-password")
+    suspend fun sendEmail(@Body reqPwActiveRequest: ResetPwActiveRequest): Resource<ChangePwResponse>
 
-//    @GET("date-by-doctor/{id}")
-//    suspend fun getDateByDoctor(@Path("id") id: Int): List<PatientModel>
+    @GET("book-schedule/detail/{id}")
+    suspend fun getDetailBookSchedule(@Path("id") id: Int): Resource<BookScheduleDetailResponse>
 
-//    @GET("list-book-schedule")
-//    suspend fun getListBookSchedule(): List<BookSchedule>
+    @POST("book-schedule/create")
+    suspend fun createBookSchedule(@Body bookScheduleRequest: BookCreatedRequest): Resource<ChangePwResponse>
 
-//    @PUT("book-schedule/update/{id}")
-//    suspend fun updateBookSchedule(@Path("id") id: Int, @Body bookSchedule: BookSchedule): Boolean
+    @GET("list-medical-history-by-patient")
+    suspend fun getListMedicalHistoryByPatient(
+        @Query("page") page: Int
+    ): Resource<MedicalHistoryListPatientResponse>
 
-//    @POST("book-schedule/create")
-//    suspend fun createBookSchedule(@Body bookSchedule: BookSchedule): Boolean
-
-//    @GET("book-schedule/detail/{id}")
-//    suspend fun getBookSchedule(@Path("id") id: Int): BookSchedule
-
+    @GET("medical-history/detail/{id}")
+    suspend fun getDetailMedicalHistory(@Path("id") id: Int): Resource<MedicalHistoryDetailResponse>
 }

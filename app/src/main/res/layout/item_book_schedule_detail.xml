@@ -11,8 +11,7 @@
         android:layout_marginHorizontal="@dimen/margin_16_dp"
         android:layout_marginTop="@dimen/margin_6_dp"
         android:layout_marginBottom="@dimen/margin_6_dp"
-        app:cardCornerRadius="@dimen/margin_12_dp"
-        app:cardElevation="@dimen/margin_5_dp">
+        app:cardCornerRadius="@dimen/margin_15_dp">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

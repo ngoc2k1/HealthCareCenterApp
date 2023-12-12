@@ -17,13 +17,13 @@ data class MedicalHistoryDetailResponse(
         @SerializedName("id")
         val id: Int,
         @SerializedName("judgmentNote")
-        val judgmentNote: String? = "",
+        val judgmentNote: String? = null,
         @SerializedName("prescription")
-        val prescription: String? = "",
+        val prescription: String? = null,
         @SerializedName("retestDate")
-        val retestDate: String? = "",
+        val retestDate: String? = null,
         @SerializedName("testResult")
-        val testResult: String? = ""
+        val testResult: String? = null
     ) {
         data class BookScheduleX(
             @SerializedName("dateTest")

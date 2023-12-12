@@ -10,6 +10,7 @@ import com.example.myapplication.databinding.ActivityDoctorNotificationBinding
 import com.example.myapplication.model.DoctorNotificationResponse
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.gone
+import com.example.myapplication.utils.toast
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -34,22 +35,26 @@ class NotificationDoctorActivity : AppCompatActivity() {
 
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
-                val notificationResponse = apiClient.doctorService.getNotification()
-                if (notificationResponse.code == 200) {
-                    withContext(Dispatchers.Main)
-                    {
-                        mListNotification = notificationResponse.data
-                        if (mListNotification.isEmpty()) {
-                            tvNoneNotification.visible()
-                            rvNotification.gone()
-                        } else {
-                            tvNoneNotification.gone()
-                            rvNotification.visible()
-                            val notificationItemAdapter = DoctorListNotificationItemmAdapter()
+                val notificationResponse = apiClient.doctorService.getNotification(1)
+                withContext(Dispatchers.Main)
+                {
+                    if (notificationResponse.isSuccessful()) {
+                        notificationResponse.data?.data?.let {
+                            mListNotification = it
+                            if (mListNotification.isEmpty()) {
+                                tvNoneNotification.visible()
+                                rvNotification.gone()
+                            } else {
+                                tvNoneNotification.gone()
+                                rvNotification.visible()
+                                val notificationItemAdapter = DoctorListNotificationItemmAdapter()
 //        binding.pbMainLoadingvideo.visibility = View.VISIBLE
-                            rvNotification.adapter = notificationItemAdapter
-                            notificationItemAdapter.submitList(mListNotification)
+                                rvNotification.adapter = notificationItemAdapter
+                                notificationItemAdapter.submitList(mListNotification)
+                            }
                         }
+                    }else {
+                        toast(notificationResponse.error?.error?.msg.toString())
                     }
                 }
             }

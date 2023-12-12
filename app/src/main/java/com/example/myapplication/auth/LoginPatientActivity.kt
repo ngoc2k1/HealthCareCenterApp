@@ -10,16 +10,21 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginBinding
 import com.example.myapplication.model.doctor.UserLoginRequest
+import com.example.myapplication.model.doctor.UserLoginResponse
+import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.serviceapi.Resource
 import com.example.myapplication.utils.getCurrentHour
+import com.example.myapplication.utils.toast
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.security.auth.callback.Callback
 
 class LoginPatientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
@@ -41,9 +46,9 @@ class LoginPatientActivity : AppCompatActivity() {
 
         binding.apply {
             loginTvForgetPassword.setOnClickListener {
-                val forgotPwDialog = ForgotPasswordDialog()
+                val forgotPwDialog = ForgotPasswordPatientDialog()
                 forgotPwDialog.isCancelable = false
-//                forgotPwDialog.mContext = this@LoginPatientActivity
+                forgotPwDialog.mContext = this@LoginPatientActivity
                 forgotPwDialog.show(supportFragmentManager, "dialog")//supportFM : activity
             }
             btnLogin.setOnClickListener {
@@ -53,9 +58,18 @@ class LoginPatientActivity : AppCompatActivity() {
                     val patient = apiClient.patientService.loginPatient(
                         UserLoginRequest(username, password)
                     )
-                    if (patient.code == 200) {
-                        Hawk.put(HawkKey.ACCESS_TOKEN_PATIENT, patient.data.token)
-                        startActivity(Intent(this@LoginPatientActivity, MainActivity::class.java))
+                    withContext(Dispatchers.Main) {
+                        if (patient.isSuccessful()) {
+                            Hawk.put(HawkKey.ACCESS_TOKEN_PATIENT, patient.data?.data?.token)
+                            startActivity(
+                                Intent(
+                                    this@LoginPatientActivity,
+                                    HomePatientActivity::class.java
+                                )
+                            )
+                        } else {
+                            toast(patient.error?.error?.msg.toString())
+                        }
                     }
                 }
             }
@@ -110,26 +124,19 @@ class LoginPatientActivity : AppCompatActivity() {
                     } else {
                         checkInputLogin()
                     }
-
                 }
             })
         }
     }
 
     fun checkInputLogin() {
-        var isCheck = true
-
         binding.apply {
             val password = loginEdtPassword.text.toString()
             val username = loginEdtUsername.text.toString()
 
             if (password.isBlank() || username.isBlank()) {
-                isCheck = false
-            }
-
-            if (isCheck) {
-                btnLogin.setBackgroundResource(R.drawable.bg_border_button_authen_clicked)
-            } else btnLogin.setBackgroundResource(R.drawable.bg_border_button_authen)
+                btnLogin.setBackgroundResource(R.drawable.bg_border_button_authen)
+            } else btnLogin.setBackgroundResource(R.drawable.bg_border_button_authen_clicked)
         }
     }
 

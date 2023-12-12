@@ -13,7 +13,9 @@ import java.util.concurrent.TimeUnit
 
 class ApiClient(context: Context) {
     private val gson = Gson()
+//    private val BASE_URL = "http://192.168.5.71:8080/api/v1/"
     private val BASE_URL = "http://192.168.0.103:8080/api/v1/"
+//    private val BASE_URL = "http://192.168.103.188:8080/api/v1/"
 
     val okHttpClientDoctor = OkHttpClient.Builder()
         .addInterceptor(NetworkInterceptor(context))
@@ -24,7 +26,7 @@ class ApiClient(context: Context) {
     val retrofitDoctor = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .baseUrl(BASE_URL)
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create()) // Use RxJava for handling asynchronous operations
+        .addCallAdapterFactory(CallAdapterFactory())
         .client(okHttpClientDoctor)
         .build()
 
@@ -37,6 +39,7 @@ class ApiClient(context: Context) {
     val retrofitPatient = Retrofit.Builder()
         .addConverterFactory(GsonConverterFactory.create(gson))
         .baseUrl(BASE_URL)
+        .addCallAdapterFactory(CallAdapterFactory())
         .client(okHttpClientPatient)
         .build()
     val patientService: PatientService by lazy {

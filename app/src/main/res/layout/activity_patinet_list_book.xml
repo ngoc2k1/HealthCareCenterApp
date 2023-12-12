@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_light"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/margin_16_dp">
+
+    <TextView
+        android:id="@+id/header"
+        style="@style/roboto_bold_24dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_40_dp"
+        android:gravity="center"
+        android:text="Lịch khám" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_medical_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="30"
+        tools:listitem="@layout/item_work_schedule_doctor" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_none"
+        style="@style/roboto_bold_18dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_20_dp"
+        android:gravity="center"
+        android:text="@string/str_no_patient"
+        android:textColor="@color/grey"
+        android:visibility="gone"/>
+</LinearLayout>

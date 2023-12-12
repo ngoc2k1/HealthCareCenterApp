@@ -14,6 +14,7 @@ import com.example.myapplication.model.PatientProfile
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant.ID_PATIENT
 import com.example.myapplication.utils.gone
+import com.example.myapplication.utils.toast
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,20 +37,19 @@ class ListPatientActivity : AppCompatActivity(), OnItemmClickListener {
             statusBarColor = Color.TRANSPARENT
         }
 
-        val bundle = Bundle()
         val apiClient = ApiClient(this@ListPatientActivity)
         val patientItemAdapter = ListPatientItemmAdapter(this@ListPatientActivity)
         binding.apply {
             lifecycleScope.launch(Dispatchers.IO) {
                 val listPatient = apiClient.doctorService.getListPatient("")
-                if (listPatient.code == 200) {
-                    mListPatient = listPatient.data
-                    withContext(Dispatchers.Main)
-                    {
-                        header.text = "Bệnh nhân (${listPatient.data.size})"
-
+                withContext(Dispatchers.Main) {
+                    if (listPatient.isSuccessful()) {
+                        listPatient.data?.data?.let {
+                            mListPatient = it
+                        }
+                        header.text = "Bệnh nhân (${listPatient.data?.data?.size})"
 //        binding.pbMainLoadingvideo.visibility = View.VISIBLE
-                        binding.rvMedicalHistory.adapter = patientItemAdapter
+                        rvMedicalHistory.adapter = patientItemAdapter
                         if (mListPatient.isEmpty()) {
                             tvNone.visible()
                             rvMedicalHistory.gone()
@@ -58,6 +58,8 @@ class ListPatientActivity : AppCompatActivity(), OnItemmClickListener {
                             rvMedicalHistory.visible()
                             patientItemAdapter.submitList(mListPatient)
                         }
+                    } else {
+                        toast(listPatient.error?.error?.msg.toString())
                     }
                 }
             }
@@ -82,18 +84,22 @@ class ListPatientActivity : AppCompatActivity(), OnItemmClickListener {
                                     lifecycleScope.launch(Dispatchers.IO) {
                                         val listPatient =
                                             apiClient.doctorService.getListPatient(s.toString())
-                                        if (listPatient.code == 200) {
-                                            mListPatient = listPatient.data
-                                            withContext(Dispatchers.Main)
-                                            {
-                                                if (mListPatient.isEmpty()) {
-                                                    tvNone.visible()
-                                                    rvMedicalHistory.gone()
-                                                } else {
-                                                    tvNone.gone()
-                                                    rvMedicalHistory.visible()
-                                                    patientItemAdapter.submitList(mListPatient)
+                                        withContext(Dispatchers.Main)
+                                        {
+                                            if (listPatient.isSuccessful()) {
+                                                listPatient.data?.data?.let {
+                                                    mListPatient = it
+                                                    if (mListPatient.isEmpty()) {
+                                                        tvNone.visible()
+                                                        rvMedicalHistory.gone()
+                                                    } else {
+                                                        tvNone.gone()
+                                                        rvMedicalHistory.visible()
+                                                        patientItemAdapter.submitList(mListPatient)
+                                                    }
                                                 }
+                                            } else {
+                                                toast(listPatient.error?.error?.msg.toString())
                                             }
                                         }
                                     }
@@ -108,7 +114,7 @@ class ListPatientActivity : AppCompatActivity(), OnItemmClickListener {
     }
 
     override fun getDetailPatient(id: Int) {
-        val intent = Intent(this@ListPatientActivity, MedicalHistoryPatientActivity::class.java)
+        val intent = Intent(this@ListPatientActivity, ProfilePatientScheduleActivity::class.java)
         intent.putExtra(ID_PATIENT, id)
         startActivity(intent)
     }

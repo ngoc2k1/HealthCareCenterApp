@@ -18,7 +18,7 @@ data class DoctorAccountResponse(
         @SerializedName("age")
         val age: Int,
         @SerializedName("avatar")
-        val avatar: String,
+        var avatar: String="",
         @SerializedName("birthday")
         val birthday: String,
         @SerializedName("email")

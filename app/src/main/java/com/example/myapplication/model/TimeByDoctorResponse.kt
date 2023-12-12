@@ -7,11 +7,11 @@ data class TimeByDoctorResponse(
     @SerializedName("code")
     val code: Int,
     @SerializedName("data")
-    val `data`: List<DataX>,
+    val `data`: List<Data>,
     @SerializedName("msg")
     val msg: String
 ){
-    data class DataX(
+    data class Data(
         @SerializedName("id")
         val id: Int,
         @SerializedName("isBooked")
