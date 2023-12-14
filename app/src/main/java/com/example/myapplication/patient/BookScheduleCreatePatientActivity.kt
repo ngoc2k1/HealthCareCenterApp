@@ -3,34 +3,34 @@ package com.example.myapplication.patient
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.example.myapplication.R
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication.databinding.BookScheduleCreateBinding
 import com.example.myapplication.model.BookCreatedRequest
-import com.example.myapplication.model.TimeByDoctorResponse
+import com.example.myapplication.model.DateByDoctorUI
+import com.example.myapplication.model.TimeByDoctorUI
 import com.example.myapplication.serviceapi.ApiClient
-import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.ID_DOCTOR
-import com.example.myapplication.utils.GENDER
-import com.example.myapplication.utils.convertGender
+import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.toast
+import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
+class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener, OnDateListener {
     private lateinit var binding: BookScheduleCreateBinding
-    private var mDate: List<String> = emptyList()
-    private var mTime: List<TimeByDoctorResponse.Data> = emptyList()
-    var mDateClicked = ""
+    private var mDate = ArrayList<DateByDoctorUI>()
+    private var mTime = ArrayList<TimeByDoctorUI>()
+    private lateinit var timeListItemAdapter: TimeListItemAdapter
+    private lateinit var dateListAdapter: DateListItemAdapter
+    private var idDoctor = 0
+
     var mdoctorWorkScheduleId = 0
     var informationQR = ""
 
@@ -44,12 +44,18 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
             this@BookScheduleCreatePatientActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
-        val idDoctor = intent.getIntExtra(ID_DOCTOR, 0)
+        idDoctor = intent.getIntExtra(ID_DOCTOR, 0)
         val apiClient = ApiClient(this@BookScheduleCreatePatientActivity)
-        val timeListAdapter = TimeListItemAdapter(this@BookScheduleCreatePatientActivity)
-
-
+        dateListAdapter = DateListItemAdapter(this@BookScheduleCreatePatientActivity)
+        timeListItemAdapter = TimeListItemAdapter(this@BookScheduleCreatePatientActivity)
         binding.apply {
+            ivHome.setOnClickListener {
+                val intent = Intent(
+                    this@BookScheduleCreatePatientActivity,
+                    HomePatientActivity::class.java
+                )
+                startActivity(intent)
+            }
             lifecycleScope.launch(Dispatchers.IO) {
                 val patient = apiClient.patientService.getPatient()
                 withContext(Dispatchers.Main) {
@@ -57,7 +63,7 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
                         patient.data?.data?.let {
                             it.apply {
                                 informationQR =
-                                    "Tên người đặt lịch: $name | ${convertGender(gender)}\n"
+                                    "Tên người đặt lịch: $name. "
                             }
                         }
                     } else {
@@ -72,69 +78,18 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
                     if (listDate.isSuccessful()) {
                         listDate.data?.data?.let {
                             it.apply {
-                                mDate = it
-                                val myArrayAdapter = ArrayAdapter(
-                                    this@BookScheduleCreatePatientActivity,
-                                    com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item,
-                                    mDate
+                                for (item: String in it) {
+                                    mDate.add(DateByDoctorUI(item, false))
+                                }
+                                val gridLayoutManager = GridLayoutManager(
+                                    applicationContext, 2
                                 )
-                                rvDate.adapter = myArrayAdapter
-                                rvDate.onItemClickListener =
-                                    AdapterView.OnItemClickListener { _, _, i, _ ->
-                                        try {
-                                            for (ctr in 0..mDate.size) {
-                                                if (i == ctr) {
-                                                    rvDate.getChildAt(ctr)
-                                                        .setBackgroundResource(R.drawable.bg_item_selected)
-                                                    mDateClicked = mDate[ctr]
-                                                    lifecycleScope.launch(Dispatchers.IO) {
-                                                        val listDoctor =
-                                                            apiClient.patientService.getTimeByDoctor(
-                                                                idDoctor,
-                                                                mDateClicked
-                                                            )
-                                                        withContext(Dispatchers.Main) {
-                                                            if (listDoctor.isSuccessful()) {
-                                                                listDoctor.data?.data?.let {
-                                                                    mTime = it
-                                                                    rvTime.adapter = timeListAdapter
-                                                                    timeListAdapter.submitList(mTime)
-                                                                }
-                                                            } else {
-                                                                toast(listDoctor.error?.error?.msg.toString())
-                                                            }
-                                                        }
-                                                    }
-                                                } else {
-                                                    rvDate.getChildAt(ctr)
-                                                        .setBackgroundResource(R.drawable.bg_item_unselected)
-                                                }
-                                            }
-                                        } catch (e: Exception) {
-                                            e.printStackTrace()
-                                        }
-                                    }
+                                gridLayoutManager.orientation =
+                                    LinearLayoutManager.VERTICAL
+                                rvDate.layoutManager = gridLayoutManager
+                                rvDate.adapter = dateListAdapter
+                                dateListAdapter.submitList(mDate)
                             }
-//                        rvDate.onItemClickListener =
-//                            AdapterView.OnItemClickListener { parent, view, position, id ->
-//                                mDateClicked = mDate[position]
-//                                view.setBackgroundResource(com.example.myapplication.R.drawable.bg_item_selected)
-//                                lifecycleScope.launch(Dispatchers.IO) {
-//                                    val listDoctor =
-//                                        apiClient.patientService.getTimeByDoctor(
-//                                            idDoctor,
-//                                            mDateClicked
-//                                        )
-//                                    if (listDoctor.code == 200) {
-//                                        mTime = listDoctor.data
-//                                        withContext(Dispatchers.Main) {
-//                                            rvTime.adapter = timeListAdapter
-////        binding.pbMainLoadingvideo.visibility = View.VISIBLE
-//                                            timeListAdapter.submitList(mTime)
-//                                        }
-//                                    }
-//                                }
-//                            }
                         }
                     } else {
                         toast(listDate.error?.error?.msg.toString())
@@ -143,13 +98,20 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
             }
             tvSave.setOnClickListener {
                 lifecycleScope.launch(Dispatchers.IO) {
-                    val namePatientTest = edtNamePatientTest.text.toString()
-                    val statusHeath = edtStatus.text.toString()
+                    val namePatientTest = edtNamePatientTest.text.trim().toString()
+                    val statusHeath = edtStatus.text.trim().toString()
+                    var qrcode = informationQR
+                    if (namePatientTest.isNotBlank()) {
+                        qrcode += "Tên người khám: $namePatientTest. "
+                    }
+                    if (edtStatus.text.toString().isNotBlank()) {
+                        qrcode += "Tình trạng sức khỏe: $statusHeath."
+                    }
                     val response = apiClient.patientService.createBookSchedule(
                         BookCreatedRequest(
                             mdoctorWorkScheduleId,
                             namePatientTest,
-                            informationQR + "Tên người khám: $namePatientTest\nTình trạng sức khỏe: $statusHeath",
+                            qrcode,
                             statusHeath
                         )
                     )
@@ -168,11 +130,82 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener {
                     }
                 }
             }
-
         }
     }
 
-    override fun getTime(doctorWorkScheduleId: Int) {
+    override fun getTime(doctorWorkScheduleId: Int, time: TimeByDoctorUI) {
+        mTime.forEach {
+            it.isClicked = it.value == time.value
+        }
         mdoctorWorkScheduleId = doctorWorkScheduleId
+        val gridLayoutManager = GridLayoutManager(
+            applicationContext, 2
+        )
+        gridLayoutManager.orientation =
+            LinearLayoutManager.VERTICAL
+        binding.rvTime.layoutManager = gridLayoutManager
+        binding.rvTime.adapter = timeListItemAdapter
+        timeListItemAdapter.submitList(mTime)
+    }
+
+    override fun getDate(date: DateByDoctorUI) {
+        val apiClient = ApiClient(this@BookScheduleCreatePatientActivity)
+        val timeListAdapter = TimeListItemAdapter(this@BookScheduleCreatePatientActivity)
+        mDate.forEach {
+            it.isClicked = it.date == date.date
+        }
+        val gridLayoutManager = GridLayoutManager(
+            applicationContext, 2
+        )
+        gridLayoutManager.orientation =
+            LinearLayoutManager.VERTICAL
+        binding.rvDate.layoutManager = gridLayoutManager
+        binding.rvDate.adapter = dateListAdapter
+        dateListAdapter.submitList(mDate)
+        mTime.clear()
+        lifecycleScope.launch(Dispatchers.IO) {
+            val listDoctor =
+                apiClient.patientService.getTimeByDoctor(
+                    idDoctor,
+                    date.date
+                )
+            withContext(Dispatchers.Main) {
+                if (listDoctor.isSuccessful()) {
+                    listDoctor.data?.data?.let {
+                        var countBooked = 0
+                        for (element in it) {
+                            if (!element.isBooked) {
+                                val data = TimeByDoctorUI(
+                                    element.id,
+                                    element.value,
+                                    false,
+                                    isBooked = false,
+                                    price = element.price
+                                )
+                                mTime.add(data)
+                            } else countBooked++
+                        }
+                        if (countBooked == it.size) {
+                            binding.tvNone.visible()
+                            binding.rvTime.gone()
+                        } else {
+                            binding.tvNone.gone()
+                            binding.rvTime.visible()
+                            val gridLayoutManager = GridLayoutManager(
+                                applicationContext, 2
+                            )
+                            gridLayoutManager.orientation =
+                                LinearLayoutManager.VERTICAL
+                            binding.rvTime.layoutManager = gridLayoutManager
+                            binding.rvTime.adapter = timeListAdapter
+                            timeListAdapter.submitList(mTime)
+
+                        }
+                    }
+                } else {
+                    toast(listDoctor.error?.error?.msg.toString())
+                }
+            }
+        }
     }
 }

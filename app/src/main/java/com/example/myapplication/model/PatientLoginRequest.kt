@@ -1,4 +1,4 @@
-package com.example.myapplication.model.patient
+package com.example.myapplication.model
 
 import com.example.myapplication.utils.GENDER
 import com.google.gson.annotations.SerializedName

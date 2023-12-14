@@ -12,19 +12,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginBinding
-import com.example.myapplication.model.doctor.UserLoginRequest
-import com.example.myapplication.model.doctor.UserLoginResponse
+import com.example.myapplication.model.UserLoginRequest
 import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
-import com.example.myapplication.serviceapi.Resource
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.security.auth.callback.Callback
 
 class LoginPatientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

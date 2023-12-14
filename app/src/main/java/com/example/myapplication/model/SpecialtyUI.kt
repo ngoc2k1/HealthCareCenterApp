@@ -1,7 +1,7 @@
 package com.example.myapplication.model
 
-data class SpecialtyData(
+data class SpecialtyUI(
     val id: Int,
     val name: String,
-    var isClicked: Boolean = false
+    var isClicked: Boolean,
 )

@@ -1,7 +1,6 @@
-package com.example.myapplication.model.doctor
+package com.example.myapplication.model
 
 
-import com.example.myapplication.model.Specialty
 import com.google.gson.annotations.SerializedName
 
 data class DoctorAccountResponse(

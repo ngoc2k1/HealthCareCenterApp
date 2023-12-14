@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
+import androidx.core.os.persistableBundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -30,7 +31,6 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityDoctorWorkScheduleBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         window.apply {
             decorView.systemUiVisibility =
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -48,9 +48,12 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
             ScheduleDoctorItemmAdapter(this@ScheduleDoctorActivity)
 
         binding.apply {
+            pbLoading.visible()
             lifecycleScope.launch(Dispatchers.IO) {
                 val listSchedule = apiClient.doctorService.getListBookScheduleByDoctor(1)
                 withContext(Dispatchers.Main) {
+                    pbLoading.gone()
+
                     if (listSchedule.isSuccessful()) {
                         listSchedule.data?.data?.let {
                             mListSchedule = it
@@ -80,11 +83,15 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
                             val listSchedule =
                                 apiClient.doctorService.getListBookScheduleByDoctor(currentPage)
                             withContext(Dispatchers.Main) {
+                                pbLoading.gone()
                                 if (listSchedule.isSuccessful()) {
                                     listSchedule.data?.data?.let {
-                                        mListSchedule = mListSchedule + it
-                                        scheduleItemAdapter.submitList(mListSchedule)
-                                        mAllowToLoadMore = true
+                                        if (it.isNotEmpty()) {
+                                            mListSchedule = mListSchedule + it
+                                            scheduleItemAdapter.submitList(mListSchedule)
+                                            mAllowToLoadMore = true
+                                        }
+                                        else mAllowToLoadMore =false
                                     }
                                 } else {
                                     mAllowToLoadMore = false
@@ -98,6 +105,10 @@ class ScheduleDoctorActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        binding.rcvWorkSchedule.gone()
+    }
     override fun getDetailSchedule(id: Int) {
         val intent = Intent(this@ScheduleDoctorActivity, DetailScheduleActivity::class.java)
         intent.putExtra(ID_BOOKSCHEDULE, id)

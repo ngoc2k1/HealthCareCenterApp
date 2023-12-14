@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FragmentBookScheduleBinding
 import com.example.myapplication.model.DoctorBySpecialtyResponse
-import com.example.myapplication.model.SpecialtyData
+import com.example.myapplication.model.SpecialtyUI
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.toast
@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 
 class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, OnDoctorListener {
     private lateinit var binding: FragmentBookScheduleBinding
-    private var mListSpecialtyData = ArrayList<SpecialtyData>()
+    private var mListSpecialtyData = ArrayList<SpecialtyUI>()
     private var mListDoctor: List<DoctorBySpecialtyResponse.Data> = emptyList()
     private lateinit var specialtyAdapter: SpecialtyListItemAdapter
     private var currentPage = 1
@@ -43,16 +43,23 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         specialtyAdapter = SpecialtyListItemAdapter(this@BookSchedulePatientActivity)
         binding.apply {
+            ivHome.setOnClickListener {
+                val intent = Intent(
+                    this@BookSchedulePatientActivity,
+                    HomePatientActivity::class.java
+                )
+                startActivity(intent)
+            }
             lifecycleScope.launch(Dispatchers.IO) {
                 val listSpecialty = apiClient.patientService.getListSpecialty()
                 withContext(Dispatchers.Main) {
                     if (listSpecialty.isSuccessful()) {
                         listSpecialty.data?.data?.let {
                             for (element in it) {
-                                val photo = SpecialtyData(
+                                val data = SpecialtyUI(
                                     element.id, element.name, false
                                 )
-                                mListSpecialtyData.add(photo)
+                                mListSpecialtyData.add(data)
                             }
                             rvSpecialty.adapter = specialtyAdapter
                             specialtyAdapter.submitList(mListSpecialtyData)
@@ -67,29 +74,30 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
 
     }
 
-    override fun getSpecialty(specialty: SpecialtyData) {
+    override fun getSpecialty(specialty: SpecialtyUI, index: Int) {
         mListSpecialtyData.forEach {
-            it.isClicked = it.id == specialty.id
+            it.isClicked = it.name == specialty.name
         }
+        binding.rvSpecialty.adapter = specialtyAdapter
+        binding.rvSpecialty.scrollToPosition(index)
         specialtyAdapter.submitList(mListSpecialtyData)
-        toast("Chọn chuyên khoa " + specialty.name)
         callApiGetDoctorBySpecialty(specialty.id)
     }
 
-    private fun callApiGetDoctorBySpecialty(id: Int) {
+    private fun callApiGetDoctorBySpecialty(idSpecialty: Int) {
         val apiClient = ApiClient(this@BookSchedulePatientActivity)
         val doctorAdapter = DoctorListItemAdapter(this@BookSchedulePatientActivity)
         binding.apply {
             tvList.setOnClickListener {
-                startActivity(
+                val intent =
                     Intent(
                         this@BookSchedulePatientActivity,
                         ListBookSchedulePatientActivity::class.java
                     )
-                )
+                startActivity(intent)
             }
             lifecycleScope.launch(Dispatchers.IO) {
-                val listDoctor = apiClient.patientService.getDoctorBySpecialty(id,1)
+                val listDoctor = apiClient.patientService.getDoctorBySpecialty(idSpecialty, 1)
                 withContext(Dispatchers.Main) {
                     if (listDoctor.isSuccessful()) {
                         listDoctor.data?.data?.let {
@@ -100,7 +108,7 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
                                 doctorAdapter.submitList(mListDoctor)
                             }
                         }
-                    }else {
+                    } else {
                         toast(listDoctor.error?.error?.msg.toString())
                     }
                 }
@@ -113,7 +121,7 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
                         currentPage += 1
                         lifecycleScope.launch(Dispatchers.IO) {
                             val listDoctor =
-                                apiClient.patientService.getDoctorBySpecialty(id,currentPage)
+                                apiClient.patientService.getDoctorBySpecialty(idSpecialty, currentPage)
                             withContext(Dispatchers.Main) {
                                 if (listDoctor.isSuccessful()) {
                                     listDoctor.data?.data?.let {

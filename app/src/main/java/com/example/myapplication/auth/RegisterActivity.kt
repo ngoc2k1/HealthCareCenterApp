@@ -13,15 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRegisterBinding
 import com.example.myapplication.model.PatientRegisterRequest
-import com.example.myapplication.model.doctor.UserLoginRequest
-import com.example.myapplication.patient.HomePatientActivity
-import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.openCalendarDialog
 import com.example.myapplication.utils.toast
-import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

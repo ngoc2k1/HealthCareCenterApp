@@ -12,13 +12,16 @@ import androidx.fragment.app.Fragment
 import com.example.myapplication.R
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.zxing.BarcodeFormat
+import com.google.zxing.EncodeHintType
 import com.google.zxing.MultiFormatWriter
 import com.journeyapps.barcodescanner.BarcodeEncoder
+import java.nio.charset.Charset
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 object Constant {
+    const val PICK_IMAGE_MULTIPLE = 1
     const val USERNAME = "username"
     const val PASSWORD = "password"
     const val NAME_DOCTOR = "NAME_DOCTOR"
@@ -70,29 +73,6 @@ fun getCurrentHour(): Int {
     return df.format(Calendar.getInstance().time).toInt()
 }
 
-fun Fragment.initDatePicker(editText: EditText, title: String) {
-    val datePicker =
-        MaterialDatePicker.Builder.datePicker()
-            .setTitleText(title)
-            .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
-            .setInputMode(MaterialDatePicker.INPUT_MODE_TEXT)
-            .setTheme(R.style.ThemeOverlay_App_DatePicker)
-            .build()
-    datePicker.show(requireActivity().supportFragmentManager, "date picker")
-    val formatter = SimpleDateFormat(resources.getString(R.string.str_ddmmyyyy))
-
-    datePicker.addOnPositiveButtonClickListener {
-        editText.setText(formatter.format(it))
-    }
-}
-
-enum class BLOOD_GROUP {
-    A,
-    B,
-    AB,
-    O
-}
-
 enum class STATUS_BOOK {
     CHUA_KHAM,
     DA_KHAM,
@@ -129,10 +109,13 @@ fun View.visible() {
     this.visibility = View.VISIBLE
 }
 
-
 fun String.generateQR(): Bitmap {
+
     val write = MultiFormatWriter()
-    val matrix = write.encode(this, BarcodeFormat.QR_CODE, 400, 400)
+    val hints = hashMapOf<EncodeHintType, Any>()
+    hints[EncodeHintType.CHARACTER_SET] = Charset.forName("UTF-8")
+
+    val matrix = write.encode(this, BarcodeFormat.QR_CODE, 400, 400,hints)
     val encoder = BarcodeEncoder()
     return encoder.createBitmap(matrix)
 }

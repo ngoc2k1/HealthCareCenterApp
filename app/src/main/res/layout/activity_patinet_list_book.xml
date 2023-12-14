@@ -8,21 +8,40 @@
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/margin_16_dp">
 
-    <TextView
-        android:id="@+id/header"
-        style="@style/roboto_bold_24dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_40_dp"
-        android:gravity="center"
-        android:text="Lịch khám" />
+        android:layout_marginTop="@dimen/margin_40_dp">
+
+        <ImageView
+            android:id="@+id/iv_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_home"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_header"
+            style="@style/roboto_bold_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5_dp"
+            android:text="Lịch khám"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar
         android:id="@+id/pb_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="@dimen/margin_20_dp" />
+        android:layout_weight="1"
+        android:minWidth="50dp"
+        android:minHeight="50dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_medical_history"

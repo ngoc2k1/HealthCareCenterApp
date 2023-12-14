@@ -5,7 +5,6 @@ import com.example.myapplication.model.ChangePwRequest
 import com.example.myapplication.model.ChangePwResponse
 import com.example.myapplication.model.DoctorNotificationResponse
 import com.example.myapplication.model.DoctorProfileRequest
-import com.example.myapplication.model.MedicalHistoryDetailResponse
 import com.example.myapplication.model.MedicalHistoryListDoctorResponse
 import com.example.myapplication.model.MedicalHistoryUpdateRequest
 import com.example.myapplication.model.PatientAccountResponse
@@ -13,9 +12,9 @@ import com.example.myapplication.model.PatientListResponse
 import com.example.myapplication.model.ResetPwActiveRequest
 import com.example.myapplication.model.ResetPwRequest
 import com.example.myapplication.model.WorkScheduleResponse
-import com.example.myapplication.model.doctor.DoctorAccountResponse
-import com.example.myapplication.model.doctor.UserLoginRequest
-import com.example.myapplication.model.doctor.UserLoginResponse
+import com.example.myapplication.model.DoctorAccountResponse
+import com.example.myapplication.model.UserLoginRequest
+import com.example.myapplication.model.UserLoginResponse
 import retrofit2.http.*
 
 interface DoctorService {

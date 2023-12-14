@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentBookScheduleDetailBinding
+import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
 import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
@@ -42,6 +43,14 @@ class DetailScheduleActivity : AppCompatActivity() {
         val apiClient = ApiClient(this@DetailScheduleActivity)
         val idBookSchedule = intent.getIntExtra(ID_BOOKSCHEDULE, 0)
         binding.apply {
+            ivEdit.gone()
+            ivHome.setOnClickListener {
+                val intent = Intent(
+                    this@DetailScheduleActivity,
+                    HomeDoctorActivity::class.java
+                )
+                startActivity(intent)
+            }
             lifecycleScope.launch(Dispatchers.IO) {
                 val schedule = apiClient.doctorService.getDetailBookSchedule(idBookSchedule)
                 withContext(Dispatchers.Main) {
@@ -94,7 +103,7 @@ class DetailScheduleActivity : AppCompatActivity() {
                                     clHealth.visible()
                                     tvStatusHealth.text = statusHealth
                                 }
-                                tvPrice.text = price.toString()
+                                tvPrice.text = "$price đồng"
                             }
                         }
                     } else {

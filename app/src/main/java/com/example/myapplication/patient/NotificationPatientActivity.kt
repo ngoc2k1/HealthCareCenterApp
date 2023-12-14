@@ -1,6 +1,7 @@
 package com.example.myapplication.patient
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -77,7 +78,6 @@ class NotificationPatientActivity : AppCompatActivity() {
                         currentPage += 1
                         lifecycleScope.launch(Dispatchers.IO) {
                             val notificationResponse = apiClient.patientService.getNotification(currentPage)
-
                             withContext(Dispatchers.Main) {
                                 if (notificationResponse.isSuccessful()) {
                                     notificationResponse.data?.data?.let {

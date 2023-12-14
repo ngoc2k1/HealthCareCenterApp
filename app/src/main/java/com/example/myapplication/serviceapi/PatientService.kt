@@ -1,6 +1,5 @@
 package com.example.myapplication.serviceapi
 
-import androidx.paging.PagingData
 import com.example.myapplication.model.BookCreatedRequest
 import com.example.myapplication.model.BookScheduleByPatientResponse
 import com.example.myapplication.model.BookScheduleDetailResponse
@@ -18,9 +17,8 @@ import com.example.myapplication.model.ResetPwActiveRequest
 import com.example.myapplication.model.ResetPwRequest
 import com.example.myapplication.model.SpecialtyListResponse
 import com.example.myapplication.model.TimeByDoctorResponse
-import com.example.myapplication.model.WorkScheduleResponse
-import com.example.myapplication.model.doctor.UserLoginRequest
-import com.example.myapplication.model.doctor.UserLoginResponse
+import com.example.myapplication.model.UserLoginRequest
+import com.example.myapplication.model.UserLoginResponse
 import retrofit2.http.*
 
 interface PatientService {
@@ -60,10 +58,13 @@ interface PatientService {
     suspend fun cancelBookSchedule(@Path("id") id: Int): Resource<ChangePwResponse>
 
     @PUT("book-schedule/update/{id}")
-    suspend fun updateBookSchedule(@Path("id") id: Int): PagingData<Resource<ChangePwResponse>>
+    suspend fun updateBookSchedule(
+        @Path("id") id: Int,
+        @Body bookScheduleRequest: BookCreatedRequest
+    ): Resource<ChangePwResponse>
 
     @GET("list-book-schedule-by-patient")
-    suspend fun getListBookScheduleByPatient(): Resource<BookScheduleByPatientResponse>
+    suspend fun getListBookScheduleByPatient(@Query("page") page: Int): Resource<BookScheduleByPatientResponse>
 
     @PUT("patient/change-password")
     suspend fun changePassword(@Body changePwRequest: ChangePwRequest): Resource<ChangePwResponse>

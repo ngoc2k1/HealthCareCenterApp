@@ -78,22 +78,12 @@
                     style="@style/roboto_bold_16dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_40_dp"
-                    android:layout_marginEnd="@dimen/margin_12_dp"
-                    android:layout_toStartOf="@id/btn_finger"
                     android:background="@drawable/bg_border_button_authen"
                     android:gravity="center"
                     android:text="@string/btn_login_title"
                     android:textAllCaps="false"
                     android:textColor="@color/white" />
-
-                <ImageView
-                    android:id="@+id/btn_finger"
-                    android:layout_width="@dimen/content_padding_40_dp"
-                    android:layout_height="@dimen/content_padding_40_dp"
-                    android:layout_alignParentEnd="true"
-                    android:src="@drawable/ic_fingerprint_setting" />
             </RelativeLayout>
-
 
         </LinearLayout>
 

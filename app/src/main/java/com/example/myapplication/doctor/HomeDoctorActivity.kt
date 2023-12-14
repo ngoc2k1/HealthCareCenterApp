@@ -11,13 +11,11 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDoctorHomeBinding
-import com.example.myapplication.model.doctor.DoctorAccountResponse
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.AVT_DOCTOR
 import com.example.myapplication.utils.Constant.NAME_DOCTOR
 import com.example.myapplication.utils.GENDER
-import com.example.myapplication.utils.generateQR
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
 import com.journeyapps.barcodescanner.ScanContract
@@ -100,7 +98,6 @@ class HomeDoctorActivity : AppCompatActivity() {
                     options.setOrientationLocked(true)
                     options.captureActivity = QRCodeDoctorActivity::class.java
                     barLauncher.launch(options)
-//                    generateQR()
                 }
                 rlListPatient.setOnClickListener {
                     val intent = Intent(this@HomeDoctorActivity, ListPatientActivity::class.java)
@@ -120,7 +117,7 @@ class HomeDoctorActivity : AppCompatActivity() {
         if (result.contents != null) {
             val builder: android.app.AlertDialog.Builder =
                 android.app.AlertDialog.Builder(context)
-            builder.setTitle("Result")
+            builder.setTitle("Thông tin lịch đặt khám")
             builder.setMessage(result.contents)
             builder.setPositiveButton(
                 "OK"

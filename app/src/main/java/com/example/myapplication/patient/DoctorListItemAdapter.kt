@@ -52,8 +52,8 @@ class DoctorListItemAdapter(
     }
 
     override fun onBindViewHolder(holder: DoctorBySpecialtyViewHolder, position: Int) {
-        val okRs = getItem(position)
-        holder.bind(okRs)
+        val data = getItem(position)
+        holder.bind(data)
     }
 }
 

@@ -13,7 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginDoctorBinding
 import com.example.myapplication.doctor.HomeDoctorActivity
-import com.example.myapplication.model.doctor.UserLoginRequest
+import com.example.myapplication.model.UserLoginRequest
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.getCurrentHour

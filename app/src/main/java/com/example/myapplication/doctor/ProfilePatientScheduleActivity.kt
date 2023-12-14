@@ -54,6 +54,13 @@ class ProfilePatientScheduleActivity : AppCompatActivity(), OnMedicalHistoryClic
             MedicalHistoryListPatientItemmAdapter(this@ProfilePatientScheduleActivity)
 
         binding.apply {
+            ivHome.setOnClickListener {
+                val intent = Intent(
+                    this@ProfilePatientScheduleActivity,
+                    HomeDoctorActivity::class.java
+                )
+                startActivity(intent)
+            }
             lifecycleScope.launch(Dispatchers.IO) {
                 val medicalHistoryResponse =
                     apiClient.doctorService.getListMedicalHistoryByDoctor(idPatient,1)
@@ -102,7 +109,6 @@ class ProfilePatientScheduleActivity : AppCompatActivity(), OnMedicalHistoryClic
                     }
                 }
             })
-
             lifecycleScope.launch(Dispatchers.IO) {
                 val patient =
                     apiClient.doctorService.getPatientByDoctor(idPatient)

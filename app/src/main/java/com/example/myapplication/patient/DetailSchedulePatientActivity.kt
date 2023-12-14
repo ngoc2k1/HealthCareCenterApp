@@ -13,6 +13,7 @@ import com.example.myapplication.databinding.FragmentBookScheduleDetailBinding
 import com.example.myapplication.doctor.DetailMedicalHistoryActivity
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
+import com.example.myapplication.utils.Constant.ID_DOCTOR
 import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
 import com.example.myapplication.utils.STATUS_BOOK
 import com.example.myapplication.utils.convertGender
@@ -27,6 +28,7 @@ import kotlinx.coroutines.withContext
 
 class DetailSchedulePatientActivity : AppCompatActivity() {
     private lateinit var binding: FragmentBookScheduleDetailBinding
+    private  var idDoctor=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,6 +44,15 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
         val apiClient = ApiClient(this@DetailSchedulePatientActivity)
         val idBookSchedule = intent.getIntExtra(ID_BOOKSCHEDULE, 0)
         binding.apply {
+            ivEdit.setOnClickListener {
+                val intent = Intent(
+                    this@DetailSchedulePatientActivity,
+                    BookScheduleUpdatePatientActivity::class.java
+                )
+                intent.putExtra(ID_BOOKSCHEDULE, idBookSchedule)
+                intent.putExtra(ID_DOCTOR, idDoctor)
+                startActivity(intent)
+            }
             llInformationPatient.gone()
             clTop.visible()
             clDaHuy.visible()
@@ -72,6 +83,7 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                                     .placeholder(R.drawable.img_default_avatar_home)
                                     .into(ivAvatarDoctor)
                                 tvSpecialtyDoctor.text = specialty.name
+                                idDoctor=id
                             }
                         }
                         schedule.data?.data?.patient?.let {
@@ -86,7 +98,7 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                         }
                         schedule.data?.data?.let {
                             it.apply {
-                            ivQr.setImageBitmap(qrCode.generateQR())
+                                ivQr.setImageBitmap(qrCode.generateQR())
                                 when (statusBook) {
                                     STATUS_BOOK.DA_KHAM.toString() -> {
                                         tvStatus.setTextColor(resources.getColor(R.color.green))
@@ -103,6 +115,7 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                                     }
 
                                     else -> {
+                                        ivEdit.visible()
                                         ivQr.visible()
                                         clChuaKham.gone()
                                         clDaHuy.visible()
@@ -113,13 +126,17 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                                 tvStatus.text = convertStatusBook(statusBook, tvStatus)
                                 tvTimeTest.text = timeTest
                                 tvDateTest.text = dateTest
+                                if (namePatientTest.isNotBlank()) {
+                                    clPatientTest.visible()
+                                    tvNameTestData.text = namePatientTest
+                                } else clPatientTest.gone()
                                 if (statusHealth == "") {
                                     clHealth.gone()
                                 } else {
                                     clHealth.visible()
                                     tvStatusHealth.text = statusHealth
                                 }
-                                tvPrice.text = price.toString()
+                                tvPrice.text = "$price đồng"
                             }
                         }
                     } else {

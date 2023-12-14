@@ -8,115 +8,162 @@
     android:background="@color/grey_light"
     android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/header"
-        style="@style/roboto_bold_24dp"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_40_dp"
-        android:gravity="center"
-        android:text="Đặt lịch khám" />
+        android:clipToPadding="false"
+        android:fillViewport="true">
 
-        <LinearLayout
-            android:layout_below="@id/header"
-            android:layout_marginTop="@dimen/margin_20_dp"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="@dimen/margin_16_dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/tv_date"
-                style="@style/roboto_regular_16dp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_border_form"
-                android:drawableStart="@drawable/ic_date_test"
-                android:drawablePadding="@dimen/margin_10_dp"
-                android:padding="@dimen/margin_15_dp"
-                android:text="Chọn ngày khám" />
+                android:layout_marginTop="@dimen/margin_40_dp"
+                android:paddingHorizontal="@dimen/margin_16_dp">
 
-            <ListView
-                android:id="@+id/rv_date"
+                <ImageView
+                    android:id="@+id/iv_home"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_home"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_header"
+                    style="@style/roboto_bold_24dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:text="Đặt lịch khám"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_marginTop="@dimen/margin_10_dp"
-                android:scrollbars="vertical" />
-            <TextView
-                android:id="@+id/tv_time"
-                style="@style/roboto_regular_16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@id/cl_header"
                 android:layout_marginTop="@dimen/margin_20_dp"
-                android:background="@drawable/bg_border_form"
-                android:drawableStart="@drawable/ic_date_test"
-                android:drawablePadding="@dimen/margin_10_dp"
-                android:padding="@dimen/margin_15_dp"
-                android:text="Chọn giờ khám" />
+                android:orientation="vertical"
+                android:paddingHorizontal="@dimen/margin_16_dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_10_dp"
-                android:orientation="horizontal"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:itemCount="10"
-                tools:listitem="@layout/item_specialty" />
+                <TextView
+                    android:id="@+id/tv_date"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_border_form"
+                    android:drawableStart="@drawable/ic_date_test"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:padding="@dimen/margin_15_dp"
+                    android:text="Chọn ngày khám" />
 
-            <TextView
-                android:id="@+id/tv_namePatientTest"
-                style="@style/roboto_regular_16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20_dp"
-                android:background="@drawable/bg_border_form_medical"
-                android:drawableStart="@drawable/ic_patient"
-                android:drawablePadding="@dimen/margin_10_dp"
-                android:padding="@dimen/margin_15_dp"
-                android:text="Tên bệnh nhân khám" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:gravity="center"
+                    tools:listitem="@layout/item_specialty" />
 
-            <EditText
-                android:id="@+id/edt_namePatientTest"
-                style="@style/roboto_regular_16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5_dp"
-                android:background="@drawable/bg_border_form_medical_edt"
-                android:padding="@dimen/margin_15_dp"
-                tools:text="ABXV" />
+                <TextView
+                    android:id="@+id/tv_time"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_form"
+                    android:drawableStart="@drawable/ic_date_test"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:padding="@dimen/margin_15_dp"
+                    android:text="Chọn giờ khám" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_status"
-                style="@style/roboto_regular_16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_20_dp"
-                android:background="@drawable/bg_border_form_medical"
-                android:padding="@dimen/margin_15_dp"
-                android:text="@string/text_state_health" />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_none"
+                    style="@style/roboto_regular_12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:gravity="center"
+                    android:text="Không còn giờ khám"
+                    android:textColor="@color/grey"
+                    android:visibility="gone" />
 
-            <EditText
-                android:id="@+id/edt_status"
-                style="@style/roboto_regular_16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_5_dp"
-                android:background="@drawable/bg_border_form_medical_edt"
-                android:padding="@dimen/margin_15_dp"
-                tools:text="ABXV" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:gravity="center"
+                    tools:listitem="@layout/item_specialty" />
 
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tv_save"
-                style="@style/roboto_bold_16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_30_dp"
-                android:background="@drawable/bg_border_home"
-                android:gravity="center"
-                android:paddingVertical="@dimen/margin_10_dp"
-                android:text="Lưu thông tin lịch đặt khám"
-                android:textColor="@color/white" />
+                <TextView
+                    android:id="@+id/tv_namePatientTest"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_form_medical"
+                    android:drawableStart="@drawable/ic_patient"
+                    android:drawablePadding="@dimen/margin_10_dp"
+                    android:padding="@dimen/margin_15_dp"
+                    android:text="Tên bệnh nhân khám" />
 
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/edt_namePatientTest"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:background="@drawable/bg_border_form_medical_edt"
+                    android:padding="@dimen/margin_15_dp"
+                    tools:text="ABXV" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_status"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:background="@drawable/bg_border_form_medical"
+                    android:padding="@dimen/margin_15_dp"
+                    android:text="@string/text_state_health" />
+
+                <EditText
+                    android:id="@+id/edt_status"
+                    style="@style/roboto_regular_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_5_dp"
+                    android:background="@drawable/bg_border_form_medical_edt"
+                    android:padding="@dimen/margin_15_dp"
+                    tools:text="ABXV" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_save"
+                    style="@style/roboto_bold_16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_20_dp"
+                    android:layout_marginBottom="@dimen/margin_10_dp"
+                    android:background="@drawable/bg_border_home"
+                    android:gravity="center"
+                    android:paddingVertical="@dimen/margin_10_dp"
+                    android:text="Lưu thông tin lịch đặt khám"
+                    android:textColor="@color/white" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
 </RelativeLayout>

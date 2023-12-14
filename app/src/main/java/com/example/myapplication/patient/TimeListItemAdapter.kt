@@ -9,69 +9,65 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ItemTimeBinding
 import com.example.myapplication.model.Specialty
 import com.example.myapplication.model.TimeByDoctorResponse
+import com.example.myapplication.model.TimeByDoctorUI
 import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.visible
 
 class TimeListItemAdapter(
     private val listener: OnTimeListener
-) : ListAdapter<TimeByDoctorResponse.Data, TimeListItemAdapter.SpecialtyViewHolder>(
+) : ListAdapter<TimeByDoctorUI, TimeListItemAdapter.TimeVH>(
     ExampleListDiffUtil()
 ) {
-    inner class SpecialtyViewHolder(private val binding: ItemTimeBinding) :
+    inner class TimeVH(private val binding: ItemTimeBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(time: TimeByDoctorResponse.Data) {
+        fun bind(time: TimeByDoctorUI) {
             binding.apply {
-                tvName.text = time.value
-                tvPrice.text = time.price.toString()
-
                 if (!time.isBooked) {
-                    tvName.apply {
-                        setBackgroundResource(R.drawable.bg_item_unselected)
-                        setTextColor(resources.getColor(R.color.black))
-                    }
+                    tvName.text = time.value
+                    tvPrice.text = time.price.toString()+" đồng"
                     tvPrice.visible()
+                    if (time.isClicked) {
+                        tvName.setBackgroundResource(R.drawable.bg_item_selected_specialty)
+                    } else {
+                        tvName.setBackgroundResource(R.drawable.bg_item_unselected)
+                    }
                     root.setOnClickListener {
-                        tvName.apply {
-                            setBackgroundResource(R.drawable.bg_item_selected)
-                            setTextColor(resources.getColor(R.color.white))
-                        }
-                        listener.getTime(time.id)
+                        listener.getTime(time.id,time)
                     }
                 } else {
-                    tvName.gone()
-                    tvPrice.gone()
+                    container.gone()
                 }
             }
         }
     }
 
-    class ExampleListDiffUtil : DiffUtil.ItemCallback<TimeByDoctorResponse.Data>() {
+    class ExampleListDiffUtil : DiffUtil.ItemCallback<TimeByDoctorUI>() {
         override fun areContentsTheSame(
-            oldItem: TimeByDoctorResponse.Data,
-            newItem: TimeByDoctorResponse.Data
+            oldItem: TimeByDoctorUI,
+            newItem: TimeByDoctorUI
         ) =
             oldItem == newItem
 
         override fun areItemsTheSame(
-            oldItem: TimeByDoctorResponse.Data,
-            newItem: TimeByDoctorResponse.Data
+            oldItem: TimeByDoctorUI,
+            newItem: TimeByDoctorUI
         ) =
             oldItem.id == newItem.id
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SpecialtyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TimeVH {
         val binding =
             ItemTimeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return SpecialtyViewHolder(binding)
+        return TimeVH(binding)
     }
 
-    override fun onBindViewHolder(holder: SpecialtyViewHolder, position: Int) {
-        val okRs = getItem(position)
-        holder.bind(okRs)
+    override fun onBindViewHolder(holder: TimeVH, position: Int) {
+        val data = getItem(position)
+        holder.bind(data)
     }
 }
 
 interface OnTimeListener {
-    fun getTime(doctorWorkScheduleId: Int)
+    fun getTime(doctorWorkScheduleId: Int, time: TimeByDoctorUI)
 }

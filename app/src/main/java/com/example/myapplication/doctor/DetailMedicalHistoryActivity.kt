@@ -1,29 +1,39 @@
 package com.example.myapplication.doctor
 
+import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMedicalHistoryDetailBinding
 import com.example.myapplication.model.MedicalHistoryUpdateRequest
+import com.example.myapplication.model.PhotoUI
+import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
-import com.example.myapplication.utils.Constant.ID_PATIENT
 import com.example.myapplication.utils.Constant.IS_PATIENT
+import com.example.myapplication.utils.Constant.PICK_IMAGE_MULTIPLE
 import com.example.myapplication.utils.gone
 import com.example.myapplication.utils.toast
 import com.example.myapplication.utils.visible
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Arrays
+
 
 class DetailMedicalHistoryActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMedicalHistoryDetailBinding
-
+    private var photoList = ArrayList<String>()
+    var photoListObject = ArrayList<PhotoUI>()
+    private lateinit var photoListItemAdapter: PhotoListItemAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMedicalHistoryDetailBinding.inflate(layoutInflater)
@@ -34,24 +44,45 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
             this@DetailMedicalHistoryActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
-
+        photoListItemAdapter = PhotoListItemAdapter()
         val apiClient = ApiClient(this@DetailMedicalHistoryActivity)
         val idMedicalHistory = intent.getIntExtra(ID_MEDICALHISTORY, 0)
         val isPatient = intent.getIntExtra(IS_PATIENT, 0)
         binding.apply {
+            tvTestResult.setOnClickListener {
+                val intent = Intent(Intent.ACTION_GET_CONTENT)
+                intent.type = "image/*"
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
+                startActivityForResult(intent, PICK_IMAGE_MULTIPLE)
+            }
             if (isPatient == 1) {
                 tvSave.gone()
                 tvEdit.gone()
+                ivHome.setOnClickListener {
+                    val intent = Intent(
+                        this@DetailMedicalHistoryActivity,
+                        HomePatientActivity::class.java
+                    )
+                    startActivity(intent)
+                }
             } else {
+                ivHome.setOnClickListener {
+                    val intent = Intent(
+                        this@DetailMedicalHistoryActivity,
+                        HomeDoctorActivity::class.java
+                    )
+                    startActivity(intent)
+                }
                 tvEdit.setOnClickListener {
+                    binding.tvDelete.visible()
                     edtJudgmentNote.isEnabled = true
+                    tvTestResult.isEnabled = true
                     edtPrescription.isEnabled = true
                     edtRetestDate.isEnabled = true
                     edtRetestDate.hint = "dd/mm/yyyy"
                     val retestDate = edtRetestDate.text.toString()
                     if (retestDate.isNotBlank())
                         if (retestDate.length > 10) edtRetestDate.setText(retestDate.substring(9))
-                    edtTestResult.isEnabled = true
                     tvSave.visible()
                     tvEdit.gone()
                 }
@@ -65,7 +96,7 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                                     edtJudgmentNote.text.toString(),
                                     edtPrescription.text.toString(),
                                     edtRetestDate.text.toString(),
-                                    edtTestResult.text.toString()
+                                    photoList.toString()
                                 )
                             )
                         withContext(Dispatchers.Main) {
@@ -77,11 +108,12 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                         }
                     }
                     tvSave.gone()
+                    tvDelete.gone()
                     tvEdit.visible()
                     edtJudgmentNote.isEnabled = false
                     edtPrescription.isEnabled = false
                     edtRetestDate.isEnabled = false
-                    edtTestResult.isEnabled = false
+                    tvTestResult.isEnabled = false
                 }
             }
             lifecycleScope.launch(Dispatchers.IO) {
@@ -97,13 +129,34 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                                 if (prescription.isNullOrBlank()) edtPrescription.setText("")
                                 else
                                     edtPrescription.setText(prescription)
-                                if (testResult.isNullOrBlank()) edtTestResult.setText("")
-                                else
-                                    edtTestResult.setText(testResult)
+
                                 if (retestDate.isNullOrBlank()) edtRetestDate.setText("")
                                 else
                                     edtRetestDate.setText(retestDate)
 
+                                val arrayString = ArrayList<String>(
+                                    Arrays.asList<String>(testResult)
+                                )
+                                val b = arrayString[0]
+                                val cleanedString = b.replace("[", "").replace("]", "").trim()
+                                val elements = cleanedString.split(",").map { it.trim() }
+                                val arrayList = ArrayList(elements)
+                                for (i in arrayList) {
+                                    photoList.add(i)
+                                    photoListObject.add(PhotoUI(i))
+                                    Log.d("NGOCD", photoListObject.toString())
+                                    Log.d("NGOCDi", photoList.toString())
+
+                                }
+                                val gridLayoutManager = GridLayoutManager(
+                                    applicationContext, 2
+                                )
+                                gridLayoutManager.orientation =
+                                    LinearLayoutManager.VERTICAL
+                                binding.rvTestReult.visible()
+                                binding.rvTestReult.layoutManager = gridLayoutManager
+                                binding.rvTestReult.adapter = photoListItemAdapter
+                                photoListItemAdapter.submitList(photoListObject)
                                 bookSchedule.apply {
                                     tvDateTest.text = "Thời gian khám: $dateTest"
                                     if (namePatientTest.isNullOrBlank()) tvPatient.gone()
@@ -129,6 +182,45 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                     }
                 }
             }
+            tvDelete.setOnClickListener {
+                photoListObject.clear()
+                photoList.clear()
+                rvTestReult.gone()
+                tvDelete.gone()
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_MULTIPLE && resultCode == RESULT_OK) {
+            if (data?.clipData != null) {
+                val count = data.clipData!!.itemCount
+                for (i in 0 until count) {
+                    val imageUri = data.clipData!!.getItemAt(i).uri
+                    photoList.add(imageUri.toString())
+                }
+            } else if (data?.data != null) {
+                val imageUri = data.data
+                photoList.add(imageUri.toString())
+            }
+            photoListObject.clear()
+            for (i in photoList) {
+                photoListObject.add(PhotoUI(i))
+            }
+            binding.tvDelete.visible()
+            binding.rvTestReult.visible()
+            val gridLayoutManager = GridLayoutManager(
+                applicationContext, 2
+            )
+            gridLayoutManager.orientation =
+                LinearLayoutManager.VERTICAL
+            binding.rvTestReult.visible()
+            binding.rvTestReult.layoutManager = gridLayoutManager
+            binding.rvTestReult.adapter = photoListItemAdapter//
+//            photoListItemAdapter.notifyDataSetChanged()
+            photoListItemAdapter.submitList(photoListObject)
+            Log.d("NGOCC", photoList.toString())
         }
     }
 }

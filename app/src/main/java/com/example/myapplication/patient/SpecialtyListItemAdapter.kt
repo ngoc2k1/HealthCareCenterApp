@@ -1,6 +1,5 @@
 package com.example.myapplication.patient
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,43 +7,41 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ItemSpecialtyBinding
-import com.example.myapplication.model.Specialty
-import com.example.myapplication.model.SpecialtyData
-import com.example.myapplication.model.SpecialtyListResponse
+import com.example.myapplication.model.SpecialtyUI
 
 class SpecialtyListItemAdapter(
     private val listener: OnSpecialtyListener
-) : ListAdapter<SpecialtyData, SpecialtyListItemAdapter.SpecialtyViewHolder>(
+) : ListAdapter<SpecialtyUI, SpecialtyListItemAdapter.SpecialtyViewHolder>(
     ExampleListDiffUtil()
 ) {
     inner class SpecialtyViewHolder(private val binding: ItemSpecialtyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(specialty: SpecialtyData) {
+        fun bind(specialty: SpecialtyUI) {
             binding.apply {
                 tvName.text = specialty.name
                 if (specialty.isClicked) {
-                    tvName.setBackgroundResource(R.drawable.bg_item_selected)
+                    tvName.setBackgroundResource(R.drawable.bg_item_selected_specialty)
                 } else {
-                    tvName.setBackgroundResource(R.drawable.bg_item_unselected)
+                    tvName.setBackgroundResource(R.drawable.bg_border_form)
                 }
-                tvName.setOnClickListener {
-                    listener.getSpecialty(specialty)
+                root.setOnClickListener {
+                    listener.getSpecialty(specialty,layoutPosition)
                 }
             }
         }
     }
 
-    class ExampleListDiffUtil : DiffUtil.ItemCallback<SpecialtyData>() {
+    class ExampleListDiffUtil : DiffUtil.ItemCallback<SpecialtyUI>() {
         override fun areContentsTheSame(
-            oldItem: SpecialtyData,
-            newItem: SpecialtyData
+            oldItem: SpecialtyUI,
+            newItem: SpecialtyUI
         ) =
             oldItem == newItem
 
         override fun areItemsTheSame(
-            oldItem: SpecialtyData,
-            newItem: SpecialtyData
+            oldItem: SpecialtyUI,
+            newItem: SpecialtyUI
         ) =
             oldItem.id == newItem.id
     }
@@ -62,5 +59,5 @@ class SpecialtyListItemAdapter(
 }
 
 interface OnSpecialtyListener {
-    fun getSpecialty(specialty: SpecialtyData)
+    fun getSpecialty(specialty: SpecialtyUI, index: Int)
 }

@@ -53,6 +53,7 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
         listLayoutMgr =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
         binding.apply {
+            ivHome.gone()
             lifecycleScope.launch(Dispatchers.IO) {
                 val medicalHistoryResponse =
                     apiClient.patientService.getListMedicalHistoryByPatient(1)
@@ -60,7 +61,7 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
                     if (medicalHistoryResponse.isSuccessful()) {
                         medicalHistoryResponse.data?.data?.let {
                             mMedicalHistory = it
-                            if (mMedicalHistory.isNullOrEmpty()) {
+                            if (it.isEmpty()) {
                                 tvNone.visible()
                                 rvMedicalHistory.gone()
                             } else {
@@ -71,7 +72,7 @@ class ProfilePatientScheduleByPatientActivity : AppCompatActivity(), OnMedicalHi
                                 medicalHistoryItemAdapter.submitList(mMedicalHistory)
                             }
                         }
-                    }else {
+                    } else {
                         toast(medicalHistoryResponse.error?.error?.msg.toString())
                     }
                 }
