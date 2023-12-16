@@ -156,50 +156,6 @@
                     android:layout_marginEnd="16dp"
                     android:background="@color/grey" />
 
-                <TextView
-                    android:id="@+id/option_fingerprint"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10_dp"
-                    android:drawableStart="@drawable/ic_fingerprint_setting_black"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:paddingVertical="@dimen/margin_5_dp"
-                    android:text="@string/str_login_fingerprint" />
-
-                <TextView
-                    android:id="@+id/view_line3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginStart="@dimen/margin_30_dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@color/grey" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    style="@style/roboto_bold_18dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/margin_16_dp"
-                    android:layout_marginTop="@dimen/margin_30_dp"
-                    android:text="@string/str_support_setting" />
-
-                <TextView
-                    android:id="@+id/option_notification"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_15_dp"
-                    android:drawableStart="@drawable/ic_notification_setting"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:paddingVertical="@dimen/margin_5_dp"
-                    android:text="@string/tab_profile_doctor" />
-
-                <TextView
-                    android:id="@+id/view_line4"
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginStart="@dimen/margin_30_dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@color/grey" />
-
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/ln_language"
                     android:layout_width="match_parent"
@@ -233,20 +189,10 @@
                     android:background="@color/grey" />
 
                 <TextView
-                    android:id="@+id/option_questions"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10_dp"
-                    android:drawableStart="@drawable/ic_faq_setting"
-                    android:drawablePadding="@dimen/margin_10_dp"
-                    android:text="@string/str_questions_setting"
-                    android:visibility="gone" />
-
-                <TextView
                     android:id="@+id/option_change_account"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_10_dp"
+                    android:layout_marginTop="@dimen/margin_20_dp"
                     android:drawableStart="@drawable/ic_logout_new"
                     android:drawablePadding="@dimen/margin_10_dp"
                     android:paddingVertical="@dimen/margin_5_dp"
