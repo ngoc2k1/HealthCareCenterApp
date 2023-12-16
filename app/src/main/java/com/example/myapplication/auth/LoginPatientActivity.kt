@@ -2,9 +2,11 @@ package com.example.myapplication.auth
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
@@ -16,6 +18,9 @@ import com.example.myapplication.model.UserLoginRequest
 import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant.PASSWORD
+import com.example.myapplication.utils.Constant.SHARED_PREFS
+import com.example.myapplication.utils.Constant.USERNAME
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
 import com.orhanobut.hawk.Hawk
@@ -26,6 +31,16 @@ import kotlinx.coroutines.withContext
 class LoginPatientActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     var context: Context? = null
+    private lateinit var sharedpreferences: SharedPreferences
+    private var email: String? = null
+    private var password: String? = null
+    override fun onStart() {
+        super.onStart()
+        if (email != null && password != null) {
+            val i = Intent(this@LoginPatientActivity, HomePatientActivity::class.java)
+            startActivity(i)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +55,7 @@ class LoginPatientActivity : AppCompatActivity() {
 
         context = this
         val apiClient = ApiClient(this@LoginPatientActivity)
+        checkInputLogin()
 
         binding.apply {
             loginTvForgetPassword.setOnClickListener {
@@ -48,24 +64,40 @@ class LoginPatientActivity : AppCompatActivity() {
                 forgotPwDialog.mContext = this@LoginPatientActivity
                 forgotPwDialog.show(supportFragmentManager, "dialog")//supportFM : activity
             }
+
+            sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+            email = sharedpreferences.getString(USERNAME, null)
+            password = sharedpreferences.getString(PASSWORD, null)
+
             btnLogin.setOnClickListener {
                 val username = loginEdtUsername.text.toString()
                 val password = loginEdtPassword.text.toString()
-                lifecycleScope.launch(Dispatchers.IO) {
-                    val patient = apiClient.patientService.loginPatient(
-                        UserLoginRequest(username, password)
-                    )
-                    withContext(Dispatchers.Main) {
-                        if (patient.isSuccessful()) {
-                            Hawk.put(HawkKey.ACCESS_TOKEN_PATIENT, patient.data?.data?.token)
-                            startActivity(
-                                Intent(
-                                    this@LoginPatientActivity,
-                                    HomePatientActivity::class.java
+                if (TextUtils.isEmpty(username) || TextUtils.isEmpty(password)) {
+                    toast(getString(R.string.str_error_change_pw))
+                } else {
+                    lifecycleScope.launch(Dispatchers.IO) {
+                        val patient = apiClient.patientService.loginPatient(
+                            UserLoginRequest(username, password)
+                        )
+                        withContext(Dispatchers.Main) {
+                            if (patient.isSuccessful()) {
+                                toast(patient.data?.msg.toString())
+
+                                val editor = sharedpreferences.edit()
+                                editor.putString(USERNAME, username)
+                                editor.putString(PASSWORD, password)
+                                editor.apply()
+
+                                Hawk.put(HawkKey.ACCESS_TOKEN_PATIENT, patient.data?.data?.token)
+                                startActivity(
+                                    Intent(
+                                        this@LoginPatientActivity,
+                                        HomePatientActivity::class.java
+                                    )
                                 )
-                            )
-                        } else {
-                            toast(patient.error?.error?.msg.toString())
+                            } else {
+                                toast(patient.error?.error?.msg.toString())
+                            }
                         }
                     }
                 }

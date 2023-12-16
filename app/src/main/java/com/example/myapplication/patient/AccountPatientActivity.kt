@@ -1,6 +1,8 @@
 package com.example.myapplication.patient
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -16,6 +18,7 @@ import com.example.myapplication.databinding.FragmentAccountBinding
 import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
+import com.example.myapplication.utils.Constant.SHARED_PREFS
 import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
@@ -26,6 +29,7 @@ import kotlinx.coroutines.withContext
 
 class AccountPatientActivity : AppCompatActivity() {
     private lateinit var binding: FragmentAccountBinding
+    private lateinit var sharedpreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,8 @@ class AccountPatientActivity : AppCompatActivity() {
             this@AccountPatientActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
+        sharedpreferences = getSharedPreferences(SHARED_PREFS, Context.MODE_PRIVATE)
+
         binding.apply {
             optionChangePassword.setOnClickListener {
                 val changePwDialog = ChangePwPatientDialog()
@@ -47,6 +53,9 @@ class AccountPatientActivity : AppCompatActivity() {
 
             optionChangeAccount.setOnClickListener {
                 Hawk.put(HawkKey.ACCESS_TOKEN_PATIENT, "")
+                val editor = sharedpreferences.edit()
+                editor.clear()
+                editor.apply()
                 startActivity(Intent(this@AccountPatientActivity, LoginActivity::class.java))
             }
             optionEditProfile.setOnClickListener {

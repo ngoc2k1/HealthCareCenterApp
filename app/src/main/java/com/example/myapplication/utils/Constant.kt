@@ -22,8 +22,12 @@ import java.util.*
 
 object Constant {
     const val PICK_IMAGE_MULTIPLE = 1
-    const val USERNAME = "username"
-    const val PASSWORD = "password"
+    const val SHARED_PREFS = "SHARED_PREFS"
+    const val USERNAME = "USERNAME"
+    const val PASSWORD = "PASSWORD"
+    const val SHARED_PREFS_DOCTOR = "SHARED_PREFS_DOCTOR"
+    const val USERNAME_DOCTOR = "USERNAME_DOCTOR"
+    const val PASSWORD_DOCTOR = "PASSWORD_DOCTOR"
     const val NAME_DOCTOR = "NAME_DOCTOR"
     const val AVT_DOCTOR = "AVT_DOCTOR"
     const val ID_BOOKSCHEDULE = "ID_BOOKSCHEDULE"
@@ -38,10 +42,14 @@ object Constant {
     const val ID_MEDICALHISTORY = "ID_MEDICALHISTORY"
     const val NAME_PATIENT = "NAME_PATIENT"
     const val AVT_PATIENT = "AVT_PATIENT"
-    const val AVT_FEMALE = "http://res.cloudinary.com/ngoc2012001/image/upload/v1701702806/healthcare/nqelyx7wuxqqiu6e6chw.png"
-    const val AVT_FEMALE_DOCTOR ="http://res.cloudinary.com/ngoc2012001/image/upload/v1701700744/healthcare/iddoqbu7q7xk8afm0ixn.jpg"
-    const val AVT_MALE_DOCTOR = "http://res.cloudinary.com/ngoc2012001/image/upload/v1701700640/healthcare/fjrhvnjw1a8lnqrsrayt.jpg"
-    const val AVT_MALE = "http://res.cloudinary.com/ngoc2012001/image/upload/v1701703077/healthcare/folbtvcfv2xky5qyxrgc.png"
+    const val AVT_FEMALE =
+        "http://res.cloudinary.com/ngoc2012001/image/upload/v1701702806/healthcare/nqelyx7wuxqqiu6e6chw.png"
+    const val AVT_FEMALE_DOCTOR =
+        "http://res.cloudinary.com/ngoc2012001/image/upload/v1701700744/healthcare/iddoqbu7q7xk8afm0ixn.jpg"
+    const val AVT_MALE_DOCTOR =
+        "http://res.cloudinary.com/ngoc2012001/image/upload/v1701700640/healthcare/fjrhvnjw1a8lnqrsrayt.jpg"
+    const val AVT_MALE =
+        "http://res.cloudinary.com/ngoc2012001/image/upload/v1701703077/healthcare/folbtvcfv2xky5qyxrgc.png"
 }
 
 fun Context.toast(msg: String) {
@@ -115,7 +123,7 @@ fun String.generateQR(): Bitmap {
     val hints = hashMapOf<EncodeHintType, Any>()
     hints[EncodeHintType.CHARACTER_SET] = Charset.forName("UTF-8")
 
-    val matrix = write.encode(this, BarcodeFormat.QR_CODE, 400, 400,hints)
+    val matrix = write.encode(this, BarcodeFormat.QR_CODE, 400, 400, hints)
     val encoder = BarcodeEncoder()
     return encoder.createBitmap(matrix)
 }

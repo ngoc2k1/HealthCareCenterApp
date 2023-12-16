@@ -3,12 +3,13 @@ package com.example.myapplication.auth
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.TextUtils
 import android.text.TextWatcher
 import android.view.View
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRegisterBinding
@@ -48,37 +49,51 @@ class RegisterActivity : AppCompatActivity() {
             btnRegister.setOnClickListener {
                 val pw = inputPasswordRegister.text.toString()
                 val confirmPW = inputConfirmPasswordRegister.text.toString()
-                //check trongfull
-                if (confirmPW != pw) {
-                    toast(getString(R.string.str_error_change_pw_cf))
+                val address = edtAddress.text.toString()
+                val dOB = tvBirthday.text.toString()
+                val mail = inputEmailRegister.text.toString()
+                val name = inputFullName.text.toString()
+                val phone = inputPhoneRegister.text.toString()
+                val gender = if (rbFemale.isChecked) GENDER.FEMALE.toString()
+                else if (rbMale.isChecked) GENDER.MALE.toString()
+                else ""
+                if (TextUtils.isEmpty(pw) || TextUtils.isEmpty(confirmPW)
+                    || TextUtils.isEmpty(address) || TextUtils.isEmpty(dOB)
+                    || TextUtils.isEmpty(mail) || TextUtils.isEmpty(phone)
+                    || TextUtils.isEmpty(name) || gender == ""
+                ) {
+                    toast(getString(R.string.str_error_change_pw))
                 } else {
-                    lifecycleScope.launch(Dispatchers.IO) {
-                        val gender = if (rbFemale.isChecked) GENDER.FEMALE.toString()
-                        else GENDER.MALE.toString()
-                        val patientData = PatientRegisterRequest(
-                            edtAddress.text.toString(),
-                            tvBirthday.text.toString(),
-                            inputEmailRegister.text.toString(),
-                            gender,
-                            inputFullName.text.toString(),
-                            inputPasswordRegister.text.toString(),
-                            inputPhoneRegister.text.toString()
-                        )
-                        val patient = apiClient.patientService.registerPatient(
-                            patientData
-                        )
-                        edtAddress.setText(patientData.toString())
-                        withContext(Dispatchers.Main) {
-                            if (patient.isSuccessful()) {
-                                toast(patient.data?.msg.toString())
-                                startActivity(
-                                    Intent(
-                                        this@RegisterActivity,
-                                        LoginPatientActivity::class.java
+                    if (confirmPW != pw) {
+                        toast(getString(R.string.str_error_change_pw_cf))
+                    } else {
+                        lifecycleScope.launch(Dispatchers.IO) {
+
+                            val patientData = PatientRegisterRequest(
+                                address,
+                                dOB,
+                                mail,
+                                gender,
+                                name,
+                                pw,
+                                phone
+                            )
+                            val patient = apiClient.patientService.registerPatient(
+                                patientData
+                            )
+
+                            withContext(Dispatchers.Main) {
+                                if (patient.isSuccessful()) {
+                                    toast(patient.data?.msg.toString())
+                                    startActivity(
+                                        Intent(
+                                            this@RegisterActivity,
+                                            LoginPatientActivity::class.java
+                                        )
                                     )
-                                )
-                            } else {
-                                toast(patient.error?.error?.msg.toString())
+                                } else {
+                                    toast(patient.error?.error?.msg.toString())
+                                }
                             }
                         }
                     }
