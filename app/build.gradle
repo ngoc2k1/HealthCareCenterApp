@@ -40,6 +40,8 @@ dependencies {
     implementation 'androidx.paging:paging-common-ktx:3.1.1'
     implementation 'androidx.paging:paging-runtime-ktx:3.1.1'
     implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    //websocket
+    implementation 'org.java-websocket:Java-WebSocket:1.5.4'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

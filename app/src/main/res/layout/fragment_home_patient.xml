@@ -8,6 +8,27 @@
     android:background="@drawable/background_app_sun">
 
     <ImageView
+        android:id="@+id/iv_chat"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_chat"
+        app:layout_constraintBottom_toTopOf="@id/tv_chat"
+        app:layout_constraintEnd_toEndOf="@id/tv_chat"
+        app:layout_constraintStart_toStartOf="@id/tv_chat" />
+
+    <TextView
+        android:id="@+id/tv_chat"
+        style="@style/roboto_bold_14dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_16_dp"
+        android:layout_marginBottom="@dimen/margin_16_dp"
+        android:gravity="center"
+        android:text="Bạn cần hỗ trợ?"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
         android:id="@+id/logo"
         android:layout_width="@dimen/width_115dp"
         android:layout_height="@dimen/width_115dp"

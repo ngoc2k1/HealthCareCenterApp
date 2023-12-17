@@ -13,18 +13,22 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomePatientBinding
 import com.example.myapplication.doctor.ProfilePatientScheduleActivity
 import com.example.myapplication.model.MedicalHistoryListDoctorResponse
+import com.example.myapplication.prefs.HawkKey
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.user.ChatActivity
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.convertGender
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
+import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class HomePatientActivity : AppCompatActivity() {
     private lateinit var binding: FragmentHomePatientBinding
+    val mbundle = Bundle()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,6 +41,13 @@ class HomePatientActivity : AppCompatActivity() {
             statusBarColor = Color.TRANSPARENT
         }
         binding.apply {
+
+            ivChat.setOnClickListener {
+                val intent =
+                    Intent(this@HomePatientActivity, ChatActivity::class.java)
+                intent.putExtras(mbundle)
+                startActivity(intent)
+            }
             tvBookSchedule.setOnClickListener {
                 val intent =
                     Intent(this@HomePatientActivity, BookSchedulePatientActivity::class.java)
@@ -68,12 +79,16 @@ class HomePatientActivity : AppCompatActivity() {
             if (getCurrentHour() in 6..18) {
                 tvGreeting.text = getString(R.string.str_hello_user)
                 tvGreeting.setTextColor(resources.getColor(R.color.black))
+                tvChat.setTextColor(resources.getColor(R.color.black))
                 tvFullName.setTextColor(resources.getColor(R.color.black))
 
                 viewContain.setBackgroundResource(R.drawable.background_app_sun)
+                ivChat.setBackgroundResource(R.drawable.ic_chat)
             } else {
                 tvGreeting.text = getString(R.string.str_hello_user_evening)
+                ivChat.setBackgroundResource(R.drawable.ic_chat_white)
                 viewContain.setBackgroundResource(R.drawable.background_app)
+                tvChat.setTextColor(resources.getColor(R.color.white))
                 tvGreeting.setTextColor(resources.getColor(R.color.white))
                 tvFullName.setTextColor(resources.getColor(R.color.white))
             }
@@ -105,6 +120,9 @@ class HomePatientActivity : AppCompatActivity() {
                                 )
                                 bundle.putString(Constant.NAME_PATIENT, name)
                                 bundle.putString(Constant.AVT_PATIENT, avatar)
+                                val token = Hawk.get<String>(HawkKey.ACCESS_TOKEN_PATIENT)
+                                mbundle.putString(Constant.CHAT, "$token*$name")
+
                             }
                         }
                     } else {

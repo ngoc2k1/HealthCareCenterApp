@@ -1,4 +1,7 @@
 <resources>
+<!--    <string name="server_url">ws://192.168.40.188:8082/chat</string>-->
+    <string name="server_url">ws://192.168.0.103:8082/chat</string>
+
     <string name="app_name">Health Care Center</string>
     <string name="str_title_profile_medical">Hồ sơ bệnh án</string>
     <string name="str_all"><u>Tất cả</u></string>

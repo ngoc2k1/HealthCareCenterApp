@@ -41,6 +41,7 @@ object Constant {
     const val GENDER_PATIENT = "GENDER_PATIENT"
     const val ID_MEDICALHISTORY = "ID_MEDICALHISTORY"
     const val NAME_PATIENT = "NAME_PATIENT"
+    const val CHAT = "CHAT"
     const val AVT_PATIENT = "AVT_PATIENT"
     const val AVT_FEMALE =
         "http://res.cloudinary.com/ngoc2012001/image/upload/v1701702806/healthcare/nqelyx7wuxqqiu6e6chw.png"
