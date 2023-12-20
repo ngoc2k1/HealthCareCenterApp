@@ -133,30 +133,32 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                                 if (retestDate.isNullOrBlank()) edtRetestDate.setText("")
                                 else
                                     edtRetestDate.setText(retestDate)
+                                testResult?.let {
+                                    val arrayString = ArrayList<String>(
+                                        Arrays.asList<String>(testResult)
+                                    )
+                                    val b = arrayString[0]
+                                    val cleanedString = b.replace("[", "").replace("]", "").trim()
+                                    val elements = cleanedString.split(",").map { it.trim() }
+                                    val arrayList = ArrayList(elements)
+                                    for (i in arrayList) {
+                                        photoList.add(i)
+                                        photoListObject.add(PhotoUI(i))
+                                        Log.d("NGOCD", photoListObject.toString())
+                                        Log.d("NGOCDi", photoList.toString())
 
-                                val arrayString = ArrayList<String>(
-                                    Arrays.asList<String>(testResult)
-                                )
-                                val b = arrayString[0]
-                                val cleanedString = b.replace("[", "").replace("]", "").trim()
-                                val elements = cleanedString.split(",").map { it.trim() }
-                                val arrayList = ArrayList(elements)
-                                for (i in arrayList) {
-                                    photoList.add(i)
-                                    photoListObject.add(PhotoUI(i))
-                                    Log.d("NGOCD", photoListObject.toString())
-                                    Log.d("NGOCDi", photoList.toString())
-
+                                    }
+                                    val gridLayoutManager = GridLayoutManager(
+                                        applicationContext, 2
+                                    )
+                                    gridLayoutManager.orientation =
+                                        LinearLayoutManager.VERTICAL
+                                    binding.rvTestReult.visible()
+                                    binding.rvTestReult.layoutManager = gridLayoutManager
+                                    binding.rvTestReult.adapter = photoListItemAdapter
+                                    photoListItemAdapter.submitList(photoListObject)
                                 }
-                                val gridLayoutManager = GridLayoutManager(
-                                    applicationContext, 2
-                                )
-                                gridLayoutManager.orientation =
-                                    LinearLayoutManager.VERTICAL
-                                binding.rvTestReult.visible()
-                                binding.rvTestReult.layoutManager = gridLayoutManager
-                                binding.rvTestReult.adapter = photoListItemAdapter
-                                photoListItemAdapter.submitList(photoListObject)
+
                                 bookSchedule.apply {
                                     tvDateTest.text = "Thời gian khám: $dateTest"
                                     if (namePatientTest.isNullOrBlank()) tvPatient.gone()

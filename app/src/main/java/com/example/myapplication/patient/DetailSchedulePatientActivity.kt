@@ -12,6 +12,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentBookScheduleDetailBinding
 import com.example.myapplication.doctor.DetailMedicalHistoryActivity
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
 import com.example.myapplication.utils.Constant.ID_DOCTOR
 import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
@@ -151,6 +152,7 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                     DetailMedicalHistoryActivity::class.java
                 )
                 intent.putExtra(ID_MEDICALHISTORY, idBookSchedule)
+                intent.putExtra(Constant.IS_PATIENT, 1)
                 startActivity(intent)
             }
         }
