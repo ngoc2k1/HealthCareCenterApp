@@ -22,8 +22,8 @@ class PhotoListItemAdapter(
         fun bind(data: PhotoUI) {
             binding.apply {
                 Glide.with(imageView).load(data.photo.toUri()).centerCrop()
-                    .placeholder(R.drawable.img_default_avatar_home)
-                    .into(imageView)            }
+                    .into(imageView)
+            }
         }
     }
 

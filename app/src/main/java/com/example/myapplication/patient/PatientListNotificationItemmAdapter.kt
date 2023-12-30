@@ -18,8 +18,14 @@ class PatientListNotificationItemmAdapter(
 
         fun bind(notification: PatientNotificationResponse.Data) {
             binding.apply {
+                var time = ""
+                val mTime = notification.bookSchedule.timeTest
+                val first = mTime.split("-")[0].split(":")[0].trim().toInt()
+                val second = mTime.split("-")[1].split(":")[0].trim().toInt()
+                time = if (first < second) "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                else "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                 tvDate.text =
-                    "Thời gian khám: " + notification.bookSchedule.datTest + " | " + notification.bookSchedule.timeTest
+                    "Thời gian khám: " + notification.bookSchedule.datTest + " | " + time
                 tvTitle.text = notification.content
                 tvPatient.text =
                     "Thông tin bác sĩ: " + notification.doctor.name + " | " + notification.doctor.specialty.name

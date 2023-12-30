@@ -24,16 +24,21 @@ class TimeListItemAdapter(
         fun bind(time: TimeByDoctorUI) {
             binding.apply {
                 if (!time.isBooked) {
-                    tvName.text = time.value
-                    tvPrice.text = time.price.toString()+" đồng"
+                    val mTime = time.value
+                    val first = mTime.split("-")[0].split(":")[0].trim().toInt()
+                    val second = mTime.split("-")[1].split(":")[0].trim().toInt()
+                    if (first < second) tvName.text = "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                    else tvName.text = "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
+                    tvPrice.text = time.price.toString() + " đồng"
                     tvPrice.visible()
+                    view.visible()
                     if (time.isClicked) {
-                        tvName.setBackgroundResource(R.drawable.bg_item_selected_specialty)
+                        container.setBackgroundResource(R.drawable.bg_item_selected_specialty)
                     } else {
-                        tvName.setBackgroundResource(R.drawable.bg_item_unselected)
+                        container.setBackgroundResource(R.drawable.bg_item_unselected)
                     }
                     root.setOnClickListener {
-                        listener.getTime(time.id,time)
+                        listener.getTime(time.id, time)
                     }
                 } else {
                     container.gone()

@@ -30,7 +30,11 @@ class ScheduleDoctorItemmAdapter(
 
                 tvAgeGender.text =
                     convertGender(schedule.patient.gender) + ", " + schedule.patient.age + " tuổi"
-                tvTime.text = schedule.dateTest + " | " + schedule.timeTest
+                val mTime = schedule.timeTest
+                val first = mTime.split("-")[0].split(":")[0].trim().toInt()
+                val second = mTime.split("-")[1].split(":")[0].trim().toInt()
+                if (first < second) tvTime.text = schedule.dateTest + " | "+"${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                else tvTime.text = schedule.dateTest + " | "+"${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                 val statusBook = convertStatusBook(schedule.statusBook, tvStatus)
                 tvStatus.text = statusBook
 

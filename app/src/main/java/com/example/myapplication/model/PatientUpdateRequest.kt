@@ -14,7 +14,7 @@ data class PatientUpdateRequest(
     val bloodGroup: String,
     @SerializedName("gender")
     val gender: String,
-    @SerializedName("healthInsurance ")
+    @SerializedName("healthInsurance")
     val healthInsurance: String,
     @SerializedName("height")
     val height: Int,

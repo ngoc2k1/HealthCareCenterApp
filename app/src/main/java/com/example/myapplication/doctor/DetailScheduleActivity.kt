@@ -95,7 +95,11 @@ class DetailScheduleActivity : AppCompatActivity() {
                                     }
                                 }
                                 tvStatus.text = convertStatusBook(statusBook, tvStatus)
-                                tvTimeTest.text = timeTest
+                                val mTime = timeTest
+                                val first = mTime.split("-")[0].split(":")[0].trim().toInt()
+                                val second = mTime.split("-")[1].split(":")[0].trim().toInt()
+                                if (first < second) tvTimeTest.text = "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                                else tvTimeTest.text = "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                                 tvDateTest.text = dateTest
                                 if (statusHealth == "") {
                                     clHealth.gone()

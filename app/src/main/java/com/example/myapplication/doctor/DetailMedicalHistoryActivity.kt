@@ -56,6 +56,75 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                 startActivityForResult(intent, PICK_IMAGE_MULTIPLE)
             }
             if (isPatient == 1) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val medicalHistory =
+                        apiClient.patientService.getDetailMedicalHistory(idMedicalHistory)
+                    withContext(Dispatchers.Main) {
+                        if (medicalHistory.isSuccessful()) {
+                            medicalHistory.data?.data?.let {
+                                it.apply {
+                                    if (judgmentNote.isNullOrBlank()) edtJudgmentNote.setText("")
+                                    else
+                                        edtJudgmentNote.setText(judgmentNote)
+                                    if (prescription.isNullOrBlank()) edtPrescription.setText("")
+                                    else
+                                        edtPrescription.setText(prescription)
+
+                                    if (retestDate.isNullOrBlank()) edtRetestDate.setText("")
+                                    else
+                                        edtRetestDate.setText(retestDate)
+                                    testResult?.let {
+                                        val arrayString = ArrayList<String>(
+                                            Arrays.asList<String>(testResult)
+                                        )
+                                        val b = arrayString[0]
+                                        val cleanedString =
+                                            b.replace("[", "").replace("]", "").trim()
+                                        val elements = cleanedString.split(",").map { it.trim() }
+                                        val arrayList = ArrayList(elements)
+                                        for (i in arrayList) {
+                                            photoList.add(i)
+                                            photoListObject.add(PhotoUI(i))
+                                        }
+                                        val gridLayoutManager = GridLayoutManager(
+                                            applicationContext, 2
+                                        )
+                                        gridLayoutManager.orientation =
+                                            LinearLayoutManager.VERTICAL
+                                        if (!photoListObject.isEmpty()) {
+                                            binding.rvTestReult.visible()
+                                            binding.rvTestReult.layoutManager = gridLayoutManager
+                                            binding.rvTestReult.adapter = photoListItemAdapter
+                                            photoListItemAdapter.submitList(photoListObject)
+                                        }
+                                    }
+
+                                    bookSchedule.apply {
+                                        tvDateTest.text = "Thời gian khám: $dateTest"
+                                        if (namePatientTest.isNullOrBlank()) tvPatient.gone()
+                                        else tvPatient.text = "Tên bệnh nhân: $namePatientTest"
+                                        doctor.apply {
+                                            tvAddress.text = "Địa chỉ khám: $addressTest"
+                                            tvNameDoctor.text = name
+                                            Glide.with(imgAvatar).load(avatar).centerCrop()
+                                                .placeholder(R.drawable.img_default_avatar_home)
+                                                .into(imgAvatar)
+                                            specialty.apply {
+                                                Glide.with(ivSpecialty).load(image).centerCrop()
+                                                    .placeholder(R.drawable.ic_hepatitis_transmission_black)
+                                                    .into(ivSpecialty)
+                                                tvSpecialty.text = name
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            toast(medicalHistory.error?.error?.msg.toString())
+                        }
+                    }
+                }
+
                 tvSave.gone()
                 tvEdit.gone()
                 ivHome.setOnClickListener {
@@ -66,6 +135,75 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                     startActivity(intent)
                 }
             } else {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    val medicalHistory =
+                        apiClient.doctorService.getDetailMedicalHistory(idMedicalHistory)
+                    withContext(Dispatchers.Main) {
+                        if (medicalHistory.isSuccessful()) {
+                            medicalHistory.data?.data?.let {
+                                it.apply {
+                                    if (judgmentNote.isNullOrBlank()) edtJudgmentNote.setText("")
+                                    else
+                                        edtJudgmentNote.setText(judgmentNote)
+                                    if (prescription.isNullOrBlank()) edtPrescription.setText("")
+                                    else
+                                        edtPrescription.setText(prescription)
+
+                                    if (retestDate.isNullOrBlank()) edtRetestDate.setText("")
+                                    else
+                                        edtRetestDate.setText(retestDate)
+                                    testResult?.let {
+                                        val arrayString = ArrayList<String>(
+                                            Arrays.asList<String>(testResult)
+                                        )
+                                        val b = arrayString[0]
+                                        val cleanedString =
+                                            b.replace("[", "").replace("]", "").trim()
+                                        val elements = cleanedString.split(",").map { it.trim() }
+                                        val arrayList = ArrayList(elements)
+                                        for (i in arrayList) {
+                                            photoList.add(i)
+                                            photoListObject.add(PhotoUI(i))
+                                        }
+                                        val gridLayoutManager = GridLayoutManager(
+                                            applicationContext, 2
+                                        )
+                                        gridLayoutManager.orientation =
+                                            LinearLayoutManager.VERTICAL
+                                        if (!photoListObject.isEmpty()) {
+                                            binding.rvTestReult.visible()
+                                            binding.rvTestReult.layoutManager = gridLayoutManager
+                                            binding.rvTestReult.adapter = photoListItemAdapter
+                                            photoListItemAdapter.submitList(photoListObject)
+                                        }
+                                    }
+
+                                    bookSchedule.apply {
+                                        tvDateTest.text = "Thời gian khám: $dateTest"
+                                        if (namePatientTest.isNullOrBlank()) tvPatient.gone()
+                                        else tvPatient.text = "Tên bệnh nhân: $namePatientTest"
+                                        doctor.apply {
+                                            tvAddress.text = "Địa chỉ khám: $addressTest"
+                                            tvNameDoctor.text = name
+                                            Glide.with(imgAvatar).load(avatar).centerCrop()
+                                                .placeholder(R.drawable.img_default_avatar_home)
+                                                .into(imgAvatar)
+                                            specialty.apply {
+                                                Glide.with(ivSpecialty).load(image).centerCrop()
+                                                    .placeholder(R.drawable.ic_hepatitis_transmission_black)
+                                                    .into(ivSpecialty)
+                                                tvSpecialty.text = name
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            toast(medicalHistory.error?.error?.msg.toString())
+                        }
+                    }
+                }
+
                 ivHome.setOnClickListener {
                     val intent = Intent(
                         this@DetailMedicalHistoryActivity,
@@ -116,74 +254,6 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                     tvTestResult.isEnabled = false
                 }
             }
-            lifecycleScope.launch(Dispatchers.IO) {
-                val medicalHistory =
-                    apiClient.patientService.getDetailMedicalHistory(idMedicalHistory)
-                withContext(Dispatchers.Main) {
-                    if (medicalHistory.isSuccessful()) {
-                        medicalHistory.data?.data?.let {
-                            it.apply {
-                                if (judgmentNote.isNullOrBlank()) edtJudgmentNote.setText("")
-                                else
-                                    edtJudgmentNote.setText(judgmentNote)
-                                if (prescription.isNullOrBlank()) edtPrescription.setText("")
-                                else
-                                    edtPrescription.setText(prescription)
-
-                                if (retestDate.isNullOrBlank()) edtRetestDate.setText("")
-                                else
-                                    edtRetestDate.setText(retestDate)
-                                testResult?.let {
-                                    val arrayString = ArrayList<String>(
-                                        Arrays.asList<String>(testResult)
-                                    )
-                                    val b = arrayString[0]
-                                    val cleanedString = b.replace("[", "").replace("]", "").trim()
-                                    val elements = cleanedString.split(",").map { it.trim() }
-                                    val arrayList = ArrayList(elements)
-                                    for (i in arrayList) {
-                                        photoList.add(i)
-                                        photoListObject.add(PhotoUI(i))
-                                        Log.d("NGOCD", photoListObject.toString())
-                                        Log.d("NGOCDi", photoList.toString())
-
-                                    }
-                                    val gridLayoutManager = GridLayoutManager(
-                                        applicationContext, 2
-                                    )
-                                    gridLayoutManager.orientation =
-                                        LinearLayoutManager.VERTICAL
-                                    binding.rvTestReult.visible()
-                                    binding.rvTestReult.layoutManager = gridLayoutManager
-                                    binding.rvTestReult.adapter = photoListItemAdapter
-                                    photoListItemAdapter.submitList(photoListObject)
-                                }
-
-                                bookSchedule.apply {
-                                    tvDateTest.text = "Thời gian khám: $dateTest"
-                                    if (namePatientTest.isNullOrBlank()) tvPatient.gone()
-                                    else tvPatient.text = "Tên bệnh nhân: $namePatientTest"
-                                    doctor.apply {
-                                        tvAddress.text = "Địa chỉ khám: $addressTest"
-                                        tvNameDoctor.text = name
-                                        Glide.with(imgAvatar).load(avatar).centerCrop()
-                                            .placeholder(R.drawable.img_default_avatar_home)
-                                            .into(imgAvatar)
-                                        specialty.apply {
-                                            Glide.with(ivSpecialty).load(image).centerCrop()
-                                                .placeholder(R.drawable.ic_hepatitis_transmission_black)
-                                                .into(ivSpecialty)
-                                            tvSpecialty.text = name
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    } else {
-                        toast(medicalHistory.error?.error?.msg.toString())
-                    }
-                }
-            }
             tvDelete.setOnClickListener {
                 photoListObject.clear()
                 photoList.clear()
@@ -222,7 +292,6 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
             binding.rvTestReult.adapter = photoListItemAdapter//
 //            photoListItemAdapter.notifyDataSetChanged()
             photoListItemAdapter.submitList(photoListObject)
-            Log.d("NGOCC", photoList.toString())
         }
     }
 }

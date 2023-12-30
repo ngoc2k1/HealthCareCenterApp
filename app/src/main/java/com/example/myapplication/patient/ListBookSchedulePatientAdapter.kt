@@ -33,7 +33,11 @@ class ListBookSchedulePatientAdapter(
                         .placeholder(R.drawable.img_default_avatar_home)
                         .into(imvAvatarWorkSchedule)
                 }
-                tvTime.text = book.dateTest + " | " + book.timeTest
+                val mTime = book.timeTest
+                val first = mTime.split("-")[0].split(":")[0].trim().toInt()
+                val second = mTime.split("-")[1].split(":")[0].trim().toInt()
+                if (first < second) tvTime.text = book.dateTest + " | "+"${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                else tvTime.text = book.dateTest + " | "+"${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                 root.setOnClickListener {
                     listener.getDetailSchedule(book.id)
                 }

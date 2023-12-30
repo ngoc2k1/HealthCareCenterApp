@@ -45,6 +45,13 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
         val apiClient = ApiClient(this@DetailSchedulePatientActivity)
         val idBookSchedule = intent.getIntExtra(ID_BOOKSCHEDULE, 0)
         binding.apply {
+            ivHome.setOnClickListener {
+                val intent = Intent(
+                    this@DetailSchedulePatientActivity,
+                    HomePatientActivity::class.java
+                )
+                startActivity(intent)
+            }
             ivEdit.setOnClickListener {
                 val intent = Intent(
                     this@DetailSchedulePatientActivity,
@@ -125,7 +132,11 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                                     }
                                 }
                                 tvStatus.text = convertStatusBook(statusBook, tvStatus)
-                                tvTimeTest.text = timeTest
+                                val mTime = timeTest
+                                val first = mTime.split("-")[0].split(":")[0].trim().toInt()
+                                val second = mTime.split("-")[1].split(":")[0].trim().toInt()
+                                if (first < second) tvTimeTest.text = "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                                else tvTimeTest.text = "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                                 tvDateTest.text = dateTest
                                 if (namePatientTest.isNotBlank()) {
                                     clPatientTest.visible()

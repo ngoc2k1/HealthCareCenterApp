@@ -13,11 +13,14 @@ import com.example.myapplication.model.ResetPwActiveRequest
 import com.example.myapplication.model.ResetPwRequest
 import com.example.myapplication.model.WorkScheduleResponse
 import com.example.myapplication.model.DoctorAccountResponse
+import com.example.myapplication.model.MedicalHistoryDetailResponse
 import com.example.myapplication.model.UserLoginRequest
 import com.example.myapplication.model.UserLoginResponse
 import retrofit2.http.*
 
 interface DoctorService {
+    @GET("medical-history/detail/{id}")
+    suspend fun getDetailMedicalHistory(@Path("id") id: Int): Resource<MedicalHistoryDetailResponse>
     @GET("doctor")
     suspend fun getDoctor(): Resource<DoctorAccountResponse>
 

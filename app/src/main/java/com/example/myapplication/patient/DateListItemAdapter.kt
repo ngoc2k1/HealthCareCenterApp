@@ -20,7 +20,8 @@ class DateListItemAdapter(
 
         fun bind(data: DateByDoctorUI) {
             binding.apply {
-                tvName.text = data.date
+                val mTime = data.date
+                tvName.text = "${mTime.split("/")[2]}/${mTime.split("/")[1]}/${mTime.split("/")[0]}"
                 if (data.isClicked) {
                     tvName.setBackgroundResource(R.drawable.bg_item_selected_specialty)
                 } else {
