@@ -82,17 +82,26 @@ class ProfilePatientActivity : AppCompatActivity() {
                 val avatar = if (gender == GENDER.FEMALE.toString())
                     AVT_FEMALE
                 else AVT_MALE
+                var weight = 0.0
+                var height = 0
+                var blood = "X"
+                if (inputHeight.text.trim().toString() != "") height =
+                    inputHeight.text.trim().toString().toInt()
+                if (inputBlood.text.trim().toString() != "") blood =
+                    inputBlood.text.trim().toString()
+                if (inputWeight.text.trim().toString() != "") weight =
+                    inputWeight.text.trim().toString().toDouble()
                 val patientUpdate = PatientUpdateRequest(
                     edtAddress.text.toString(),
                     avatar,
                     tvBirthday.text.toString(),
-                    inputBlood.text.toString(),
+                    blood,
                     gender,
                     edtHealthInsurance.text.toString(),
-                    inputHeight.text.toString().toInt(),
+                    height,
                     edtIdentityCard.text.toString(),
                     inputFullName.text.toString(),
-                    inputWeight.text.toString().toDouble()
+                    weight
                 )
                 lifecycleScope.launch(Dispatchers.IO) {
                     val patientUpdateResponse = apiClient.patientService.updatePatient(
@@ -130,7 +139,9 @@ class ProfilePatientActivity : AppCompatActivity() {
                                 edtHealthInsurance.setText(healthInsurance)
                                 edtIdentityCard.setText(identityCard)
                                 edtAddress.setText(address)
-                                inputBlood.setText(bloodGroup)
+                                var mbloodGroup = "X"
+                                if (bloodGroup != "") mbloodGroup = bloodGroup
+                                inputBlood.setText(mbloodGroup)
                                 inputHeight.setText(height.toString())
                                 inputWeight.setText(weight.toString())
                                 tvBirthday.text = birthday
