@@ -1,7 +1,5 @@
 package com.example.myapplication.patient
 
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -10,11 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication.databinding.ActivityDoctorNotificationBinding
 import com.example.myapplication.databinding.FragmentNotificationBinding
-import com.example.myapplication.doctor.DoctorListNotificationItemmAdapter
-import com.example.myapplication.model.DoctorNotificationResponse
-import com.example.myapplication.model.MedicalHistoryListDoctorResponse
 import com.example.myapplication.model.PatientNotificationResponse
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.gone
@@ -27,9 +21,7 @@ import kotlinx.coroutines.withContext
 class NotificationPatientActivity : AppCompatActivity() {
     private lateinit var binding: FragmentNotificationBinding
     private var mListNotification: List<PatientNotificationResponse.Data> = emptyList()
-    private var currentPage = 1
     private lateinit var listLayoutMgr: LinearLayoutManager
-    private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentNotificationBinding.inflate(layoutInflater)
@@ -70,30 +62,6 @@ class NotificationPatientActivity : AppCompatActivity() {
                     }
                 }
             }
-            rvNotification.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    if (listLayoutMgr.findLastVisibleItemPosition() == mListNotification.size - 1 && mAllowToLoadMore) {
-                        mAllowToLoadMore = false
-                        currentPage += 1
-                        lifecycleScope.launch(Dispatchers.IO) {
-                            val notificationResponse = apiClient.patientService.getNotification(currentPage)
-                            withContext(Dispatchers.Main) {
-                                if (notificationResponse.isSuccessful()) {
-                                    notificationResponse.data?.data?.let {
-                                        mListNotification = mListNotification + it
-                                        notificationItemAdapter.submitList(mListNotification)
-                                        mAllowToLoadMore = true
-                                    }
-                                } else {
-                                    mAllowToLoadMore = false
-                                    toast(notificationResponse.error?.error?.msg.toString())
-                                }
-                            }
-                        }
-                    }
-                }
-            })
         }
     }
 }
