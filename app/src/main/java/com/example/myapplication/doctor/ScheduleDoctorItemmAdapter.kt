@@ -33,11 +33,12 @@ class ScheduleDoctorItemmAdapter(
                 val mTime = schedule.timeTest
                 val first = mTime.split("-")[0].split(":")[0].trim().toInt()
                 val second = mTime.split("-")[1].split(":")[0].trim().toInt()
-                if (first < second) tvTime.text = schedule.dateTest + " | "+"${mTime.split("-")[0]}-${mTime.split("-")[1]}"
-                else tvTime.text = schedule.dateTest + " | "+"${mTime.split("-")[1]}-${mTime.split("-")[0]}"
+                if (first < second) tvTime.text =
+                    schedule.dateTest + " | " + "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                else tvTime.text =
+                    schedule.dateTest + " | " + "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                 val statusBook = convertStatusBook(schedule.statusBook, tvStatus)
                 tvStatus.text = statusBook
-
                 when (statusBook) {
                     tvStatus.context.getString(R.string.str_chuakham) -> {
                         viewCancel.gone()
@@ -50,8 +51,6 @@ class ScheduleDoctorItemmAdapter(
                     }
 
                     else -> {
-                        viewCancel.visible()
-                        tvStatus.setBackgroundDrawable(tvStatus.resources.getDrawable(R.drawable.bg_item_work_state_cancelled))
                     }
                 }
                 Glide.with(imvAvatarWorkSchedule).load(schedule.patient.avatar).centerCrop()

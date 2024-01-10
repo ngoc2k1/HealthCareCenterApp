@@ -43,7 +43,6 @@ class ListBookSchedulePatientAdapter(
                 }
                 val statusBook = convertStatusBook(book.statusBook, tvStatus)
                 tvStatus.text = statusBook
-
                 when (statusBook) {
                     tvStatus.context.getString(R.string.str_chuakham) -> {
                         viewCancel.gone()
@@ -56,8 +55,6 @@ class ListBookSchedulePatientAdapter(
                     }
 
                     else -> {
-                        viewCancel.visible()
-                        tvStatus.setBackgroundDrawable(tvStatus.resources.getDrawable(R.drawable.bg_item_work_state_cancelled))
                     }
                 }
             }

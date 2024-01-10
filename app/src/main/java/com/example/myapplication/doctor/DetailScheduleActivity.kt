@@ -12,6 +12,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentBookScheduleDetailBinding
 import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.ID_BOOKSCHEDULE
 import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
 import com.example.myapplication.utils.STATUS_BOOK
@@ -98,8 +99,10 @@ class DetailScheduleActivity : AppCompatActivity() {
                                 val mTime = timeTest
                                 val first = mTime.split("-")[0].split(":")[0].trim().toInt()
                                 val second = mTime.split("-")[1].split(":")[0].trim().toInt()
-                                if (first < second) tvTimeTest.text = "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
-                                else tvTimeTest.text = "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
+                                if (first < second) tvTimeTest.text =
+                                    "${mTime.split("-")[0]}-${mTime.split("-")[1]}"
+                                else tvTimeTest.text =
+                                    "${mTime.split("-")[1]}-${mTime.split("-")[0]}"
                                 tvDateTest.text = dateTest
                                 if (statusHealth == "") {
                                     clHealth.gone()
@@ -128,6 +131,7 @@ class DetailScheduleActivity : AppCompatActivity() {
                             clChuaKham.gone()
                             ivQr.gone()
                             clDaKham.visible()
+                            btnResultDk.text = "Sửa kết quả khám bệnh"
                             toast(confirmSchedule.data?.msg.toString())
                         }
 //        binding.pbMainLoadingvideo.visibility = View.VISIBLE
@@ -143,6 +147,11 @@ class DetailScheduleActivity : AppCompatActivity() {
                 val intent =
                     Intent(this@DetailScheduleActivity, DetailMedicalHistoryActivity::class.java)
                 intent.putExtra(ID_MEDICALHISTORY, idBookSchedule)
+                if (btnResultDk.text == "Sửa kết quả khám bệnh") intent.putExtra(
+                    Constant.FIRST_MEDICALHISTORY,
+                    2
+                )
+
                 startActivity(intent)
             }
         }

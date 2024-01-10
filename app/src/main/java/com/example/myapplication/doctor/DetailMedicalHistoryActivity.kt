@@ -17,6 +17,7 @@ import com.example.myapplication.model.MedicalHistoryUpdateRequest
 import com.example.myapplication.model.PhotoUI
 import com.example.myapplication.patient.HomePatientActivity
 import com.example.myapplication.serviceapi.ApiClient
+import com.example.myapplication.utils.Constant.FIRST_MEDICALHISTORY
 import com.example.myapplication.utils.Constant.ID_MEDICALHISTORY
 import com.example.myapplication.utils.Constant.IS_PATIENT
 import com.example.myapplication.utils.Constant.PICK_IMAGE_MULTIPLE
@@ -48,6 +49,7 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
         val apiClient = ApiClient(this@DetailMedicalHistoryActivity)
         val idMedicalHistory = intent.getIntExtra(ID_MEDICALHISTORY, 0)
         val isPatient = intent.getIntExtra(IS_PATIENT, 0)
+        val firstMedicalHistory = intent.getIntExtra(FIRST_MEDICALHISTORY, 0)
         binding.apply {
             tvTestResult.setOnClickListener {
                 val intent = Intent(Intent.ACTION_GET_CONTENT)
@@ -159,7 +161,8 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                                         val b = arrayString[0]
                                         val cleanedString =
                                             b.replace("[", "").replace("]", "").trim()
-                                        val elements = cleanedString.split(",").map { it.trim() }
+                                        val elements =
+                                            cleanedString.split(",").map { it.trim() }
                                         val arrayList = ArrayList(elements)
                                         for (i in arrayList) {
                                             photoList.add(i)
@@ -170,11 +173,15 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                                         )
                                         gridLayoutManager.orientation =
                                             LinearLayoutManager.VERTICAL
-                                        if (!photoListObject.isEmpty()) {
-                                            binding.rvTestReult.visible()
-                                            binding.rvTestReult.layoutManager = gridLayoutManager
-                                            binding.rvTestReult.adapter = photoListItemAdapter
+                                        if (testResult != "" && testResult != "[]") {
+                                            rvTestReult.visible()
+                                            rvTestReult.layoutManager =
+                                                gridLayoutManager
+                                            rvTestReult.adapter = photoListItemAdapter
                                             photoListItemAdapter.submitList(photoListObject)
+                                        } else {
+                                            tvDelete.gone()
+                                            rvTestReult.gone()
                                         }
                                     }
 
@@ -204,15 +211,8 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                     }
                 }
 
-                ivHome.setOnClickListener {
-                    val intent = Intent(
-                        this@DetailMedicalHistoryActivity,
-                        HomeDoctorActivity::class.java
-                    )
-                    startActivity(intent)
-                }
-                tvEdit.setOnClickListener {
-                    binding.tvDelete.visible()
+                if (firstMedicalHistory == 2) {
+                    tvDelete.visible()
                     edtJudgmentNote.isEnabled = true
                     tvTestResult.isEnabled = true
                     edtPrescription.isEnabled = true
@@ -223,6 +223,26 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                         if (retestDate.length > 10) edtRetestDate.setText(retestDate.substring(9))
                     tvSave.visible()
                     tvEdit.gone()
+                }
+                tvEdit.setOnClickListener {
+                    tvDelete.visible()
+                    edtJudgmentNote.isEnabled = true
+                    tvTestResult.isEnabled = true
+                    edtPrescription.isEnabled = true
+                    edtRetestDate.isEnabled = true
+                    edtRetestDate.hint = "dd/mm/yyyy"
+                    val retestDate = edtRetestDate.text.toString()
+                    if (retestDate.isNotBlank())
+                        if (retestDate.length > 10) edtRetestDate.setText(retestDate.substring(9))
+                    tvSave.visible()
+                    tvEdit.gone()
+                }
+                ivHome.setOnClickListener {
+                    val intent = Intent(
+                        this@DetailMedicalHistoryActivity,
+                        HomeDoctorActivity::class.java
+                    )
+                    startActivity(intent)
                 }
                 tvSave.setOnClickListener {
                     edtRetestDate.hint = ""

@@ -31,6 +31,7 @@ object Constant {
     const val NAME_DOCTOR = "NAME_DOCTOR"
     const val AVT_DOCTOR = "AVT_DOCTOR"
     const val ID_BOOKSCHEDULE = "ID_BOOKSCHEDULE"
+    const val FIRST_MEDICALHISTORY = "FIRST_MEDICALHISTORY"
     const val ID_DOCTOR = "ID_DOCTOR"
     const val ID_PATIENT = "ID_PATIENT"
     const val IS_PATIENT = "IS_PATIENT"
