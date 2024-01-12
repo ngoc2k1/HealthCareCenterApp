@@ -31,17 +31,23 @@ class DoctorListItemAdapter(
                     .placeholder(R.drawable.img_default_avatar_home)
                     .into(imvAvt)
                 root.setOnClickListener {
-                    listener.getDoctor(doctor.id)
+                    listener.getDoctor(doctor.id, doctor.phone, doctor.name)
                 }
             }
         }
     }
 
     class ExampleListDiffUtil : DiffUtil.ItemCallback<DoctorBySpecialtyResponse.Data>() {
-        override fun areContentsTheSame(oldItem: DoctorBySpecialtyResponse.Data, newItem: DoctorBySpecialtyResponse.Data) =
+        override fun areContentsTheSame(
+            oldItem: DoctorBySpecialtyResponse.Data,
+            newItem: DoctorBySpecialtyResponse.Data
+        ) =
             oldItem == newItem
 
-        override fun areItemsTheSame(oldItem: DoctorBySpecialtyResponse.Data, newItem: DoctorBySpecialtyResponse.Data) =
+        override fun areItemsTheSame(
+            oldItem: DoctorBySpecialtyResponse.Data,
+            newItem: DoctorBySpecialtyResponse.Data
+        ) =
             oldItem.id == newItem.id
     }
 
@@ -58,5 +64,5 @@ class DoctorListItemAdapter(
 }
 
 interface OnDoctorListener {
-    fun getDoctor(id: Int)
+    fun getDoctor(id: Int, phoneDoctor: String, nameDoctor: String)
 }

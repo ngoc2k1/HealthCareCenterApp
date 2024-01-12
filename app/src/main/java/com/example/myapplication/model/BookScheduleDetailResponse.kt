@@ -55,6 +55,8 @@ data class BookScheduleDetailResponse(
             val id: Int,
             @SerializedName("name")
             val name: String,
+            @SerializedName("phone")
+            val phone: String,
             @SerializedName("specialty")
             val specialty: SpecialtyX
         ) {

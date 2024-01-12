@@ -93,11 +93,15 @@ class DetailMedicalHistoryActivity : AppCompatActivity() {
                                         )
                                         gridLayoutManager.orientation =
                                             LinearLayoutManager.VERTICAL
-                                        if (!photoListObject.isEmpty()) {
-                                            binding.rvTestReult.visible()
-                                            binding.rvTestReult.layoutManager = gridLayoutManager
-                                            binding.rvTestReult.adapter = photoListItemAdapter
+
+                                        if (testResult != "" && testResult != "[]") {
+                                            rvTestReult.visible()
+                                            rvTestReult.layoutManager =
+                                                gridLayoutManager
+                                            rvTestReult.adapter = photoListItemAdapter
                                             photoListItemAdapter.submitList(photoListObject)
+                                        } else {
+                                            rvTestReult.gone()
                                         }
                                     }
 

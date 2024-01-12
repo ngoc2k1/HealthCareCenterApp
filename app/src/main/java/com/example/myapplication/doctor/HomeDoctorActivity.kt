@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityDoctorHomeBinding
+import com.example.myapplication.prefs.Pref
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.AVT_DOCTOR
@@ -18,6 +19,9 @@ import com.example.myapplication.utils.Constant.NAME_DOCTOR
 import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
+import com.google.firebase.messaging.FirebaseMessaging
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
 import com.journeyapps.barcodescanner.ScanOptions
@@ -55,6 +59,7 @@ class HomeDoctorActivity : AppCompatActivity() {
                                     .placeholder(R.drawable.img_default_avatar_home)
                                     .into(imgAvatar)
                                 tvName.text = name
+                                taoToken(phone)
                                 bundle.putString(NAME_DOCTOR, name)
                                 bundle.putString(AVT_DOCTOR, avatar)
                             }
@@ -64,6 +69,20 @@ class HomeDoctorActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+    private fun taoToken(phone: String) {
+        FirebaseMessaging.getInstance().token.addOnSuccessListener { token: String? ->
+            val map: MutableMap<String, Any> =
+                HashMap()
+            map["token"] = token!!
+
+            val documentReference =
+                FirebaseFirestore.getInstance().collection("tokens").document(phone)
+            documentReference.set(map, SetOptions.merge())
+                .addOnSuccessListener { unused: Void? ->
+                    Pref.setString(this, Constant.TOKEN, token)
+                }
         }
     }
 

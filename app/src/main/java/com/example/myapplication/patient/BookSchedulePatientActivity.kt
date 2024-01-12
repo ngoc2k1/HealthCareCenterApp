@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.myapplication.databinding.FragmentBookScheduleBinding
 import com.example.myapplication.model.DoctorBySpecialtyResponse
 import com.example.myapplication.model.SpecialtyUI
+import com.example.myapplication.prefs.Pref
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.toast
@@ -27,6 +28,8 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
     private var currentPage = 1
     private lateinit var listLayoutMgr: LinearLayoutManager
     private var mAllowToLoadMore = true // chặn load khi không có dữ liệu
+    private var namePatient = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = FragmentBookScheduleBinding.inflate(layoutInflater)
@@ -37,6 +40,7 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
             this@BookSchedulePatientActivity.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
             statusBarColor = Color.TRANSPARENT
         }
+        namePatient = intent.getStringExtra(Constant.NAME_PATIENT).toString()
 
         val apiClient = ApiClient(this@BookSchedulePatientActivity)
         listLayoutMgr =
@@ -121,7 +125,10 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
                         currentPage += 1
                         lifecycleScope.launch(Dispatchers.IO) {
                             val listDoctor =
-                                apiClient.patientService.getDoctorBySpecialty(idSpecialty, currentPage)
+                                apiClient.patientService.getDoctorBySpecialty(
+                                    idSpecialty,
+                                    currentPage
+                                )
                             withContext(Dispatchers.Main) {
                                 if (listDoctor.isSuccessful()) {
                                     listDoctor.data?.data?.let {
@@ -142,13 +149,15 @@ class BookSchedulePatientActivity : AppCompatActivity(), OnSpecialtyListener, On
         }
     }
 
-    override fun getDoctor(id: Int) {
+    override fun getDoctor(id: Int, phone: String, nameDoctor: String) {
         val intent =
             Intent(
                 this@BookSchedulePatientActivity,
                 BookScheduleCreatePatientActivity::class.java
             )
         intent.putExtra(Constant.ID_DOCTOR, id)
+        intent.putExtra(Constant.PHONE_DOCTOR, phone)
+        intent.putExtra(Constant.NAME_DOCTOR, nameDoctor)
         startActivity(intent)
     }
 }

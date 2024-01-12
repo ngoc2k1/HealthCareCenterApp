@@ -29,6 +29,7 @@ object Constant {
     const val USERNAME_DOCTOR = "USERNAME_DOCTOR"
     const val PASSWORD_DOCTOR = "PASSWORD_DOCTOR"
     const val NAME_DOCTOR = "NAME_DOCTOR"
+    const val PHONE_DOCTOR = "PHONE_DOCTOR"
     const val AVT_DOCTOR = "AVT_DOCTOR"
     const val ID_BOOKSCHEDULE = "ID_BOOKSCHEDULE"
     const val FIRST_MEDICALHISTORY = "FIRST_MEDICALHISTORY"
@@ -43,6 +44,8 @@ object Constant {
     const val ID_MEDICALHISTORY = "ID_MEDICALHISTORY"
     const val NAME_PATIENT = "NAME_PATIENT"
     const val CHAT = "CHAT"
+    const val TOKEN = "TOKEN"
+    const val NAME_PATIENT_FB = "NAME_PATIENT_FB"
     const val AVT_PATIENT = "AVT_PATIENT"
     const val AVT_FEMALE =
         "http://res.cloudinary.com/ngoc2012001/image/upload/v1701702806/healthcare/nqelyx7wuxqqiu6e6chw.png"

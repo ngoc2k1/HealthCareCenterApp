@@ -1,19 +1,20 @@
 package com.example.myapplication.patient
 
-import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
 import com.example.myapplication.databinding.FragmentHomePatientBinding
-import com.example.myapplication.doctor.ProfilePatientScheduleActivity
-import com.example.myapplication.model.MedicalHistoryListDoctorResponse
 import com.example.myapplication.prefs.HawkKey
+import com.example.myapplication.prefs.Pref
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.user.ChatActivity
 import com.example.myapplication.utils.Constant
@@ -28,10 +29,11 @@ import kotlinx.coroutines.withContext
 
 class HomePatientActivity : AppCompatActivity() {
     private lateinit var binding: FragmentHomePatientBinding
-    val mbundle = Bundle()
-
+    val bundleChat = Bundle()
+    var namePatient = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        capQuyenThongBao()
         binding = FragmentHomePatientBinding.inflate(layoutInflater)
         setContentView(binding.root)
         window.apply {
@@ -45,7 +47,7 @@ class HomePatientActivity : AppCompatActivity() {
             ivChat.setOnClickListener {
                 val intent =
                     Intent(this@HomePatientActivity, ChatActivity::class.java)
-                intent.putExtras(mbundle)
+                intent.putExtras(bundleChat)
                 startActivity(intent)
             }
             tvBookSchedule.setOnClickListener {
@@ -74,7 +76,7 @@ class HomePatientActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val apiClient = ApiClient(this@HomePatientActivity)
-        val bundle = Bundle()
+        val bundleMedicalRecords = Bundle()
         binding.apply {
             if (getCurrentHour() in 6..18) {
                 tvGreeting.text = getString(R.string.str_hello_user)
@@ -106,23 +108,25 @@ class HomePatientActivity : AppCompatActivity() {
                                     .placeholder(R.drawable.img_default_avatar_home)
                                     .into(imgAvatar)
                                 tvFullName.text = name
+                                namePatient = name
                                 tvBlood.text = bloodGroup
                                 tvWeight.text = "$weight kg"
                                 tvHeight.text = "$height cm"
-//                        bundle.putString(Constant.ID_PATIENT, id.toString())
-                                bundle.putString(Constant.HEIGHT, height.toString())
-                                bundle.putString(Constant.WEIGHT, weight.toString())
-                                bundle.putString(Constant.BLOOD, bloodGroup)
-                                bundle.putString(Constant.AGE_PATIENT, age.toString())
-                                bundle.putString(
+//                        bundleMedicalRecords.putString(Constant.ID_PATIENT, id.toString())
+                                bundleMedicalRecords.putString(Constant.HEIGHT, height.toString())
+                                Pref.setString(this@HomePatientActivity, Constant.NAME_PATIENT_FB, name)
+
+                                bundleMedicalRecords.putString(Constant.WEIGHT, weight.toString())
+                                bundleMedicalRecords.putString(Constant.BLOOD, bloodGroup)
+                                bundleMedicalRecords.putString(Constant.AGE_PATIENT, age.toString())
+                                bundleMedicalRecords.putString(
                                     Constant.GENDER_PATIENT,
                                     convertGender(gender)
                                 )
-                                bundle.putString(Constant.NAME_PATIENT, name)
-                                bundle.putString(Constant.AVT_PATIENT, avatar)
+                                bundleMedicalRecords.putString(Constant.NAME_PATIENT, name)
+                                bundleMedicalRecords.putString(Constant.AVT_PATIENT, avatar)
                                 val token = Hawk.get<String>(HawkKey.ACCESS_TOKEN_PATIENT)
-                                mbundle.putString(Constant.CHAT, "$token*$name")
-
+                                bundleChat.putString(Constant.CHAT, "$token*$name")
                             }
                         }
                     } else {
@@ -136,9 +140,22 @@ class HomePatientActivity : AppCompatActivity() {
                         this@HomePatientActivity,
                         ProfilePatientScheduleByPatientActivity::class.java
                     )
-                intent.putExtras(bundle)
+                intent.putExtras(bundleMedicalRecords)
                 startActivity(intent)
             }
+        }
+    }
+
+    private fun capQuyenThongBao() {
+        val p3 =
+            ContextCompat.checkSelfPermission(this, android.Manifest.permission.POST_NOTIFICATIONS)
+        if (p3 != PackageManager.PERMISSION_GRANTED) {
+//sdk 33 trở đi cần xin quyền gửi thông báo
+            ActivityCompat.requestPermissions(
+                this, arrayOf(
+                    android.Manifest.permission.POST_NOTIFICATIONS
+                ), 123
+            )
         }
     }
 }

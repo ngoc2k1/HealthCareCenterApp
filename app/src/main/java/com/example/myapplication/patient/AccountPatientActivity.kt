@@ -11,11 +11,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.myapplication.R
-import com.example.myapplication.auth.ChangePwDialog
 import com.example.myapplication.auth.ChangePwPatientDialog
 import com.example.myapplication.auth.LoginActivity
 import com.example.myapplication.databinding.FragmentAccountBinding
 import com.example.myapplication.prefs.HawkKey
+import com.example.myapplication.prefs.Pref
 import com.example.myapplication.serviceapi.ApiClient
 import com.example.myapplication.utils.Constant
 import com.example.myapplication.utils.Constant.SHARED_PREFS
@@ -56,6 +56,10 @@ class AccountPatientActivity : AppCompatActivity() {
                 val editor = sharedpreferences.edit()
                 editor.clear()
                 editor.apply()
+
+                Pref.setString(this@AccountPatientActivity, Constant.TOKEN, "")
+                Pref.setString(this@AccountPatientActivity, Constant.NAME_PATIENT_FB, "")
+
                 startActivity(Intent(this@AccountPatientActivity, LoginActivity::class.java))
             }
             optionEditProfile.setOnClickListener {
