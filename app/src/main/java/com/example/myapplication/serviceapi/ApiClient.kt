@@ -13,9 +13,8 @@ import java.util.concurrent.TimeUnit
 
 class ApiClient(context: Context) {
     private val gson = Gson()
-//    private val BASE_URL = "http://192.168.5.71:8080/api/v1/"
-    private val BASE_URL = "http://192.168.0.101:8080/api/v1/"
-//    private val BASE_URL = "http://192.168.155.188:8080/api/v1/"
+//    private val BASE_URL = "http://192.168.0.101:8080/api/v1/"
+    private val BASE_URL = "http://192.168.155.188:8080/api/v1/"
 
     val okHttpClientDoctor = OkHttpClient.Builder()
         .addInterceptor(NetworkInterceptor(context))

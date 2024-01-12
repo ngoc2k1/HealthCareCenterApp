@@ -160,16 +160,16 @@ class BookScheduleCreatePatientActivity : AppCompatActivity(), OnTimeListener, O
 
         val h = mTimeBooked.split("-")[0].split(":")[0].trim().toInt()
         val mm = mTimeBooked.split("-")[0].split(":")[1].trim().toInt()
-        val d = mDateBooked.split("/")[0].toInt()
+        val d = mDateBooked.split("/")[2].toInt()
         val m = mDateBooked.split("/")[1].toInt()
-        val y = mDateBooked.split("/")[2].toInt()
+        val y = mDateBooked.split("/")[0].toInt()
 //        val h = 18
 //        val mm = 35
 //        val d = 12
 //        val m = 1
 //        val y = 2024
 //        10:33- 12/1/2023
-
+Log.d("__aa",mTimeBooked+"- "+mDateBooked)
         cal.set(Calendar.YEAR, y)
         cal.set(Calendar.MONTH, m - 1) //0-11
         cal.set(Calendar.DAY_OF_MONTH, d)
