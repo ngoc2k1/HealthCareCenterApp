@@ -143,10 +143,6 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                                     }
 
                                     STATUS_BOOK.DA_HUY.toString() -> {
-                                        tvStatus.setTextColor(resources.getColor(R.color.red))
-                                        clChuaKham.gone()
-                                        clDaHuy.gone()
-                                        clDaKham.gone()
                                     }
 
                                     else -> {
@@ -219,6 +215,12 @@ class DetailSchedulePatientActivity : AppCompatActivity() {
                 Log.d("__token", "error")
             }
         }
+        startActivity(
+            Intent(
+                this@DetailSchedulePatientActivity,
+                ListBookSchedulePatientActivity::class.java
+            )
+        )
     }
 
     private fun pushNotification(token: String) {
