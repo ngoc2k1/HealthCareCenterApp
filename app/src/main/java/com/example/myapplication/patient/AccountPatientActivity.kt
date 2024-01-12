@@ -57,9 +57,6 @@ class AccountPatientActivity : AppCompatActivity() {
                 editor.clear()
                 editor.apply()
 
-                Pref.setString(this@AccountPatientActivity, Constant.TOKEN, "")
-                Pref.setString(this@AccountPatientActivity, Constant.NAME_PATIENT_FB, "")
-
                 startActivity(Intent(this@AccountPatientActivity, LoginActivity::class.java))
             }
             optionEditProfile.setOnClickListener {

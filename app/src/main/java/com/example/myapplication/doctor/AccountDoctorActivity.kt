@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.lifecycle.lifecycleScope
@@ -22,6 +23,7 @@ import com.example.myapplication.utils.Constant.NAME_DOCTOR
 import com.example.myapplication.utils.GENDER
 import com.example.myapplication.utils.getCurrentHour
 import com.example.myapplication.utils.toast
+import com.google.firebase.firestore.FirebaseFirestore
 import com.orhanobut.hawk.Hawk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,7 +32,7 @@ import kotlinx.coroutines.withContext
 class AccountDoctorActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDoctorAccountBinding
     private lateinit var sharedpreferences: SharedPreferences
-
+    var mPhone = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDoctorAccountBinding.inflate(layoutInflater)
@@ -53,7 +55,18 @@ class AccountDoctorActivity : AppCompatActivity() {
             }
             optionChangeAccount.setOnClickListener {
                 Hawk.put(HawkKey.ACCESS_TOKEN_DOCTOR, "")
-                sharedpreferences = getSharedPreferences(Constant.SHARED_PREFS_DOCTOR, Context.MODE_PRIVATE)
+
+                val db = FirebaseFirestore.getInstance()
+
+                Log.d("__test", "onCreate: $mPhone")
+                db.collection("tokens").document(mPhone)
+                    .delete()
+                    .addOnSuccessListener { Log.d("__test", "DocumentSnapshot successfully deleted!") }
+                    .addOnFailureListener { e -> Log.w("__test", "Error deleting document", e) }
+
+
+                sharedpreferences =
+                    getSharedPreferences(Constant.SHARED_PREFS_DOCTOR, Context.MODE_PRIVATE)
                 val editor = sharedpreferences.edit()
                 editor.clear()
                 editor.apply()
@@ -85,6 +98,7 @@ class AccountDoctorActivity : AppCompatActivity() {
                                 .placeholder(R.drawable.img_default_avatar_home)
                                 .into(imgAvatar)
                             tvName.text = name
+                            mPhone = phone
                         }
                     } else {
                         toast(doctor.error?.error?.msg.toString())
